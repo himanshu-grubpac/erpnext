@@ -124,10 +124,18 @@ class BankClearance(Document):
 
 				clearance_date_updated = True
 
+<<<<<<< HEAD
 		if clearance_date_updated:
 			self.get_payment_entries()
 			msgprint(_("Clearance Date updated"))
 		else:
+=======
+			msg += "</ul>"
+			msgprint(_(msg))
+			return
+
+		if not entries_to_update:
+>>>>>>> 62acc4aeb5 (fix: update button was getting freezed after validation)
 			msgprint(_("Clearance Date not mentioned"))
 
 
