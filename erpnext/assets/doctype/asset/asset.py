@@ -155,9 +155,15 @@ class Asset(AccountsController):
 		self.validate_expected_value_after_useful_life()
 		self.set_total_booked_depreciations()
 
+<<<<<<< HEAD
 	def before_save(self):
 		self.total_asset_cost = self.gross_purchase_amount + self.additional_asset_cost
 		self.status = self.get_status()
+=======
+	def before_submit(self):
+		if self.is_composite_asset and not has_active_capitalization(self.name):
+			frappe.throw(_("Please capitalize this asset before submitting."))
+>>>>>>> e04353fc31 (fix: add server side validation)
 
 	def on_submit(self):
 		self.validate_in_use_date()
