@@ -551,8 +551,58 @@
    "fieldname": "purchase_invoice_item",
    "fieldtype": "Data",
    "hidden": 1,
+<<<<<<< HEAD
    "label": "Purchase Invoice Item",
    "options": "Purchase Invoice Item"
+=======
+   "label": "Purchase Invoice Item"
+  },
+  {
+   "fieldname": "insurance_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Insurance"
+  },
+  {
+   "fieldname": "other_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "Other Info"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "fieldname": "depreciation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Depreciation"
+  },
+  {
+   "fieldname": "accounting_dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimensions"
+  },
+  {
+   "fieldname": "section_break_jtou",
+   "fieldtype": "Section Break",
+   "label": "Additional Info"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:(!doc.is_existing_asset && !doc.is_composite_asset)",
+   "fieldname": "is_composite_component",
+   "fieldtype": "Check",
+   "label": "Is Composite Component"
+  },
+  {
+   "fieldname": "net_purchase_amount",
+   "fieldtype": "Currency",
+   "label": "Net Purchase Amount",
+   "mandatory_depends_on": "eval:(!doc.is_composite_asset || doc.docstatus==1)",
+   "options": "Company:company:default_currency",
+   "read_only_depends_on": "eval: doc.is_composite_asset"
+>>>>>>> 482efee6c0 (fix: do not hide primary-action for composite asset)
   }
  ],
  "idx": 72,
@@ -596,7 +646,11 @@
    "link_fieldname": "target_asset"
   }
  ],
+<<<<<<< HEAD
  "modified": "2025-11-17 18:01:51.417942",
+=======
+ "modified": "2025-12-18 16:36:40.904246",
+>>>>>>> 482efee6c0 (fix: do not hide primary-action for composite asset)
  "modified_by": "Administrator",
  "module": "Assets",
  "name": "Asset",
