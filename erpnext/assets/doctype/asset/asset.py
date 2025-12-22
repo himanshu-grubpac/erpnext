@@ -143,6 +143,7 @@ class Asset(AccountsController):
 				if frappe.db.exists("Asset", self.name):
 					asset_depr_schedules_names = make_draft_asset_depr_schedules_if_not_present(self)
 
+<<<<<<< HEAD
 					if asset_depr_schedules_names:
 						asset_depr_schedules_links = get_comma_separated_links(
 							asset_depr_schedules_names, "Asset Depreciation Schedule"
@@ -152,6 +153,105 @@ class Asset(AccountsController):
 								"Asset Depreciation Schedules created:<br>{0}<br><br>Please check, edit if needed, and submit the Asset."
 							).format(asset_depr_schedules_links)
 						)
+=======
+		created_schedules = []
+		for fb_row in self.get("finance_books"):
+			if not fb_row.rate_of_depreciation:
+				fb_row.rate_of_depreciation = self.get_depreciation_rate(fb_row, on_validate=True)
+
+			existing_schedule = get_asset_depr_schedule_doc(self.name, "Draft", fb_row.finance_book)
+
+			if not existing_schedule:
+				new_schedule = frappe.new_doc("Asset Depreciation Schedule")
+				new_schedule.asset = self.name
+				new_schedule.create_depreciation_schedule(fb_row)
+				new_schedule.save()
+				created_schedules.append(new_schedule.name)
+				continue
+
+			self.evaluate_and_recreate_depreciation_schedule(existing_schedule, fb_row)
+			created_schedules.append(existing_schedule.name)
+
+		self.show_schedule_creation_message(created_schedules)
+
+	def evaluate_and_recreate_depreciation_schedule(self, existing_doc, fb_row):
+		"""Determine if depreciation schedule needs to be regenerated and recreate if necessary"""
+
+		asset_details_changed = self.has_asset_details_changed(existing_doc)
+		depreciation_settings_changed = self.has_depreciation_settings_changed(existing_doc, fb_row)
+		if self.should_regenerate_depreciation_schedule(
+			existing_doc, asset_details_changed, depreciation_settings_changed
+		):
+			existing_doc.create_depreciation_schedule(fb_row)
+			existing_doc.save()
+
+	def has_asset_details_changed(self, existing_doc):
+		"""Check if core asset details that affect depreciation have changed"""
+		return (
+			self.net_purchase_amount != existing_doc.net_purchase_amount
+			or self.opening_accumulated_depreciation != existing_doc.opening_accumulated_depreciation
+			or self.opening_number_of_booked_depreciations
+			!= existing_doc.opening_number_of_booked_depreciations
+		)
+
+	def has_depreciation_settings_changed(self, existing_doc, fb_row):
+		"""Check if depreciation calculation settings have changed"""
+
+		if not existing_doc.get("depreciation_schedule") or fb_row.depreciation_method != "Manual":
+			return True
+
+		return (
+			fb_row.depreciation_method != existing_doc.depreciation_method
+			or fb_row.total_number_of_depreciations != existing_doc.total_number_of_depreciations
+			or fb_row.frequency_of_depreciation != existing_doc.frequency_of_depreciation
+			or getdate(fb_row.depreciation_start_date)
+			!= existing_doc.get("depreciation_schedule")[0].schedule_date
+			or fb_row.expected_value_after_useful_life != existing_doc.expected_value_after_useful_life
+		)
+
+	def should_regenerate_depreciation_schedule(
+		self, existing_doc, asset_details_changed, depreciation_settings_changed
+	):
+		"""Check all conditions to determine if schedule regeneration is required"""
+
+		# Schedule doesn't exist yet
+		if not existing_doc.get("depreciation_schedule"):
+			return True
+
+		# Either asset details or depreciation settings have changed
+		if asset_details_changed or depreciation_settings_changed:
+			return True
+
+		return False
+
+	def set_depr_rate_and_value_after_depreciation(self):
+		if self.split_from:
+			return
+
+		self.value_after_depreciation = (
+			flt(self.net_purchase_amount)
+			- flt(self.opening_accumulated_depreciation)
+			+ flt(self.additional_asset_cost)
+		)
+		if self.calculate_depreciation:
+			self.set_depreciation_rate()
+			for d in self.finance_books:
+				d.db_set("value_after_depreciation", self.value_after_depreciation)
+		else:
+			self.finance_books = []
+
+	def show_schedule_creation_message(self, schedules):
+		if schedules:
+			asset_depr_schedules_links = get_comma_separated_links(schedules, "Asset Depreciation Schedule")
+			frappe.msgprint(
+				_(
+					"Asset Depreciation Schedules created/updated:<br>{0}<br><br>Please check, edit if needed, and submit the Asset."
+				).format(asset_depr_schedules_links)
+			)
+
+	def on_update(self):
+		self.create_asset_depreciation_schedule()
+>>>>>>> 16c6b2c39f (fix: validate depreciation row values)
 		self.validate_expected_value_after_useful_life()
 		self.set_total_booked_depreciations()
 
@@ -477,6 +577,7 @@ class Asset(AccountsController):
 
 	def set_depreciation_rate(self):
 		for d in self.get("finance_books"):
+			self.validate_asset_finance_books(d)
 			d.rate_of_depreciation = flt(
 				self.get_depreciation_rate(d, on_validate=True), d.precision("rate_of_depreciation")
 			)
@@ -485,7 +586,14 @@ class Asset(AccountsController):
 		row.expected_value_after_useful_life = flt(
 			row.expected_value_after_useful_life, self.precision("gross_purchase_amount")
 		)
+<<<<<<< HEAD
 		if flt(row.expected_value_after_useful_life) >= flt(self.gross_purchase_amount):
+=======
+
+		if flt(row.expected_value_after_useful_life) < 0:
+			frappe.throw(_("Row {0}: Expected Value After Useful Life cannot be negative").format(row.idx))
+		if flt(row.expected_value_after_useful_life) >= flt(self.net_purchase_amount):
+>>>>>>> 16c6b2c39f (fix: validate depreciation row values)
 			frappe.throw(
 				_("Row {0}: Expected Value After Useful Life must be less than Gross Purchase Amount").format(
 					row.idx
@@ -500,6 +608,11 @@ class Asset(AccountsController):
 					title=_("Invalid Schedule"),
 				)
 			row.depreciation_start_date = get_last_day(self.available_for_use_date)
+<<<<<<< HEAD
+=======
+		self.validate_depreciation_start_date(row)
+		self.validate_total_number_of_depreciations_and_frequency(row)
+>>>>>>> 16c6b2c39f (fix: validate depreciation row values)
 
 		if not self.is_existing_asset:
 			self.opening_accumulated_depreciation = 0
@@ -509,7 +622,37 @@ class Asset(AccountsController):
 				flt(self.gross_purchase_amount) - flt(row.expected_value_after_useful_life),
 				self.precision("gross_purchase_amount"),
 			)
+<<<<<<< HEAD
 			if flt(self.opening_accumulated_depreciation) > depreciable_amount:
+=======
+
+		if self.opening_accumulated_depreciation:
+			if not self.opening_number_of_booked_depreciations:
+				frappe.throw(_("Please set opening number of booked depreciations"))
+		else:
+			self.opening_number_of_booked_depreciations = 0
+
+		if flt(row.total_number_of_depreciations) <= cint(self.opening_number_of_booked_depreciations):
+			frappe.throw(
+				_(
+					"Row #{0}: Total Number of Depreciations cannot be less than or equal to Opening Number of Booked Depreciations"
+				).format(row.idx),
+				title=_("Invalid Schedule"),
+			)
+
+	def validate_total_number_of_depreciations_and_frequency(self, row):
+		if row.total_number_of_depreciations <= 0:
+			frappe.throw(
+				_("Row #{0}: Total Number of Depreciations must be greater than zero").format(row.idx)
+			)
+
+		if row.frequency_of_depreciation <= 0:
+			frappe.throw(_("Row #{0}: Frequency of Depreciation must be greater than zero").format(row.idx))
+
+	def validate_depreciation_start_date(self, row):
+		if row.depreciation_start_date:
+			if getdate(row.depreciation_start_date) < getdate(self.purchase_date):
+>>>>>>> 16c6b2c39f (fix: validate depreciation row values)
 				frappe.throw(
 					_("Opening Accumulated Depreciation must be less than or equal to {0}").format(
 						depreciable_amount
