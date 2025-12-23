@@ -1,8 +1,10 @@
 # Copyright (c) 2025, Frappe Technologies Pvt. Ltd. and contributors
 # For license information, please see license.txt
 
+from collections import defaultdict
+from datetime import datetime, date as date_type
+
 import frappe
-import pandas as pd
 from frappe import _
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
@@ -120,13 +122,12 @@ class SalesForecast(Document):
 
 		for item_code, data in itemwise_data.items():
 			seasonal_periods = self.get_seasonal_periods(data)
-			pd_sales_data = pd.DataFrame({"item": data.item, "date": data.date, "qty": data.qty})
 
-			resample_val = "M" if self.frequency == "Monthly" else "W"
-			_sales_data = pd_sales_data.set_index("date").resample(resample_val).sum()["qty"]
+			# Resample sales data by month or week and sum quantities
+			resampled_data = self.resample_sales_data(data.date, data.qty, self.frequency)
 
 			model = ExponentialSmoothing(
-				_sales_data, trend="add", seasonal="add", seasonal_periods=seasonal_periods
+				resampled_data, trend="add", seasonal="add", seasonal_periods=seasonal_periods
 			)
 
 			fit = model.fit()
@@ -157,6 +158,37 @@ class SalesForecast(Document):
 			)
 
 			self.append("items", item_details)
+
+	def resample_sales_data(self, dates, quantities, frequency):
+		"""
+		Resample sales data by month or week and sum quantities.
+		This replaces pandas DataFrame resample functionality.
+		
+		Args:
+			dates: List of datetime objects
+			quantities: List of quantities corresponding to dates
+			frequency: "Monthly" or "Weekly"
+		
+		Returns:
+			List of summed quantities per period
+		"""
+		# Group quantities by period (year-month or year-week)
+		period_qty = defaultdict(float)
+		
+		for date, qty in zip(dates, quantities):
+			if frequency == "Monthly":
+				# Group by year-month
+				period_key = (date.year, date.month)
+			else:
+				# Group by year-week (ISO week)
+				# isocalendar() returns (year, week, weekday)
+				period_key = date.isocalendar()[:2]
+			
+			period_qty[period_key] += qty
+		
+		# Sort by period and return values as a list
+		sorted_periods = sorted(period_qty.items())
+		return [qty for period, qty in sorted_periods]
 
 	def get_seasonal_periods(self, data):
 		days = date_diff(data["end_date"], data["start_date"])
@@ -192,7 +224,17 @@ class SalesForecast(Document):
 
 			item_data = itemwise_data[row.item_code]
 			item_data["item"].append(row.item_code)
-			item_data["date"].append(pd.to_datetime(row.transaction_date))
+			# Convert date to datetime object for consistency
+			if isinstance(row.transaction_date, str):
+				date_obj = datetime.strptime(row.transaction_date, "%Y-%m-%d")
+			elif isinstance(row.transaction_date, datetime):
+				date_obj = row.transaction_date
+			elif isinstance(row.transaction_date, date_type):
+				# Handle date objects by converting to datetime
+				date_obj = datetime.combine(row.transaction_date, datetime.min.time())
+			else:
+				date_obj = row.transaction_date
+			item_data["date"].append(date_obj)
 			item_data["qty"].append(row.qty)
 			item_data["end_date"] = row.transaction_date
 
