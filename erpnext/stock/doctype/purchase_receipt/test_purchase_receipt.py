@@ -4573,7 +4573,7 @@ class TestPurchaseReceipt(FrappeTestCase):
 
 		self.assertEqual(sles, [1500.0, 1500.0])
 
-	@IntegrationTestCase.change_settings("Stock Settings", {"allow_negative_stock": 0})
+	@change_settings("Stock Settings", {"allow_negative_stock": 0})
 	def test_multiple_transactions_with_same_posting_datetime(self):
 		from erpnext.stock.doctype.delivery_note.test_delivery_note import create_delivery_note
 		from erpnext.stock.stock_ledger import NegativeStockError
