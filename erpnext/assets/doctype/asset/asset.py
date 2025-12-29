@@ -985,7 +985,11 @@ def get_asset_naming_series():
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def make_sales_invoice(asset, item_code, company, serial_no=None):
+=======
+def make_sales_invoice(asset, item_code, company, sell_qty, serial_no=None):
+>>>>>>> 9a2710b9d7 (fix(asset): handle partial asset sales by splitting remaining quantity)
 	asset_doc = frappe.get_doc("Asset", asset)
 	si = frappe.new_doc("Sales Invoice")
 	si.company = company
@@ -1000,7 +1004,7 @@ def make_sales_invoice(asset, item_code, company, serial_no=None):
 			"income_account": disposal_account,
 			"serial_no": serial_no,
 			"cost_center": depreciation_cost_center,
-			"qty": 1,
+			"qty": sell_qty,
 		},
 	)
 
