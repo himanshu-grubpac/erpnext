@@ -420,8 +420,16 @@ class Asset(AccountsController):
 		if self.available_for_use_date and getdate(self.available_for_use_date) < getdate(self.purchase_date):
 			frappe.throw(_("Available-for-use Date should be after purchase date"))
 
+<<<<<<< HEAD
 	def validate_linked_purchase_docs(self):
 		for doctype_field, doctype_name in [
+=======
+	def validate_linked_purchase_documents(self):
+		if self.flags.is_split_asset:
+			return
+
+		for fieldname, doctype in [
+>>>>>>> e7e6567792 (fix(asset): skip purchase document validation while splitting existing asset)
 			("purchase_receipt", "Purchase Receipt"),
 			("purchase_invoice", "Purchase Invoice"),
 		]:
@@ -1262,6 +1270,37 @@ def split_asset(asset_name, split_qty):
 	new_asset = create_new_asset_after_split(asset, split_qty)
 	update_existing_asset(asset, remaining_qty, new_asset.name)
 
+<<<<<<< HEAD
+=======
+
+def validate_split_quantity(existing_asset, split_qty):
+	if split_qty >= existing_asset.asset_quantity:
+		frappe.throw(_("Split Quantity must be less than Asset Quantity"))
+
+
+def create_new_asset_from_split(existing_asset, split_qty):
+	"""Create a new asset from the split quantity."""
+	return process_asset_split(existing_asset, split_qty, is_new_asset=True)
+
+
+def update_existing_asset_after_split(existing_asset, remaining_qty, splitted_asset):
+	"""Update the existing asset with the remaining quantity."""
+	process_asset_split(existing_asset, remaining_qty, splitted_asset=splitted_asset)
+
+
+def process_asset_split(existing_asset, split_qty, splitted_asset=None, is_new_asset=False):
+	"""Handle asset creation or update during the split."""
+	scaling_factor = flt(split_qty) / flt(existing_asset.asset_quantity)
+	new_asset = frappe.copy_doc(existing_asset) if is_new_asset else splitted_asset
+	asset_doc = new_asset if is_new_asset else existing_asset
+	asset_doc.flags.is_split_asset = True
+
+	set_split_asset_values(asset_doc, scaling_factor, split_qty, existing_asset, is_new_asset)
+	log_asset_activity(existing_asset, asset_doc, splitted_asset, is_new_asset)
+
+	# Update finance books and depreciation schedules
+	update_finance_books(asset_doc, existing_asset, new_asset, scaling_factor, is_new_asset)
+>>>>>>> e7e6567792 (fix(asset): skip purchase document validation while splitting existing asset)
 	return new_asset
 
 
