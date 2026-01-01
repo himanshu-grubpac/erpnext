@@ -10,11 +10,16 @@
  "label": "Financial Reports",
  "link_to": "Financial Reports",
  "link_type": "Workspace",
+<<<<<<< HEAD
  "modified": "2025-11-17 13:34:48.074533",
+=======
+ "modified": "2025-12-31 16:07:27.060176",
+>>>>>>> b93f920592 (fix: sidebar items for accounts (#51418))
  "modified_by": "Administrator",
  "name": "Financial Reports",
  "owner": "Administrator",
  "parent_icon": "Accounts",
  "roles": [],
+ "sidebar": "",
  "standard": 1
 }
