@@ -258,7 +258,11 @@
    "url": ""
   }
  ],
+<<<<<<< HEAD
  "modified": "2026-01-10 00:06:13.218453",
+=======
+ "modified": "2025-12-31 16:27:44.936562",
+>>>>>>> b93f920592 (fix: sidebar items for accounts (#51418))
  "modified_by": "Administrator",
  "module": "Assets",
  "name": "Assets",

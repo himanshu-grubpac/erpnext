@@ -9,13 +9,21 @@
  "idx": 0,
  "label": "Financial Reports",
  "link_to": "Financial Reports",
+<<<<<<< HEAD
  "link_type": "Workspace Sidebar",
  "modified": "2026-01-01 20:07:01.253367",
+=======
+ "link_type": "Workspace",
+ "modified": "2025-12-31 16:07:27.060176",
+>>>>>>> b93f920592 (fix: sidebar items for accounts (#51418))
  "modified_by": "Administrator",
  "name": "Financial Reports",
  "owner": "Administrator",
  "parent_icon": "Accounts",
+<<<<<<< HEAD
  "restrict_removal": 0,
+=======
+>>>>>>> b93f920592 (fix: sidebar items for accounts (#51418))
  "roles": [],
  "sidebar": "",
  "standard": 1
