@@ -486,45 +486,6 @@
    "options": "currency",
    "print_hide": 1,
    "read_only": 1
-<<<<<<< HEAD
-=======
-  },
-  {
-   "fieldname": "item_reorder_section",
-   "fieldtype": "Section Break",
-   "label": "Item Reorder"
-  },
-  {
-   "fieldname": "column_break_fdjh",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "reorder_level",
-   "fieldtype": "Float",
-   "label": "Reorder Level",
-   "read_only": 1
-  },
-  {
-   "fieldname": "reorder_qty",
-   "fieldtype": "Float",
-   "label": "Reorder Qty",
-   "read_only": 1
-  },
-  {
-   "description": "If the reorder check is set at the Group warehouse level, the available quantity becomes the sum of the projected quantities of all its child warehouses.",
-   "fieldname": "projected_on_hand",
-   "fieldtype": "Float",
-   "label": "Projected On Hand",
-   "read_only": 1
-  },
-  {
-   "fieldname": "picked_qty",
-   "fieldtype": "Float",
-   "hidden": 1,
-   "label": "Picked Qty",
-   "no_copy": 1,
-   "non_negative": 1,
-   "read_only": 1
   },
   {
    "fieldname": "packed_item",
@@ -535,7 +496,6 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
->>>>>>> 6ade609dd6 (fix(material-request): get remaining qty on partial transaction with product bundle)
   }
  ],
  "idx": 1,
