@@ -62,6 +62,15 @@ frappe.ui.form.on("BOM", {
 				},
 			};
 		});
+<<<<<<< HEAD
+=======
+
+		frm.events.set_company_filters(frm, "project");
+		frm.events.set_company_filters(frm, "default_source_warehouse");
+		frm.events.set_company_filters(frm, "default_target_warehouse");
+
+		frm.trigger("toggle_fields_for_semi_finished_goods");
+>>>>>>> 73bcfc4710 (fix(bom): pass company warehouse filter)
 	},
 
 	validate: function (frm) {
@@ -73,6 +82,37 @@ frappe.ui.form.on("BOM", {
 		}
 	},
 
+<<<<<<< HEAD
+=======
+	set_company_filters: function (frm, fieldname) {
+		frm.set_query(fieldname, () => {
+			return {
+				filters: {
+					company: frm.doc.company,
+				},
+			};
+		});
+	},
+
+	track_semi_finished_goods(frm) {
+		frm.trigger("toggle_fields_for_semi_finished_goods");
+	},
+
+	toggle_fields_for_semi_finished_goods(frm) {
+		let fields = ["finished_good", "finished_good_qty", "bom_no"];
+
+		fields.forEach((field) => {
+			frm.fields_dict["operations"].grid.update_docfield_property(
+				field,
+				"read_only",
+				!frm.doc.track_semi_finished_goods
+			);
+		});
+
+		refresh_field("operations");
+	},
+
+>>>>>>> 73bcfc4710 (fix(bom): pass company warehouse filter)
 	with_operations: function (frm) {
 		frm.set_df_property("fg_based_operating_cost", "hidden", frm.doc.with_operations ? 1 : 0);
 	},
