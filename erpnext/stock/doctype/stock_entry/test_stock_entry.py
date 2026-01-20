@@ -2232,44 +2232,6 @@ class TestStockEntry(FrappeTestCase):
 		se.save()
 		se.submit()
 
-
-<<<<<<< HEAD
-def make_serialized_item(**args):
-=======
-		warehouse = "_Test Warehouse - _TC"
-		retain_sample_item = make_item(
-			"Retain Sample Item",
-			properties={
-				"is_stock_item": 1,
-				"retain_sample": 1,
-				"sample_quantity": 2,
-				"has_batch_no": 1,
-				"has_serial_no": 1,
-				"create_new_batch": 1,
-				"batch_number_series": "SAMPLE-RET-.#####",
-				"serial_no_series": "SAMPLE-RET-SN-.#####",
-			},
-		)
-		material_receipt = make_stock_entry(
-			item_code=retain_sample_item.item_code, target=warehouse, qty=10, purpose="Material Receipt"
-		)
-
-		source_sabb = frappe.get_doc(
-			"Serial and Batch Bundle", material_receipt.items[0].serial_and_batch_bundle
-		)
-		batch = source_sabb.entries[0].batch_no
-		serial_nos = [entry.serial_no for entry in source_sabb.entries]
-
-		sample_entry = frappe.get_doc(
-			move_sample_to_retention_warehouse(material_receipt.company, material_receipt.items)
-		)
-		sample_entry.submit()
-		target_sabb = frappe.get_doc("Serial and Batch Bundle", sample_entry.items[0].serial_and_batch_bundle)
-
-		self.assertEqual(sample_entry.items[0].transfer_qty, 2)
-		self.assertEqual(target_sabb.entries[0].batch_no, batch)
-		self.assertEqual([entry.serial_no for entry in target_sabb.entries], serial_nos[:2])
-
 	@IntegrationTestCase.change_settings("Manufacturing Settings", {"material_consumption": 0})
 	def test_raw_material_missing_validation(self):
 		stock_entry = make_stock_entry(
@@ -2317,7 +2279,6 @@ def make_serialized_item(**args):
 
 
 def make_serialized_item(self, **args):
->>>>>>> 017cc9d9f9 (fix: continuous raw material consumption with bom validation)
 	args = frappe._dict(args)
 	se = frappe.copy_doc(test_records[0])
 
