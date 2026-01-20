@@ -90,12 +90,19 @@ frappe.query_reports["Sales Analytics"] = {
 			label: __("Curves"),
 			fieldtype: "Select",
 			options: [
+<<<<<<< HEAD
 				{ value: "select", label: __("Select") },
+=======
+>>>>>>> c2995f6800 (fix(sales analytics): add curve filter)
 				{ value: "all", label: __("All") },
 				{ value: "non-zeros", label: __("Non-Zeros") },
 				{ value: "total", label: __("Total Only") },
 			],
+<<<<<<< HEAD
 			default: "select",
+=======
+			default: "all",
+>>>>>>> c2995f6800 (fix(sales analytics): add curve filter)
 			reqd: 1,
 		},
 		{
