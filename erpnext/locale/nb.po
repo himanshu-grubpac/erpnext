@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2025-12-22 03:08\n"
+"PO-Revision-Date: 2026-01-21 07:46\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Norwegian Bokmal\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: nb\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: nb_NO\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -924,14 +924,14 @@ msgstr ""
 #: erpnext/setup/workspace/home/home.json
 #: erpnext/support/workspace/support/support.json
 msgid "<span class=\"h4\"><b>Reports &amp; Masters</b></span>"
-msgstr "<span class=\"h4\"><b>Rapporter &amp; grunnregistre</b></span>"
+msgstr "<span class=\"h4\"><b>Rapporter og stamdata</b></span>"
 
 #. Header text in the Payables Workspace
 #. Header text in the Receivables Workspace
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "<span class=\"h4\"><b>Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>Snarveier</b></span>"
+msgstr ""
 
 #. Header text in the Subcontracting Workspace
 #: erpnext/subcontracting/workspace/subcontracting/subcontracting.json
@@ -972,7 +972,7 @@ msgstr "<span class=\"h4\"><b>Dine snarveier\n"
 #: erpnext/setup/workspace/home/home.json
 #: erpnext/support/workspace/support/support.json
 msgid "<span class=\"h4\"><b>Your Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>Snarveiene dine</b></span>"
+msgstr ""
 
 #: erpnext/accounts/doctype/payment_request/payment_request.py:1002
 msgid "<strong>Grand Total:</strong> {0}"
@@ -5084,7 +5084,7 @@ msgstr ""
 #: erpnext/buying/doctype/purchase_order_item/purchase_order_item.json
 #: erpnext/stock/doctype/purchase_receipt_item/purchase_receipt_item.json
 msgid "Apply TDS"
-msgstr "Bruk TDS"
+msgstr ""
 
 #. Label of the apply_tax_withholding_amount (Check) field in DocType 'Payment
 #. Entry'
@@ -23275,7 +23275,7 @@ msgstr ""
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "Invoicing"
-msgstr "Fakturering"
+msgstr ""
 
 #. Label of the invoicing_features_section (Section Break) field in DocType
 #. 'Accounts Settings'
@@ -57044,7 +57044,7 @@ msgstr ""
 #: erpnext/quality_management/workspace/quality/quality.json
 #: erpnext/selling/workspace/selling/selling.json
 msgid "{} Open"
-msgstr ""
+msgstr "{} Åpne"
 
 #. Count format of shortcut in the Buying Workspace
 #. Count format of shortcut in the Stock Workspace
