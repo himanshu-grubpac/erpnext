@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2025-12-22 03:07\n"
+"PO-Revision-Date: 2026-01-21 07:45\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: es_ES\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -931,7 +931,7 @@ msgstr "<span class=\"h4\"><b>Informes &amp; Datos Maestros</b></span>"
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "<span class=\"h4\"><b>Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>Accesos directos</b></span>"
+msgstr ""
 
 #. Header text in the Subcontracting Workspace
 #: erpnext/subcontracting/workspace/subcontracting/subcontracting.json
@@ -2030,7 +2030,7 @@ msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:362
 msgid "Accounts Missing Error"
-msgstr "Error por cuentas inexistentes"
+msgstr ""
 
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:166
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:191
@@ -3262,7 +3262,7 @@ msgstr "Pagos adelantados"
 #: erpnext/accounts/doctype/advance_tax/advance_tax.json
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 msgid "Advance Tax"
-msgstr "Impuesto anticipado"
+msgstr ""
 
 #. Name of a DocType
 #. Label of the taxes (Table) field in DocType 'Payment Entry'
@@ -5084,7 +5084,7 @@ msgstr "Aplicar SLA para el tiempo de resolución"
 #: erpnext/buying/doctype/purchase_order_item/purchase_order_item.json
 #: erpnext/stock/doctype/purchase_receipt_item/purchase_receipt_item.json
 msgid "Apply TDS"
-msgstr "Aplicar retención de impuesto en origen (TDS)"
+msgstr ""
 
 #. Label of the apply_tax_withholding_amount (Check) field in DocType 'Payment
 #. Entry'
@@ -5094,12 +5094,12 @@ msgstr "Aplicar retención de impuesto en origen (TDS)"
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 msgid "Apply Tax Withholding Amount"
-msgstr "Aplicar Monto de Retención de Impuestos"
+msgstr ""
 
 #. Label of the apply_tds (Check) field in DocType 'Journal Entry'
 #: erpnext/accounts/doctype/journal_entry/journal_entry.json
 msgid "Apply Tax Withholding Amount "
-msgstr "Aplicar Monto de Retención de Impuestos "
+msgstr ""
 
 #. Label of the apply_restriction_on_values (Check) field in DocType
 #. 'Accounting Dimension Filter'
@@ -7329,7 +7329,7 @@ msgstr "Tarifa base"
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.json
 msgid "Base Tax Withholding Net Total"
-msgstr "Base Imponible Retención Neta Total"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:261
 msgid "Base Total"
@@ -11039,7 +11039,7 @@ msgstr "Considere las dimensiones contables"
 #. Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Consider Entire Party Ledger Amount"
-msgstr "Considerar el importe total del libro mayor del tercero"
+msgstr ""
 
 #. Label of the consider_minimum_order_qty (Check) field in DocType 'Production
 #. Plan'
@@ -12281,7 +12281,7 @@ msgstr "Cree pedidos de ventas para ayudarlo a planificar su trabajo y entregarl
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:428
 msgid "Create Sample Retention Stock Entry"
-msgstr "Crear entrada de stock de retención de muestra"
+msgstr ""
 
 #: erpnext/stock/dashboard/item_dashboard.js:283
 #: erpnext/stock/doctype/material_request/material_request.js:488
@@ -12757,7 +12757,7 @@ msgstr "Yarda Cúbica"
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Cumulative Transaction Threshold"
-msgstr "Umbral de Transacción Acumulativo"
+msgstr ""
 
 #. Name of a UOM
 #: erpnext/setup/setup_wizard/data/uom_data.json
@@ -16632,7 +16632,7 @@ msgstr "EAN"
 #. Option for the 'Barcode Type' (Select) field in DocType 'Item Barcode'
 #: erpnext/stock/doctype/item_barcode/item_barcode.json
 msgid "EAN-12"
-msgstr "EAN-12"
+msgstr ""
 
 #. Option for the 'Barcode Type' (Select) field in DocType 'Item Barcode'
 #: erpnext/stock/doctype/item_barcode/item_barcode.json
@@ -23277,7 +23277,7 @@ msgstr ""
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "Invoicing"
-msgstr "Facturación"
+msgstr ""
 
 #. Label of the invoicing_features_section (Section Break) field in DocType
 #. 'Accounts Settings'
@@ -26163,34 +26163,34 @@ msgstr "Las Iniciativas ayudan a obtener negocios, agrega todos tus contactos y 
 #. Label of a shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Learn Inventory Management"
-msgstr "Aprende la Gestión del Inventario"
+msgstr ""
 
 #. Label of a shortcut in the Manufacturing Workspace
 #: erpnext/manufacturing/workspace/manufacturing/manufacturing.json
 msgid "Learn Manufacturing"
-msgstr "Aprender Manufactura"
+msgstr ""
 
 #. Label of a shortcut in the Buying Workspace
 #: erpnext/buying/workspace/buying/buying.json
 msgid "Learn Procurement"
-msgstr "Aprender Compras"
+msgstr ""
 
 #. Label of a shortcut in the Projects Workspace
 #: erpnext/projects/workspace/projects/projects.json
 msgid "Learn Project Management"
-msgstr "Aprender Gestión de Proyecto"
+msgstr ""
 
 #. Label of a shortcut in the Selling Workspace
 #: erpnext/selling/workspace/selling/selling.json
 msgid "Learn Sales Management"
-msgstr "Aprender Gestión de Ventas"
+msgstr ""
 
 #. Description of the 'Enable Common Party Accounting' (Check) field in DocType
 #. 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 #, python-format
 msgid "Learn about <a href=\"https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier.\">Common Party</a>"
-msgstr "Conozca más sobre <a href=\"https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier.\">Terceros comúnes</a>"
+msgstr ""
 
 #. Label of the leave_encashed (Select) field in DocType 'Employee'
 #: erpnext/setup/doctype/employee/employee.json
@@ -29620,7 +29620,7 @@ msgstr ""
 
 #: erpnext/setup/doctype/email_digest/email_digest.py:166
 msgid "No items to be received are overdue"
-msgstr "No hay elementos para ser recibidos están vencidos"
+msgstr ""
 
 #: erpnext/accounts/doctype/bank_reconciliation_tool/bank_reconciliation_tool.py:452
 msgid "No matches occurred via auto reconciliation"
@@ -31619,7 +31619,7 @@ msgstr "Artículo suministrado por pedido"
 #. Label of the pos_tab (Tab Break) field in DocType 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "POS"
-msgstr "Punto de venta POS"
+msgstr ""
 
 #. Label of the invoice_fields (Table) field in DocType 'POS Settings'
 #: erpnext/accounts/doctype/pos_settings/pos_settings.json
@@ -35254,7 +35254,7 @@ msgstr "Por favor, especifique el rango (desde / hasta)"
 
 #: erpnext/buying/doctype/request_for_quotation/request_for_quotation.js:41
 msgid "Please supply the specified items at the best possible rates"
-msgstr "Por favor suministrar los elementos especificados en las mejores tasas posibles"
+msgstr ""
 
 #: erpnext/stock/doctype/repost_item_valuation/repost_item_valuation.py:247
 msgid "Please try again in an hour."
@@ -41137,11 +41137,11 @@ msgstr "UTILIDADES RETENIDAS"
 
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.js:266
 msgid "Retention Stock Entry"
-msgstr "Entrada de Retención de Acciones"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:555
 msgid "Retention Stock Entry already created or Sample Quantity not provided"
-msgstr "Entrada de Inventario de Retención ya creada o Cantidad de muestra no proporcionada"
+msgstr ""
 
 #. Label of the retried (Int) field in DocType 'Bulk Transaction Log Detail'
 #: erpnext/bulk_transaction/doctype/bulk_transaction_log_detail/bulk_transaction_log_detail.json
@@ -41858,7 +41858,7 @@ msgstr "Fila # {0}: No se puede eliminar el elemento {1} que tiene una orden de 
 
 #: erpnext/controllers/accounts_controller.py:3747
 msgid "Row #{0}: Cannot delete item {1} which is assigned to customer's purchase order."
-msgstr "Fila # {0}: No se puede eliminar el artículo {1} que se asigna a la orden de compra del cliente."
+msgstr ""
 
 #: erpnext/controllers/accounts_controller.py:4051
 msgid "Row #{0}: Cannot set Rate if the billed amount is greater than the amount for Item {1}."
@@ -46412,7 +46412,7 @@ msgstr "Programa de nivel único"
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Single Transaction Threshold"
-msgstr "Umbral de Transacción único"
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:163
 msgid "Single Variant"
@@ -50209,7 +50209,7 @@ msgstr "Metas de territorios"
 #. Label of a chart in the CRM Workspace
 #: erpnext/crm/workspace/crm/crm.json
 msgid "Territory Wise Sales"
-msgstr "Ventas por territorios"
+msgstr ""
 
 #. Name of a report
 #: erpnext/selling/report/territory_wise_sales/territory_wise_sales.json
@@ -50584,7 +50584,7 @@ msgstr ""
 #: erpnext/accounts/doctype/journal_entry/journal_entry.py:179
 #: erpnext/accounts/doctype/journal_entry/journal_entry.py:186
 msgid "The task has been enqueued as a background job."
-msgstr "La tarea se ha puesto en cola como trabajo en segundo plano."
+msgstr ""
 
 #: erpnext/stock/doctype/stock_reconciliation/stock_reconciliation.py:1008
 msgid "The task has been enqueued as a background job. In case there is any issue on processing in background, the system will add a comment about the error on this Stock Reconciliation and revert to the Draft stage"
@@ -50763,7 +50763,7 @@ msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:131
 msgid "This Item is a Template and cannot be used in transactions. Item attributes will be copied over into the variants unless 'No Copy' is set"
-msgstr "Este producto es una plantilla y no se puede utilizar en las transacciones. Los atributos del producto se copiarán sobre las variantes, a menos que la opción 'No copiar' este seleccionada"
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:190
 msgid "This Item is a Variant of {0} (Template)."
@@ -51151,7 +51151,7 @@ msgstr "Tabla de Tiempo para las tareas."
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:868
 msgid "Timesheet {0} is already completed or cancelled"
-msgstr "Table de Tiempo {0} ya se haya completado o cancelado"
+msgstr ""
 
 #. Label of the timesheet_sb (Section Break) field in DocType 'Projects
 #. Settings'
@@ -52026,12 +52026,12 @@ msgstr "Total saliente"
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Bills"
-msgstr "Total de Facturas Salientes"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Payment"
-msgstr "Pago Total Saliente"
+msgstr ""
 
 #. Label of the total_outgoing_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -57011,7 +57011,7 @@ msgstr "{}"
 #. Count format of shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{}  Available"
-msgstr "{}  Disponible"
+msgstr ""
 
 #. Count format of shortcut in the Selling Workspace
 #: erpnext/selling/workspace/selling/selling.json
@@ -57030,14 +57030,14 @@ msgstr ""
 #: erpnext/projects/workspace/projects/projects.json
 #: erpnext/support/workspace/support/support.json
 msgid "{} Assigned"
-msgstr "{} Asignado"
+msgstr ""
 
 #. Count format of shortcut in the Buying Workspace
 #. Count format of shortcut in the Selling Workspace
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/selling/workspace/selling/selling.json
 msgid "{} Available"
-msgstr "{} Disponible"
+msgstr ""
 
 #. Count format of shortcut in the CRM Workspace
 #. Count format of shortcut in the Projects Workspace
