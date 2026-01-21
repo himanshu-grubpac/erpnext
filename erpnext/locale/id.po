@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2026-01-11 06:34\n"
+"PO-Revision-Date: 2026-01-21 07:46\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Indonesian\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: id\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: id_ID\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -894,7 +894,7 @@ msgstr "<span class=\"h4\"><b>Akses Cepat</b></span>"
 #. Header text in the Assets Workspace
 #: erpnext/assets/workspace/assets/assets.json
 msgid "<span class=\"h4\"><b>Reports & Masters</b></span>"
-msgstr "<span class=\"h4\"><b>Laporan & Master</b></span>"
+msgstr ""
 
 #. Header text in the Accounting Workspace
 #. Header text in the Payables Workspace
@@ -919,14 +919,14 @@ msgstr "<span class=\"h4\"><b>Laporan & Master</b></span>"
 #: erpnext/setup/workspace/home/home.json
 #: erpnext/support/workspace/support/support.json
 msgid "<span class=\"h4\"><b>Reports &amp; Masters</b></span>"
-msgstr "<span class=\"h4\"><b>Laporan &amp; Master</b></span>"
+msgstr ""
 
 #. Header text in the Payables Workspace
 #. Header text in the Receivables Workspace
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "<span class=\"h4\"><b>Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>Pintasan</b></span>"
+msgstr ""
 
 #. Header text in the Subcontracting Workspace
 #: erpnext/subcontracting/workspace/subcontracting/subcontracting.json
@@ -967,7 +967,7 @@ msgstr "<span class=\"h4\"><b>Pintasan Anda\n"
 #: erpnext/setup/workspace/home/home.json
 #: erpnext/support/workspace/support/support.json
 msgid "<span class=\"h4\"><b>Your Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>Pintasan Anda</b></span>"
+msgstr ""
 
 #: erpnext/accounts/doctype/payment_request/payment_request.py:1002
 msgid "<strong>Grand Total:</strong> {0}"
@@ -2025,7 +2025,7 @@ msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:362
 msgid "Accounts Missing Error"
-msgstr "Kesalahan Akun Hilang"
+msgstr ""
 
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:166
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:191
@@ -12276,7 +12276,7 @@ msgstr "Buat Pesanan Penjualan untuk membantu Anda merencanakan pekerjaan dan me
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:428
 msgid "Create Sample Retention Stock Entry"
-msgstr "Buat Entri Stok Penyimpanan Sampel"
+msgstr ""
 
 #: erpnext/stock/dashboard/item_dashboard.js:283
 #: erpnext/stock/doctype/material_request/material_request.js:488
@@ -29613,7 +29613,7 @@ msgstr ""
 
 #: erpnext/setup/doctype/email_digest/email_digest.py:166
 msgid "No items to be received are overdue"
-msgstr "Tidak ada barang yang akan diterima sudah lewat"
+msgstr ""
 
 #: erpnext/accounts/doctype/bank_reconciliation_tool/bank_reconciliation_tool.py:452
 msgid "No matches occurred via auto reconciliation"
@@ -35247,7 +35247,7 @@ msgstr "Silakan tentukan dari / ke berkisar"
 
 #: erpnext/buying/doctype/request_for_quotation/request_for_quotation.js:41
 msgid "Please supply the specified items at the best possible rates"
-msgstr "Silakan memasok barang-barang tertentu dengan tarif terbaik"
+msgstr ""
 
 #: erpnext/stock/doctype/repost_item_valuation/repost_item_valuation.py:247
 msgid "Please try again in an hour."
@@ -41130,11 +41130,11 @@ msgstr "Laba Ditahan"
 
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.js:266
 msgid "Retention Stock Entry"
-msgstr "Entri Saham Retensi"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:555
 msgid "Retention Stock Entry already created or Sample Quantity not provided"
-msgstr "Entry Stok Retensi sudah dibuat atau Jumlah Sampel tidak disediakan"
+msgstr ""
 
 #. Label of the retried (Int) field in DocType 'Bulk Transaction Log Detail'
 #: erpnext/bulk_transaction/doctype/bulk_transaction_log_detail/bulk_transaction_log_detail.json
@@ -41851,7 +41851,7 @@ msgstr "Baris # {0}: Tidak dapat menghapus item {1} yang memiliki perintah kerja
 
 #: erpnext/controllers/accounts_controller.py:3747
 msgid "Row #{0}: Cannot delete item {1} which is assigned to customer's purchase order."
-msgstr "Baris # {0}: Tidak dapat menghapus item {1} yang ditetapkan untuk pesanan pembelian pelanggan."
+msgstr ""
 
 #: erpnext/controllers/accounts_controller.py:4051
 msgid "Row #{0}: Cannot set Rate if the billed amount is greater than the amount for Item {1}."
@@ -50753,7 +50753,7 @@ msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:131
 msgid "This Item is a Template and cannot be used in transactions. Item attributes will be copied over into the variants unless 'No Copy' is set"
-msgstr "Stok Barang ini adalah Template dan tidak dapat digunakan dalam transaksi. Item atribut akan disalin ke dalam varian kecuali 'Tidak ada Copy' diatur"
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:190
 msgid "This Item is a Variant of {0} (Template)."
@@ -51141,7 +51141,7 @@ msgstr "Absen untuk tugas-tugas."
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:868
 msgid "Timesheet {0} is already completed or cancelled"
-msgstr "Absen {0} sudah selesai atau dibatalkan"
+msgstr ""
 
 #. Label of the timesheet_sb (Section Break) field in DocType 'Projects
 #. Settings'
