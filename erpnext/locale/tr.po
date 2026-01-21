@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2025-12-22 03:08\n"
+"PO-Revision-Date: 2026-01-21 07:46\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Turkish\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: tr\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: tr_TR\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -931,7 +931,7 @@ msgstr "<span class=\"h4\"><b>Raporlar &amp; Kayıtlar</b></span>"
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "<span class=\"h4\"><b>Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>Kısayollar</b></span>"
+msgstr ""
 
 #. Header text in the Subcontracting Workspace
 #: erpnext/subcontracting/workspace/subcontracting/subcontracting.json
@@ -2030,7 +2030,7 @@ msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:362
 msgid "Accounts Missing Error"
-msgstr "Hesap Eksik Hatası"
+msgstr ""
 
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:166
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:191
@@ -3262,7 +3262,7 @@ msgstr "Peşinat Ödemeleri"
 #: erpnext/accounts/doctype/advance_tax/advance_tax.json
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 msgid "Advance Tax"
-msgstr "Peşin Vergi"
+msgstr ""
 
 #. Name of a DocType
 #. Label of the taxes (Table) field in DocType 'Payment Entry'
@@ -5084,7 +5084,7 @@ msgstr "Çözüm Süresi için SLA'yı Uygulayın"
 #: erpnext/buying/doctype/purchase_order_item/purchase_order_item.json
 #: erpnext/stock/doctype/purchase_receipt_item/purchase_receipt_item.json
 msgid "Apply TDS"
-msgstr "Vergiyi Dahil Et"
+msgstr ""
 
 #. Label of the apply_tax_withholding_amount (Check) field in DocType 'Payment
 #. Entry'
@@ -5094,12 +5094,12 @@ msgstr "Vergiyi Dahil Et"
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 msgid "Apply Tax Withholding Amount"
-msgstr "Vergi Kesintisini Uygula"
+msgstr ""
 
 #. Label of the apply_tds (Check) field in DocType 'Journal Entry'
 #: erpnext/accounts/doctype/journal_entry/journal_entry.json
 msgid "Apply Tax Withholding Amount "
-msgstr "Vergi Kesintisini Uygula "
+msgstr ""
 
 #. Label of the apply_restriction_on_values (Check) field in DocType
 #. 'Accounting Dimension Filter'
@@ -7329,7 +7329,7 @@ msgstr "Taban Fiyat"
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.json
 msgid "Base Tax Withholding Net Total"
-msgstr "Vergi Stopajı Net Taban Toplamı"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:261
 msgid "Base Total"
@@ -11039,7 +11039,7 @@ msgstr "Muhasebe Boyutları"
 #. Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Consider Entire Party Ledger Amount"
-msgstr "Tüm Parti Defteri Tutarını Dikkate Alın"
+msgstr ""
 
 #. Label of the consider_minimum_order_qty (Check) field in DocType 'Production
 #. Plan'
@@ -12281,7 +12281,7 @@ msgstr "İşinizi planlamanıza ve zamanında teslim etmenize yardımcı olmak i
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:428
 msgid "Create Sample Retention Stock Entry"
-msgstr "Numune Saklama Stok Hareketi Oluştur"
+msgstr ""
 
 #: erpnext/stock/dashboard/item_dashboard.js:283
 #: erpnext/stock/doctype/material_request/material_request.js:488
@@ -12759,7 +12759,7 @@ msgstr "Metreküp"
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Cumulative Transaction Threshold"
-msgstr "Kümülatif İşlem Eşiği"
+msgstr ""
 
 #. Name of a UOM
 #: erpnext/setup/setup_wizard/data/uom_data.json
@@ -16317,7 +16317,7 @@ msgstr "Satış İadesindeki Siparişi Miktarını Ayırma"
 #. Charges'
 #: erpnext/accounts/doctype/sales_taxes_and_charges/sales_taxes_and_charges.json
 msgid "Dont Recompute tax"
-msgstr "Vergiyi Yeniden Hesaplamayın"
+msgstr ""
 
 #. Label of the doors (Int) field in DocType 'Vehicle'
 #: erpnext/setup/doctype/vehicle/vehicle.json
@@ -16634,7 +16634,7 @@ msgstr "EAN"
 #. Option for the 'Barcode Type' (Select) field in DocType 'Item Barcode'
 #: erpnext/stock/doctype/item_barcode/item_barcode.json
 msgid "EAN-12"
-msgstr "EAN-12"
+msgstr ""
 
 #. Option for the 'Barcode Type' (Select) field in DocType 'Item Barcode'
 #: erpnext/stock/doctype/item_barcode/item_barcode.json
@@ -23283,7 +23283,7 @@ msgstr "Faturalar ve Ödemeler Alındı ve Tahsis Edildi"
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "Invoicing"
-msgstr "Faturalandırma"
+msgstr ""
 
 #. Label of the invoicing_features_section (Section Break) field in DocType
 #. 'Accounts Settings'
@@ -26169,34 +26169,34 @@ msgstr "Potansiyel müşteriler iş almanıza, tüm kişilerinizi ve daha fazlas
 #. Label of a shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Learn Inventory Management"
-msgstr "Envanter Yönetimini Öğrenin"
+msgstr ""
 
 #. Label of a shortcut in the Manufacturing Workspace
 #: erpnext/manufacturing/workspace/manufacturing/manufacturing.json
 msgid "Learn Manufacturing"
-msgstr "Üretimi Öğrenin"
+msgstr ""
 
 #. Label of a shortcut in the Buying Workspace
 #: erpnext/buying/workspace/buying/buying.json
 msgid "Learn Procurement"
-msgstr "Satın Almayı Öğrenin"
+msgstr ""
 
 #. Label of a shortcut in the Projects Workspace
 #: erpnext/projects/workspace/projects/projects.json
 msgid "Learn Project Management"
-msgstr "Proje Yönetimini Öğren"
+msgstr ""
 
 #. Label of a shortcut in the Selling Workspace
 #: erpnext/selling/workspace/selling/selling.json
 msgid "Learn Sales Management"
-msgstr "Satış Yönetimini Öğren"
+msgstr ""
 
 #. Description of the 'Enable Common Party Accounting' (Check) field in DocType
 #. 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 #, python-format
 msgid "Learn about <a href=\"https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier.\">Common Party</a>"
-msgstr "<a href=\"https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier.\">Ortak Cari</a> hakkında bilgi edinin"
+msgstr ""
 
 #. Label of the leave_encashed (Select) field in DocType 'Employee'
 #: erpnext/setup/doctype/employee/employee.json
@@ -26415,7 +26415,7 @@ msgstr "Tedarikçi ile İlişkilendir"
 #. 'Appointment'
 #: erpnext/crm/doctype/appointment/appointment.json
 msgid "Linked Documents"
-msgstr "Bağlantılı Belgeler"
+msgstr "Bağlı Belgeler"
 
 #. Label of the section_break_12 (Section Break) field in DocType 'POS Closing
 #. Entry'
@@ -29401,7 +29401,7 @@ msgstr "Yeni {0} fiyatlandırma kuralları oluşturuldu"
 #. Label of a Link in the CRM Workspace
 #: erpnext/crm/workspace/crm/crm.json
 msgid "Newsletter"
-msgstr "Bülten"
+msgstr ""
 
 #: erpnext/setup/setup_wizard/data/industry_type.txt:34
 msgid "Newspaper Publishers"
@@ -29627,7 +29627,7 @@ msgstr "Sepette ürün yok"
 
 #: erpnext/setup/doctype/email_digest/email_digest.py:166
 msgid "No items to be received are overdue"
-msgstr "Teslim alınması gereken hiçbir ürünün vadesi geçmemiştir"
+msgstr ""
 
 #: erpnext/accounts/doctype/bank_reconciliation_tool/bank_reconciliation_tool.py:452
 msgid "No matches occurred via auto reconciliation"
@@ -29798,7 +29798,7 @@ msgstr "Veri Yok"
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:361
 msgid "No {0} Accounts found for this company."
-msgstr "Bu şirket için {0} Hesap bulunamadı."
+msgstr ""
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:2495
 msgid "No {0} found for Inter Company Transactions."
@@ -31627,7 +31627,7 @@ msgstr "Satın Alma Emri Tedarik Edilen Ürün"
 #. Label of the pos_tab (Tab Break) field in DocType 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "POS"
-msgstr "POS Satış Noktası"
+msgstr ""
 
 #. Label of the invoice_fields (Table) field in DocType 'POS Settings'
 #: erpnext/accounts/doctype/pos_settings/pos_settings.json
@@ -31877,7 +31877,7 @@ msgstr "POS Arama Alanları"
 #. Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "POS Setting"
-msgstr "POS Ayarları"
+msgstr ""
 
 #. Name of a DocType
 #. Label of a Link in the Selling Workspace
@@ -33182,7 +33182,7 @@ msgstr "Ödeme Talebi Türü"
 #. Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "Payment Request created from Sales Order or Purchase Order will be in Draft status. When disabled document will be in unsaved state."
-msgstr "Satış Siparişi veya Satın Alma Siparişinden oluşturulan Ödeme Talebi Taslak durumunda olacaktır. Devre dışı bırakıldığında belge kaydedilmemiş durumda olacaktır."
+msgstr ""
 
 #: erpnext/accounts/doctype/payment_request/payment_request.py:626
 msgid "Payment Request for {0}"
@@ -35262,7 +35262,7 @@ msgstr "Lütfen başlangıç/bitiş aralığını belirtin"
 
 #: erpnext/buying/doctype/request_for_quotation/request_for_quotation.js:41
 msgid "Please supply the specified items at the best possible rates"
-msgstr "Lütfen belirtilen ürünleri mümkün olan en iyi fiyatlarla tedarik edin"
+msgstr ""
 
 #: erpnext/stock/doctype/repost_item_valuation/repost_item_valuation.py:247
 msgid "Please try again in an hour."
@@ -39742,7 +39742,7 @@ msgstr "Erken Ödeme İndirimi için Referans Tarihi"
 #. Label of the reference_detail (Data) field in DocType 'Advance Tax'
 #: erpnext/accounts/doctype/advance_tax/advance_tax.json
 msgid "Reference Detail"
-msgstr "Referans Detayı"
+msgstr ""
 
 #. Label of the reference_detail_no (Data) field in DocType 'Journal Entry
 #. Account'
@@ -41145,11 +41145,11 @@ msgstr "Birikmiş Kazançlar"
 
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.js:266
 msgid "Retention Stock Entry"
-msgstr "Stok Tutma Girişi"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:555
 msgid "Retention Stock Entry already created or Sample Quantity not provided"
-msgstr "Saklama Stok Girişi zaten oluşturuldu veya Örnek Miktarı sağlanmadı"
+msgstr ""
 
 #. Label of the retried (Int) field in DocType 'Bulk Transaction Log Detail'
 #: erpnext/bulk_transaction/doctype/bulk_transaction_log_detail/bulk_transaction_log_detail.json
@@ -41866,7 +41866,7 @@ msgstr "Satır # {0}: İş emri atanmış {1} kalem silinemez."
 
 #: erpnext/controllers/accounts_controller.py:3747
 msgid "Row #{0}: Cannot delete item {1} which is assigned to customer's purchase order."
-msgstr "Satır #{0}: Müşterinin satın alma siparişine atanmış olan {1} kalem silinemiyor."
+msgstr ""
 
 #: erpnext/controllers/accounts_controller.py:4051
 msgid "Row #{0}: Cannot set Rate if the billed amount is greater than the amount for Item {1}."
@@ -41945,7 +41945,7 @@ msgstr ""
 
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.py:52
 msgid "Row #{0}: Dates overlapping with other row"
-msgstr "Satır #{0}: Diğer satırla çakışan tarihler var"
+msgstr ""
 
 #: erpnext/buying/doctype/purchase_order/purchase_order.py:395
 msgid "Row #{0}: Default BOM not found for FG Item {1}"
@@ -42488,7 +42488,7 @@ msgstr "Satır {0}: Seçilen miktar gereken miktardan daha az, ek olarak {1} {2}
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:1459
 msgid "Row {0}# Item {1} cannot be transferred more than {2} against {3} {4}"
-msgstr "Satır {0}#: Ürün {1}, {3} {4} kapsamında {2} değerinden fazla aktarılamaz."
+msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:1483
 msgid "Row {0}# Item {1} not found in 'Raw Materials Supplied' table in {2} {3}"
@@ -46425,7 +46425,7 @@ msgstr "Tek Katmanlı Programı"
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Single Transaction Threshold"
-msgstr "Tek İşlem Eşiği"
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:163
 msgid "Single Variant"
@@ -46456,7 +46456,7 @@ msgstr "Hammaddeyi Devam Eden İş Deposuna Aktarma"
 
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.py:141
 msgid "Skipping Tax Withholding Category {0} as there is no associated account set for Company {1} in it."
-msgstr "Şirket {1} için ayarlanmış ilişkili bir hesap olmadığından Vergi Stopajı Kategorisi {0} atlanıyor."
+msgstr ""
 
 #. Label of the customer_skype (Data) field in DocType 'Appointment'
 #: erpnext/crm/doctype/appointment/appointment.json
@@ -49089,16 +49089,16 @@ msgstr "Sistem miktarını veya miktarını artırma veya azaltma bildirimi"
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:267
 msgid "TCS Amount"
-msgstr "Kaynakta Tahsil Edilen Vergi Tutarı"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:249
 #: erpnext/accounts/report/tds_computation_summary/tds_computation_summary.py:125
 msgid "TCS Rate %"
-msgstr "Vergi Oranı %"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:267
 msgid "TDS Amount"
-msgstr "Stopaj Vergisi Tutarı"
+msgstr ""
 
 #. Name of a report
 #: erpnext/accounts/report/tds_computation_summary/tds_computation_summary.json
@@ -49116,7 +49116,7 @@ msgstr "Ödenecek Stopaj Vergisi"
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:249
 #: erpnext/accounts/report/tds_computation_summary/tds_computation_summary.py:125
 msgid "TDS Rate %"
-msgstr "Stopaj Vergisi Oranı %"
+msgstr ""
 
 #. Description of a DocType
 #: erpnext/stock/doctype/item_website_specification/item_website_specification.json
@@ -49635,11 +49635,11 @@ msgstr "Vergi Türü"
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 #: erpnext/accounts/doctype/tax_withheld_vouchers/tax_withheld_vouchers.json
 msgid "Tax Withheld Vouchers"
-msgstr "Tevkifatlı Vergi Makbuzları"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:361
 msgid "Tax Withholding"
-msgstr "Vergi Stopajı"
+msgstr ""
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/tax_withholding_account/tax_withholding_account.json
@@ -49674,7 +49674,7 @@ msgstr "Vergi Stopaj Kategorisi"
 
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.py:152
 msgid "Tax Withholding Category {} against Company {} for Customer {} should have Cumulative Threshold value."
-msgstr "Vergi Stopajı Kategorisi {0} için Müşteri {2} adına Şirket {1} ile ilişkili olarak Kümülatif Eşik değeri bulunmalıdır."
+msgstr ""
 
 #. Name of a report
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.json
@@ -49691,7 +49691,7 @@ msgstr "Vergi Stopajı Detayları"
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.json
 msgid "Tax Withholding Net Total"
-msgstr "Vergi Stopajı Net Toplam"
+msgstr ""
 
 #. Name of a DocType
 #. Label of the tax_withholding_rate (Float) field in DocType 'Tax Withholding
@@ -49727,7 +49727,7 @@ msgstr "Vergi ayrıntı tablosu, öğe ana verisinden bir dize olarak alınır v
 #. DocType 'Tax Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Tax will be withheld only for amount exceeding the cumulative threshold"
-msgstr "Vergi sadece kümülatif eşiği aşan tutar için kesilecektir"
+msgstr ""
 
 #. Label of the taxable_amount (Currency) field in DocType 'Item Wise Tax
 #. Detail'
@@ -50223,7 +50223,7 @@ msgstr "Bölge Hedefleri"
 #. Label of a chart in the CRM Workspace
 #: erpnext/crm/workspace/crm/crm.json
 msgid "Territory Wise Sales"
-msgstr "Bölge Bazlı Satışlar"
+msgstr ""
 
 #. Name of a report
 #: erpnext/selling/report/territory_wise_sales/territory_wise_sales.json
@@ -50324,7 +50324,7 @@ msgstr "'Üretim' türündeki Stok Girişi geri akış olarak bilinir. Bitmiş �
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:2166
 msgid "The Work Order is mandatory for Disassembly Order"
-msgstr "Sökme Emri için İş Emri zorunludur"
+msgstr ""
 
 #. Description of the 'Closing Account Head' (Link) field in DocType 'Period
 #. Closing Voucher'
@@ -50598,7 +50598,7 @@ msgstr ""
 #: erpnext/accounts/doctype/journal_entry/journal_entry.py:179
 #: erpnext/accounts/doctype/journal_entry/journal_entry.py:186
 msgid "The task has been enqueued as a background job."
-msgstr "Görev arka plan işi olarak kuyruğa alındı."
+msgstr ""
 
 #: erpnext/stock/doctype/stock_reconciliation/stock_reconciliation.py:1008
 msgid "The task has been enqueued as a background job. In case there is any issue on processing in background, the system will add a comment about the error on this Stock Reconciliation and revert to the Draft stage"
@@ -50714,7 +50714,7 @@ msgstr "Bu tarihte boş yer bulunmamaktadır"
 
 #: erpnext/stock/doctype/item/item.js:1065
 msgid "There are two options to maintain valuation of stock. FIFO (first in - first out) and Moving Average. To understand this topic in detail please visit <a href='https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average' target='_blank'>Item Valuation, FIFO and Moving Average.</a>"
-msgstr "Stok değerlemesini sürdürmek için iki seçenek vardır. FIFO (ilk giren ilk çıkar) ve Hareketli Ortalama. Bu konuyu ayrıntılı olarak anlamak için lütfen <a href='https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average' target='_blank'>Öğe Değerleme, FIFO ve Hareketli Ortalama</a> bölümünü ziyaret edin."
+msgstr ""
 
 #: erpnext/stock/report/item_variant_details/item_variant_details.py:25
 msgid "There aren't any item variants for the selected item"
@@ -50777,7 +50777,7 @@ msgstr "Bu Hesap, Ana Para Birimi veya Hesap Para Biriminde ‘0’ bakiyeye sah
 
 #: erpnext/stock/doctype/item/item.js:131
 msgid "This Item is a Template and cannot be used in transactions. Item attributes will be copied over into the variants unless 'No Copy' is set"
-msgstr "Bu Ürün bir Şablondur ve işlemlerde kullanılamaz. Ürün özellikleri, 'Kopyalama' seçilmediği sürece varyantlara uygulanır."
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:190
 msgid "This Item is a Variant of {0} (Template)."
@@ -51165,7 +51165,7 @@ msgstr "Görevler için zaman çizelgesi."
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:868
 msgid "Timesheet {0} is already completed or cancelled"
-msgstr "Zaman çizelgesi {0} zaten tamamlandı veya iptal edildi"
+msgstr ""
 
 #. Label of the timesheet_sb (Section Break) field in DocType 'Projects
 #. Settings'
@@ -51915,12 +51915,12 @@ msgstr "Bu Yılın Toplam Geliri"
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Incoming Bills"
-msgstr "Toplam Gelen Faturalar"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Incoming Payment"
-msgstr "Toplam Gelen Ödeme"
+msgstr ""
 
 #. Label of the total_incoming_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -52040,12 +52040,12 @@ msgstr "Toplam Giden"
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Bills"
-msgstr "Toplam Giden Faturalar"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Payment"
-msgstr "Toplam Giden Ödeme"
+msgstr ""
 
 #. Label of the total_outgoing_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -54655,7 +54655,7 @@ msgstr ""
 #. Label of the voucher_name (Data) field in DocType 'Tax Withheld Vouchers'
 #: erpnext/accounts/doctype/tax_withheld_vouchers/tax_withheld_vouchers.json
 msgid "Voucher Name"
-msgstr "Belge Adı"
+msgstr ""
 
 #. Label of the voucher_no (Dynamic Link) field in DocType 'Advance Payment
 #. Ledger Entry'
@@ -57025,17 +57025,17 @@ msgstr "{}"
 #. Count format of shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{}  Available"
-msgstr "{}  Mevcut"
+msgstr ""
 
 #. Count format of shortcut in the Selling Workspace
 #: erpnext/selling/workspace/selling/selling.json
 msgid "{}  To Deliver"
-msgstr "{}  Teslim Edilecek"
+msgstr ""
 
 #. Count format of shortcut in the Buying Workspace
 #: erpnext/buying/workspace/buying/buying.json
 msgid "{}  To Receive"
-msgstr "{}  Teslim Alınacak"
+msgstr ""
 
 #. Count format of shortcut in the CRM Workspace
 #. Count format of shortcut in the Projects Workspace
@@ -57044,14 +57044,14 @@ msgstr "{}  Teslim Alınacak"
 #: erpnext/projects/workspace/projects/projects.json
 #: erpnext/support/workspace/support/support.json
 msgid "{} Assigned"
-msgstr "{} Atanan"
+msgstr ""
 
 #. Count format of shortcut in the Buying Workspace
 #. Count format of shortcut in the Selling Workspace
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/selling/workspace/selling/selling.json
 msgid "{} Available"
-msgstr "{} Mevcut"
+msgstr ""
 
 #. Count format of shortcut in the CRM Workspace
 #. Count format of shortcut in the Projects Workspace
@@ -57069,12 +57069,12 @@ msgstr "{} Açık"
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{} Pending"
-msgstr "{} Bekliyor"
+msgstr ""
 
 #. Count format of shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{} To Bill"
-msgstr "{} Faturalanacak"
+msgstr ""
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:2056
 msgid "{} can't be cancelled since the Loyalty Points earned has been redeemed. First cancel the {} No {}"
