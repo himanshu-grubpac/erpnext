@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2025-12-22 03:07\n"
+"PO-Revision-Date: 2026-01-21 07:45\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: it\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: it_IT\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -826,7 +826,7 @@ msgstr "<span class=\"h4\"><b>Menù Rapido</b></span>"
 #. Header text in the Assets Workspace
 #: erpnext/assets/workspace/assets/assets.json
 msgid "<span class=\"h4\"><b>Reports & Masters</b></span>"
-msgstr "<span class=\"h4\"><b>Dati Master & Rapporti </b></span>"
+msgstr ""
 
 #. Header text in the Accounting Workspace
 #. Header text in the Payables Workspace
@@ -1926,7 +1926,7 @@ msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:362
 msgid "Accounts Missing Error"
-msgstr ""
+msgstr "Errore di account mancanti"
 
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:166
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:191
@@ -3158,7 +3158,7 @@ msgstr ""
 #: erpnext/accounts/doctype/advance_tax/advance_tax.json
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 msgid "Advance Tax"
-msgstr ""
+msgstr "Imposta anticipata"
 
 #. Name of a DocType
 #. Label of the taxes (Table) field in DocType 'Payment Entry'
@@ -4980,7 +4980,7 @@ msgstr ""
 #: erpnext/buying/doctype/purchase_order_item/purchase_order_item.json
 #: erpnext/stock/doctype/purchase_receipt_item/purchase_receipt_item.json
 msgid "Apply TDS"
-msgstr ""
+msgstr "Applicare TDS"
 
 #. Label of the apply_tax_withholding_amount (Check) field in DocType 'Payment
 #. Entry'
@@ -4995,7 +4995,7 @@ msgstr "Applica l'importo della Ritenuta Fiscale"
 #. Label of the apply_tds (Check) field in DocType 'Journal Entry'
 #: erpnext/accounts/doctype/journal_entry/journal_entry.json
 msgid "Apply Tax Withholding Amount "
-msgstr ""
+msgstr "Applica l'importo della ritenuta fiscale "
 
 #. Label of the apply_restriction_on_values (Check) field in DocType
 #. 'Accounting Dimension Filter'
@@ -7225,7 +7225,7 @@ msgstr ""
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.json
 msgid "Base Tax Withholding Net Total"
-msgstr ""
+msgstr "Ritenuta d'acconto sulla base dell'imposta netta totale"
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:261
 msgid "Base Total"
@@ -10935,7 +10935,7 @@ msgstr ""
 #. Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Consider Entire Party Ledger Amount"
-msgstr ""
+msgstr "Considerare l'intero importo del libro mastro del partito"
 
 #. Label of the consider_minimum_order_qty (Check) field in DocType 'Production
 #. Plan'
@@ -12008,7 +12008,7 @@ msgstr ""
 
 #: erpnext/stock/doctype/pick_list/pick_list.js:132
 msgid "Create Delivery Note"
-msgstr ""
+msgstr "Crea nota di consegna"
 
 #: erpnext/stock/doctype/delivery_note/delivery_note_list.js:61
 msgid "Create Delivery Trip"
@@ -12177,7 +12177,7 @@ msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:428
 msgid "Create Sample Retention Stock Entry"
-msgstr ""
+msgstr "Crea una voce di stock di conservazione del campione"
 
 #: erpnext/stock/dashboard/item_dashboard.js:283
 #: erpnext/stock/doctype/material_request/material_request.js:488
@@ -12653,7 +12653,7 @@ msgstr ""
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Cumulative Transaction Threshold"
-msgstr ""
+msgstr "Soglia di transazione cumulativa"
 
 #. Name of a UOM
 #: erpnext/setup/setup_wizard/data/uom_data.json
@@ -16211,7 +16211,7 @@ msgstr ""
 #. Charges'
 #: erpnext/accounts/doctype/sales_taxes_and_charges/sales_taxes_and_charges.json
 msgid "Dont Recompute tax"
-msgstr ""
+msgstr "Non ricalcolare le tasse"
 
 #. Label of the doors (Int) field in DocType 'Vehicle'
 #: erpnext/setup/doctype/vehicle/vehicle.json
@@ -31513,7 +31513,7 @@ msgstr ""
 #. Label of the pos_tab (Tab Break) field in DocType 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "POS"
-msgstr "POS"
+msgstr ""
 
 #. Label of the invoice_fields (Table) field in DocType 'POS Settings'
 #: erpnext/accounts/doctype/pos_settings/pos_settings.json
@@ -50100,7 +50100,7 @@ msgstr ""
 #. Label of a chart in the CRM Workspace
 #: erpnext/crm/workspace/crm/crm.json
 msgid "Territory Wise Sales"
-msgstr "Vendite Basate sul Territorio"
+msgstr ""
 
 #. Name of a report
 #: erpnext/selling/report/territory_wise_sales/territory_wise_sales.json
@@ -51792,12 +51792,12 @@ msgstr ""
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Incoming Bills"
-msgstr "Totale Fatture in Entrata"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Incoming Payment"
-msgstr "Totale Pagamenti in Entrata"
+msgstr ""
 
 #. Label of the total_incoming_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -51917,12 +51917,12 @@ msgstr ""
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Bills"
-msgstr "Totale Fatture in Uscita"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Payment"
-msgstr "Totale Pagamenti in Uscita"
+msgstr ""
 
 #. Label of the total_outgoing_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
