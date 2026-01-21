@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2025-12-22 03:07\n"
+"PO-Revision-Date: 2026-01-21 07:45\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Danish\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: da\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: da_DK\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -8765,7 +8765,7 @@ msgstr ""
 #: erpnext/stock/doctype/stock_entry/stock_entry_list.js:25
 #: erpnext/telephony/doctype/call_log/call_log.json
 msgid "Canceled"
-msgstr ""
+msgstr "Annulleret"
 
 #: erpnext/accounts/doctype/pos_opening_entry/pos_opening_entry.py:76
 msgid "Cannot Assign Cashier"
