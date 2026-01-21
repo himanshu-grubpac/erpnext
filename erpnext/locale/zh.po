@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2025-12-21 09:37+0000\n"
-"PO-Revision-Date: 2025-12-22 03:08\n"
+"PO-Revision-Date: 2026-01-21 07:46\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: frappe\n"
 "X-Crowdin-Project-ID: 639578\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /[frappe.erpnext] develop/erpnext/locale/main.pot\n"
-"X-Crowdin-File-ID: 46\n"
+"X-Crowdin-File: /[frappe.erpnext] version-16-hotfix/erpnext/locale/main.pot\n"
+"X-Crowdin-File-ID: 146\n"
 "Language: zh_CN\n"
 
 #. Label of the column_break_32 (Column Break) field in DocType 'Email Digest'
@@ -895,7 +895,7 @@ msgstr "<span class=\"h4\"><b>快速访问</b></span>"
 #. Header text in the Assets Workspace
 #: erpnext/assets/workspace/assets/assets.json
 msgid "<span class=\"h4\"><b>Reports & Masters</b></span>"
-msgstr "<span class=\"h4\"><b>报表与主数据</b></span>"
+msgstr "<span class=\"h4\"><b>报告和主控</b></span>"
 
 #. Header text in the Accounting Workspace
 #. Header text in the Payables Workspace
@@ -920,14 +920,14 @@ msgstr "<span class=\"h4\"><b>报表与主数据</b></span>"
 #: erpnext/setup/workspace/home/home.json
 #: erpnext/support/workspace/support/support.json
 msgid "<span class=\"h4\"><b>Reports &amp; Masters</b></span>"
-msgstr "<span class=\"h4\"><b>报表 &amp; 主数据</b></span>"
+msgstr "<span class=\"h4\"><b>报告 &amp; 大师</b></span>"
 
 #. Header text in the Payables Workspace
 #. Header text in the Receivables Workspace
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "<span class=\"h4\"><b>Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>快捷方式</b></span>"
+msgstr ""
 
 #. Header text in the Subcontracting Workspace
 #: erpnext/subcontracting/workspace/subcontracting/subcontracting.json
@@ -968,7 +968,7 @@ msgstr "<span class=\"h4\"><b>快速访问\n"
 #: erpnext/setup/workspace/home/home.json
 #: erpnext/support/workspace/support/support.json
 msgid "<span class=\"h4\"><b>Your Shortcuts</b></span>"
-msgstr "<span class=\"h4\"><b>快速访问</b></span>"
+msgstr "<span class=\"h4\"><b>快捷方式</b></span>"
 
 #: erpnext/accounts/doctype/payment_request/payment_request.py:1002
 msgid "<strong>Grand Total:</strong> {0}"
@@ -2026,7 +2026,7 @@ msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:362
 msgid "Accounts Missing Error"
-msgstr "科目缺失错误"
+msgstr ""
 
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:166
 #: erpnext/accounts/doctype/financial_report_template/financial_report_template.js:191
@@ -3258,7 +3258,7 @@ msgstr "预付款"
 #: erpnext/accounts/doctype/advance_tax/advance_tax.json
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 msgid "Advance Tax"
-msgstr "预扣税"
+msgstr ""
 
 #. Name of a DocType
 #. Label of the taxes (Table) field in DocType 'Payment Entry'
@@ -5080,7 +5080,7 @@ msgstr "服务水平基于解决时间"
 #: erpnext/buying/doctype/purchase_order_item/purchase_order_item.json
 #: erpnext/stock/doctype/purchase_receipt_item/purchase_receipt_item.json
 msgid "Apply TDS"
-msgstr "计算代扣税"
+msgstr ""
 
 #. Label of the apply_tax_withholding_amount (Check) field in DocType 'Payment
 #. Entry'
@@ -5090,12 +5090,12 @@ msgstr "计算代扣税"
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 msgid "Apply Tax Withholding Amount"
-msgstr "含代扣税款"
+msgstr ""
 
 #. Label of the apply_tds (Check) field in DocType 'Journal Entry'
 #: erpnext/accounts/doctype/journal_entry/journal_entry.json
 msgid "Apply Tax Withholding Amount "
-msgstr "应用预扣税额 "
+msgstr ""
 
 #. Label of the apply_restriction_on_values (Check) field in DocType
 #. 'Accounting Dimension Filter'
@@ -7325,7 +7325,7 @@ msgstr "基准汇率"
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.json
 msgid "Base Tax Withholding Net Total"
-msgstr "基准代扣税净总计"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:261
 msgid "Base Total"
@@ -8865,7 +8865,7 @@ msgstr "取消日期"
 #: erpnext/stock/doctype/stock_entry/stock_entry_list.js:25
 #: erpnext/telephony/doctype/call_log/call_log.json
 msgid "Canceled"
-msgstr "取消"
+msgstr "已取消"
 
 #: erpnext/accounts/doctype/pos_opening_entry/pos_opening_entry.py:76
 msgid "Cannot Assign Cashier"
@@ -11035,7 +11035,7 @@ msgstr "显示辅助核算"
 #. Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Consider Entire Party Ledger Amount"
-msgstr "考虑交易方总账金额"
+msgstr ""
 
 #. Label of the consider_minimum_order_qty (Check) field in DocType 'Production
 #. Plan'
@@ -12108,7 +12108,7 @@ msgstr "科目表模板"
 
 #: erpnext/stock/doctype/pick_list/pick_list.js:132
 msgid "Create Delivery Note"
-msgstr "创建交货单"
+msgstr ""
 
 #: erpnext/stock/doctype/delivery_note/delivery_note_list.js:61
 msgid "Create Delivery Trip"
@@ -12277,7 +12277,7 @@ msgstr "创建销售订单以帮助您规划工作并按时出货"
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:428
 msgid "Create Sample Retention Stock Entry"
-msgstr "创建样本保留库存凭证"
+msgstr ""
 
 #: erpnext/stock/dashboard/item_dashboard.js:283
 #: erpnext/stock/doctype/material_request/material_request.js:488
@@ -12755,7 +12755,7 @@ msgstr "立方码"
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Cumulative Transaction Threshold"
-msgstr "累积交易阈值"
+msgstr ""
 
 #. Name of a UOM
 #: erpnext/setup/setup_wizard/data/uom_data.json
@@ -16313,7 +16313,7 @@ msgstr "销售退货不预留销售订单数量"
 #. Charges'
 #: erpnext/accounts/doctype/sales_taxes_and_charges/sales_taxes_and_charges.json
 msgid "Dont Recompute tax"
-msgstr "不重新计算税款"
+msgstr ""
 
 #. Label of the doors (Int) field in DocType 'Vehicle'
 #: erpnext/setup/doctype/vehicle/vehicle.json
@@ -16630,7 +16630,7 @@ msgstr "EAN"
 #. Option for the 'Barcode Type' (Select) field in DocType 'Item Barcode'
 #: erpnext/stock/doctype/item_barcode/item_barcode.json
 msgid "EAN-12"
-msgstr "EAN-12"
+msgstr ""
 
 #. Option for the 'Barcode Type' (Select) field in DocType 'Item Barcode'
 #: erpnext/stock/doctype/item_barcode/item_barcode.json
@@ -19203,7 +19203,7 @@ msgstr "预测"
 #. Label of the forecasting_method (Select) field in DocType 'Sales Forecast'
 #: erpnext/manufacturing/doctype/sales_forecast/sales_forecast.json
 msgid "Forecasting Method"
-msgstr "预测方法"
+msgstr ""
 
 #: erpnext/accounts/report/consolidated_trial_balance/consolidated_trial_balance.py:280
 #: erpnext/accounts/report/consolidated_trial_balance/consolidated_trial_balance.py:281
@@ -19894,7 +19894,7 @@ msgstr "会计总账"
 #: erpnext/stock/doctype/warehouse/warehouse.js:77
 msgctxt "Warehouse"
 msgid "General Ledger"
-msgstr "总账"
+msgstr "会计总账"
 
 #. Label of the gs (Section Break) field in DocType 'Item Group'
 #: erpnext/setup/doctype/item_group/item_group.json
@@ -21006,7 +21006,7 @@ msgstr "假期"
 #. Forecast'
 #: erpnext/manufacturing/doctype/sales_forecast/sales_forecast.json
 msgid "Holt-Winters"
-msgstr "霍尔特-温特斯法"
+msgstr ""
 
 #. Name of a UOM
 #: erpnext/setup/setup_wizard/data/uom_data.json
@@ -23280,7 +23280,7 @@ msgstr "发票与付款已获取并核销"
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "Invoicing"
-msgstr "开票管理"
+msgstr ""
 
 #. Label of the invoicing_features_section (Section Break) field in DocType
 #. 'Accounts Settings'
@@ -26166,34 +26166,34 @@ msgstr "信息帮助你的业务，你所有的联系人和更添加为您的线
 #. Label of a shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Learn Inventory Management"
-msgstr "学习库存管理"
+msgstr ""
 
 #. Label of a shortcut in the Manufacturing Workspace
 #: erpnext/manufacturing/workspace/manufacturing/manufacturing.json
 msgid "Learn Manufacturing"
-msgstr "学习生产管理"
+msgstr ""
 
 #. Label of a shortcut in the Buying Workspace
 #: erpnext/buying/workspace/buying/buying.json
 msgid "Learn Procurement"
-msgstr "学习采购管理"
+msgstr ""
 
 #. Label of a shortcut in the Projects Workspace
 #: erpnext/projects/workspace/projects/projects.json
 msgid "Learn Project Management"
-msgstr "学习项目管理"
+msgstr ""
 
 #. Label of a shortcut in the Selling Workspace
 #: erpnext/selling/workspace/selling/selling.json
 msgid "Learn Sales Management"
-msgstr "学习销售管理"
+msgstr ""
 
 #. Description of the 'Enable Common Party Accounting' (Check) field in DocType
 #. 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 #, python-format
 msgid "Learn about <a href=\"https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier.\">Common Party</a>"
-msgstr "了解更多 <a href=\"https://docs.erpnext.com/docs/v13/user/manual/en/accounts/articles/common_party_accounting#:~:text=Common%20Party%20Accounting%20in%20ERPNext,Invoice%20against%20a%20primary%20Supplier.\\\">供应商/客户合并记账功能</a>"
+msgstr ""
 
 #. Label of the leave_encashed (Select) field in DocType 'Employee'
 #: erpnext/setup/doctype/employee/employee.json
@@ -26412,7 +26412,7 @@ msgstr "关联供应商"
 #. 'Appointment'
 #: erpnext/crm/doctype/appointment/appointment.json
 msgid "Linked Documents"
-msgstr "关联单据"
+msgstr "关联文档"
 
 #. Label of the section_break_12 (Section Break) field in DocType 'POS Closing
 #. Entry'
@@ -29398,7 +29398,7 @@ msgstr "创建新{0}动态规则"
 #. Label of a Link in the CRM Workspace
 #: erpnext/crm/workspace/crm/crm.json
 msgid "Newsletter"
-msgstr "简讯"
+msgstr "新闻简报"
 
 #: erpnext/setup/setup_wizard/data/industry_type.txt:34
 msgid "Newspaper Publishers"
@@ -29624,7 +29624,7 @@ msgstr "物料车为空"
 
 #: erpnext/setup/doctype/email_digest/email_digest.py:166
 msgid "No items to be received are overdue"
-msgstr "无已逾期待入库物料"
+msgstr ""
 
 #: erpnext/accounts/doctype/bank_reconciliation_tool/bank_reconciliation_tool.py:452
 msgid "No matches occurred via auto reconciliation"
@@ -29776,7 +29776,7 @@ msgstr "无预留库存可取消预留"
 
 #: erpnext/manufacturing/doctype/sales_forecast/sales_forecast.py:117
 msgid "No sales data found for the selected items."
-msgstr "未找到所选物料的销售数据。"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_reconciliation/stock_reconciliation.py:786
 msgid "No stock ledger entries were created. Please set the quantity or valuation rate for the items properly and try again."
@@ -29795,7 +29795,7 @@ msgstr "无金额"
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:361
 msgid "No {0} Accounts found for this company."
-msgstr "本公司未找到{0}科目"
+msgstr ""
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:2495
 msgid "No {0} found for Inter Company Transactions."
@@ -30440,7 +30440,7 @@ msgstr "每个工单{1}仅能创建一个{0}条目"
 #. DocType 'Tax Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Only payment entries with apply tax withholding unchecked will be considered for checking cumulative threshold breach"
-msgstr "仅未勾选'应用代扣税'的付款凭证将用于检查累计阈值突破情况"
+msgstr ""
 
 #. Description of the 'Customer Groups' (Table) field in DocType 'POS Profile'
 #: erpnext/accounts/doctype/pos_profile/pos_profile.json
@@ -31624,7 +31624,7 @@ msgstr "采购订单供应项"
 #. Label of the pos_tab (Tab Break) field in DocType 'Accounts Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "POS"
-msgstr "POS"
+msgstr ""
 
 #. Label of the invoice_fields (Table) field in DocType 'POS Settings'
 #: erpnext/accounts/doctype/pos_settings/pos_settings.json
@@ -31874,7 +31874,7 @@ msgstr "POS机搜索字段"
 #. Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "POS Setting"
-msgstr "POS设置"
+msgstr ""
 
 #. Name of a DocType
 #. Label of a Link in the Selling Workspace
@@ -32765,7 +32765,7 @@ msgstr "付款"
 #: erpnext/templates/pages/order.html:43
 msgctxt "Amount"
 msgid "Pay"
-msgstr "支付"
+msgstr "付款"
 
 #. Label of the pay_to_recd_from (Data) field in DocType 'Journal Entry'
 #: erpnext/accounts/doctype/journal_entry/journal_entry.json
@@ -33179,7 +33179,7 @@ msgstr "收付款申请类型"
 #. Settings'
 #: erpnext/accounts/doctype/accounts_settings/accounts_settings.json
 msgid "Payment Request created from Sales Order or Purchase Order will be in Draft status. When disabled document will be in unsaved state."
-msgstr "销售订单或采购订单生成的付款请求将处于草稿状态。禁用后单据将处于未保存状态"
+msgstr ""
 
 #: erpnext/accounts/doctype/payment_request/payment_request.py:626
 msgid "Payment Request for {0}"
@@ -35259,7 +35259,7 @@ msgstr "请指定 从/至 范围"
 
 #: erpnext/buying/doctype/request_for_quotation/request_for_quotation.js:41
 msgid "Please supply the specified items at the best possible rates"
-msgstr "请以最优惠的价格供应所需物料"
+msgstr ""
 
 #: erpnext/stock/doctype/repost_item_valuation/repost_item_valuation.py:247
 msgid "Please try again in an hour."
@@ -39739,7 +39739,7 @@ msgstr "提前付款折扣的参考日期"
 #. Label of the reference_detail (Data) field in DocType 'Advance Tax'
 #: erpnext/accounts/doctype/advance_tax/advance_tax.json
 msgid "Reference Detail"
-msgstr "参考明细"
+msgstr ""
 
 #. Label of the reference_detail_no (Data) field in DocType 'Journal Entry
 #. Account'
@@ -41143,11 +41143,11 @@ msgstr "留存收益"
 
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.js:266
 msgid "Retention Stock Entry"
-msgstr "留存样品物料移动"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.js:555
 msgid "Retention Stock Entry already created or Sample Quantity not provided"
-msgstr "留存样品物料移动已创建或未提供“样品数量”"
+msgstr ""
 
 #. Label of the retried (Int) field in DocType 'Bulk Transaction Log Detail'
 #: erpnext/bulk_transaction/doctype/bulk_transaction_log_detail/bulk_transaction_log_detail.json
@@ -41408,7 +41408,7 @@ msgstr "评审和控制措施"
 #: erpnext/quality_management/doctype/quality_procedure/quality_procedure.json
 #: erpnext/quality_management/doctype/quality_review/quality_review.json
 msgid "Reviews"
-msgstr "评审"
+msgstr "审核记录"
 
 #: erpnext/accounts/doctype/budget/budget.js:37
 msgid "Revise Budget"
@@ -41864,7 +41864,7 @@ msgstr "第{0}行: 不能删除已关联工单的物料 {1}"
 
 #: erpnext/controllers/accounts_controller.py:3747
 msgid "Row #{0}: Cannot delete item {1} which is assigned to customer's purchase order."
-msgstr "第{0}行: 不能删除已分派客户采购订单号的物料 {1}"
+msgstr ""
 
 #: erpnext/controllers/accounts_controller.py:4051
 msgid "Row #{0}: Cannot set Rate if the billed amount is greater than the amount for Item {1}."
@@ -41943,7 +41943,7 @@ msgstr "第{0}行：客户提供物料{1}不属于工作订单{2}"
 
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.py:52
 msgid "Row #{0}: Dates overlapping with other row"
-msgstr "行号#{0}：日期与其他行重叠"
+msgstr ""
 
 #: erpnext/buying/doctype/purchase_order/purchase_order.py:395
 msgid "Row #{0}: Default BOM not found for FG Item {1}"
@@ -42405,7 +42405,7 @@ msgstr "行号#{idx}：{field_label}为必填项"
 
 #: erpnext/controllers/buying_controller.py:687
 msgid "Row #{idx}: {field_label} is not allowed in Purchase Return."
-msgstr "行号#{idx}：采购退货中不允许{field_label}"
+msgstr ""
 
 #: erpnext/controllers/buying_controller.py:302
 msgid "Row #{idx}: {from_warehouse_field} and {to_warehouse_field} cannot be same."
@@ -42486,7 +42486,7 @@ msgstr "第 {0} 行拣货数量少于需求数量，短缺 {1} {2}"
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:1459
 msgid "Row {0}# Item {1} cannot be transferred more than {2} against {3} {4}"
-msgstr "第 {0} 行： 对 {3} {4} 发原物料 {1} 的数量不能超过 {2}"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:1483
 msgid "Row {0}# Item {1} not found in 'Raw Materials Supplied' table in {2} {3}"
@@ -46423,7 +46423,7 @@ msgstr "单一等级积分方案"
 #. Rate'
 #: erpnext/accounts/doctype/tax_withholding_rate/tax_withholding_rate.json
 msgid "Single Transaction Threshold"
-msgstr "单一交易阈值"
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:163
 msgid "Single Variant"
@@ -46454,7 +46454,7 @@ msgstr "不进行工单发料"
 
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.py:141
 msgid "Skipping Tax Withholding Category {0} as there is no associated account set for Company {1} in it."
-msgstr "跳过代扣税类别{0}，因其中未设置公司{1}的关联账户。"
+msgstr ""
 
 #. Label of the customer_skype (Data) field in DocType 'Appointment'
 #: erpnext/crm/doctype/appointment/appointment.json
@@ -49088,16 +49088,16 @@ msgstr "系统将通知增减数量或金额"
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:267
 msgid "TCS Amount"
-msgstr "TCS金额"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:249
 #: erpnext/accounts/report/tds_computation_summary/tds_computation_summary.py:125
 msgid "TCS Rate %"
-msgstr "TCS税率%"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:267
 msgid "TDS Amount"
-msgstr "TDS金额"
+msgstr ""
 
 #. Name of a report
 #: erpnext/accounts/report/tds_computation_summary/tds_computation_summary.json
@@ -49115,7 +49115,7 @@ msgstr "应付TDS"
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:249
 #: erpnext/accounts/report/tds_computation_summary/tds_computation_summary.py:125
 msgid "TDS Rate %"
-msgstr "代扣所得税率％"
+msgstr ""
 
 #. Description of a DocType
 #: erpnext/stock/doctype/item_website_specification/item_website_specification.json
@@ -49634,11 +49634,11 @@ msgstr "税别"
 #: erpnext/accounts/doctype/purchase_invoice/purchase_invoice.json
 #: erpnext/accounts/doctype/tax_withheld_vouchers/tax_withheld_vouchers.json
 msgid "Tax Withheld Vouchers"
-msgstr "代缴税款凭证"
+msgstr ""
 
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py:361
 msgid "Tax Withholding"
-msgstr "税款代扣代缴"
+msgstr ""
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/tax_withholding_account/tax_withholding_account.json
@@ -49673,7 +49673,7 @@ msgstr "代扣税款类别"
 
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.py:152
 msgid "Tax Withholding Category {} against Company {} for Customer {} should have Cumulative Threshold value."
-msgstr "针对公司{1}客户{2}的代扣代缴类别{0}应设置累计起征点值"
+msgstr ""
 
 #. Name of a report
 #: erpnext/accounts/report/tax_withholding_details/tax_withholding_details.json
@@ -49690,7 +49690,7 @@ msgstr "代扣代缴明细"
 #: erpnext/buying/doctype/purchase_order/purchase_order.json
 #: erpnext/stock/doctype/purchase_receipt/purchase_receipt.json
 msgid "Tax Withholding Net Total"
-msgstr "代扣税净总计"
+msgstr ""
 
 #. Name of a DocType
 #. Label of the tax_withholding_rate (Float) field in DocType 'Tax Withholding
@@ -49726,7 +49726,7 @@ msgstr "税务细节表已作为字符串从项目主中获取并存储在此字
 #. DocType 'Tax Withholding Category'
 #: erpnext/accounts/doctype/tax_withholding_category/tax_withholding_category.json
 msgid "Tax will be withheld only for amount exceeding the cumulative threshold"
-msgstr "仅对超过累计起征点的金额进行税款代扣"
+msgstr ""
 
 #. Label of the taxable_amount (Currency) field in DocType 'Item Wise Tax
 #. Detail'
@@ -50222,7 +50222,7 @@ msgstr "区域目标"
 #. Label of a chart in the CRM Workspace
 #: erpnext/crm/workspace/crm/crm.json
 msgid "Territory Wise Sales"
-msgstr "区域销售额分布"
+msgstr ""
 
 #. Name of a report
 #: erpnext/selling/report/territory_wise_sales/territory_wise_sales.json
@@ -50323,7 +50323,7 @@ msgstr "'生产'类型的库存转移单称为反冲。通过消耗原材料生�
 
 #: erpnext/stock/doctype/stock_entry/stock_entry.py:2166
 msgid "The Work Order is mandatory for Disassembly Order"
-msgstr "拆卸订单必须关联工单"
+msgstr ""
 
 #. Description of the 'Closing Account Head' (Link) field in DocType 'Period
 #. Closing Voucher'
@@ -50597,7 +50597,7 @@ msgstr "系统将基于此设置从POS界面创建销售发票或POS发票。对
 #: erpnext/accounts/doctype/journal_entry/journal_entry.py:179
 #: erpnext/accounts/doctype/journal_entry/journal_entry.py:186
 msgid "The task has been enqueued as a background job."
-msgstr "任务已加入后台队列"
+msgstr ""
 
 #: erpnext/stock/doctype/stock_reconciliation/stock_reconciliation.py:1008
 msgid "The task has been enqueued as a background job. In case there is any issue on processing in background, the system will add a comment about the error on this Stock Reconciliation and revert to the Draft stage"
@@ -50713,7 +50713,7 @@ msgstr "该日期无可用时段"
 
 #: erpnext/stock/doctype/item/item.js:1065
 msgid "There are two options to maintain valuation of stock. FIFO (first in - first out) and Moving Average. To understand this topic in detail please visit <a href='https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average' target='_blank'>Item Valuation, FIFO and Moving Average.</a>"
-msgstr "库存计价有两种方法：先进先出（FIFO）和移动平均。详情请参阅<a href='https://docs.erpnext.com/docs/v13/user/manual/en/stock/articles/item-valuation-fifo-and-moving-average' target='_blank'>物料计价方法</a>"
+msgstr ""
 
 #: erpnext/stock/report/item_variant_details/item_variant_details.py:25
 msgid "There aren't any item variants for the selected item"
@@ -50776,7 +50776,7 @@ msgstr "本科目本币或外币余额为0"
 
 #: erpnext/stock/doctype/item/item.js:131
 msgid "This Item is a Template and cannot be used in transactions. Item attributes will be copied over into the variants unless 'No Copy' is set"
-msgstr "此物料为模板物料，不可在业务交易中直接使用。模板物料的属性(字段值)会被复制到多规格物料，可以设置“不允许复制”"
+msgstr ""
 
 #: erpnext/stock/doctype/item/item.js:190
 msgid "This Item is a Variant of {0} (Template)."
@@ -51164,7 +51164,7 @@ msgstr "任务工时表。"
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:868
 msgid "Timesheet {0} is already completed or cancelled"
-msgstr "工时表{0}已完成或取消"
+msgstr ""
 
 #. Label of the timesheet_sb (Section Break) field in DocType 'Projects
 #. Settings'
@@ -51914,12 +51914,12 @@ msgstr "本年收入"
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Incoming Bills"
-msgstr "采购总额"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Incoming Payment"
-msgstr "收款总额"
+msgstr ""
 
 #. Label of the total_incoming_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -52039,12 +52039,12 @@ msgstr "总出库"
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Bills"
-msgstr "销售总额"
+msgstr ""
 
 #. Label of a number card in the Accounting Workspace
 #: erpnext/accounts/workspace/accounting/accounting.json
 msgid "Total Outgoing Payment"
-msgstr "付款总额"
+msgstr ""
 
 #. Label of the total_outgoing_value (Currency) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -54654,7 +54654,7 @@ msgstr "凭证明细参考"
 #. Label of the voucher_name (Data) field in DocType 'Tax Withheld Vouchers'
 #: erpnext/accounts/doctype/tax_withheld_vouchers/tax_withheld_vouchers.json
 msgid "Voucher Name"
-msgstr "凭证号"
+msgstr ""
 
 #. Label of the voucher_no (Dynamic Link) field in DocType 'Advance Payment
 #. Ledger Entry'
@@ -57024,17 +57024,17 @@ msgstr "{}"
 #. Count format of shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{}  Available"
-msgstr "{} 可用"
+msgstr ""
 
 #. Count format of shortcut in the Selling Workspace
 #: erpnext/selling/workspace/selling/selling.json
 msgid "{}  To Deliver"
-msgstr "{} 待出货"
+msgstr ""
 
 #. Count format of shortcut in the Buying Workspace
 #: erpnext/buying/workspace/buying/buying.json
 msgid "{}  To Receive"
-msgstr "{} 待入库"
+msgstr ""
 
 #. Count format of shortcut in the CRM Workspace
 #. Count format of shortcut in the Projects Workspace
@@ -57043,14 +57043,14 @@ msgstr "{} 待入库"
 #: erpnext/projects/workspace/projects/projects.json
 #: erpnext/support/workspace/support/support.json
 msgid "{} Assigned"
-msgstr "{} 已分派"
+msgstr ""
 
 #. Count format of shortcut in the Buying Workspace
 #. Count format of shortcut in the Selling Workspace
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/selling/workspace/selling/selling.json
 msgid "{} Available"
-msgstr "{} 可用"
+msgstr ""
 
 #. Count format of shortcut in the CRM Workspace
 #. Count format of shortcut in the Projects Workspace
@@ -57068,12 +57068,12 @@ msgstr "{} 待处理"
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{} Pending"
-msgstr "{} 待处理"
+msgstr ""
 
 #. Count format of shortcut in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "{} To Bill"
-msgstr "{} 待开发票"
+msgstr ""
 
 #: erpnext/accounts/doctype/sales_invoice/sales_invoice.py:2056
 msgid "{} can't be cancelled since the Loyalty Points earned has been redeemed. First cancel the {} No {}"
