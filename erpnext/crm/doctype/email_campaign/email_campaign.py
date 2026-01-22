@@ -100,6 +100,16 @@ def send_email_to_leads_or_contacts():
 
 
 def send_mail(entry, email_campaign):
+	"""
+	Send the rendered email template to the recipients defined by the campaign, creating one communication per batch.
+	
+	Parameters:
+		entry (dict): Campaign schedule entry containing at least the `email_template` reference and `send_after_days`.
+		email_campaign (Document): Email Campaign document that provides recipient selection, sender, campaign name, start/end dates and related context.
+	
+	Returns:
+		comm (Document or None): The last created communication Document for the final recipient batch, or `None` if no recipients were found.
+	"""
 	recipient_list = []
 	if email_campaign.email_campaign_for == "Email Group":
 		for member in frappe.db.get_list(
@@ -116,19 +126,29 @@ def send_mail(entry, email_campaign):
 	email_template = frappe.get_doc("Email Template", entry.get("email_template"))
 	sender = frappe.db.get_value("User", email_campaign.get("sender"), "email")
 	context = {"doc": frappe.get_doc(email_campaign.email_campaign_for, email_campaign.recipient)}
-	# send mail and link communication to document
-	comm = make(
-		doctype="Email Campaign",
-		name=email_campaign.name,
-		subject=frappe.render_template(email_template.get("subject"), context),
-		content=frappe.render_template(email_template.response_, context),
-		sender=sender,
-		bcc=recipient_list,
-		communication_medium="Email",
-		sent_or_received="Sent",
-		send_email=True,
-		email_template=email_template.name,
-	)
+	subject = frappe.render_template(email_template.get("subject"), context)
+	content = frappe.render_template(email_template.response_, context)
+
+	# Batch recipients to avoid timeout when processing large email groups
+	BATCH_SIZE = 100
+	comm = None
+
+	for i in range(0, len(recipient_list), BATCH_SIZE):
+		batch = recipient_list[i : i + BATCH_SIZE]
+
+		comm = make(
+			doctype="Email Campaign",
+			name=email_campaign.name,
+			subject=subject,
+			content=content,
+			sender=sender,
+			bcc=batch,
+			communication_medium="Email",
+			sent_or_received="Sent",
+			send_email=True,
+			email_template=email_template.name,
+		)
+
 	return comm
 
 
