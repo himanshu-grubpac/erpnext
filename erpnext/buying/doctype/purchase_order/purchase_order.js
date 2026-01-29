@@ -828,3 +828,14 @@ frappe.ui.form.on("Purchase Order", "is_subcontracted", function (frm) {
 		erpnext.buying.get_default_bom(frm);
 	}
 });
+<<<<<<< HEAD
+=======
+
+function prevent_past_schedule_dates(frm) {
+	if (frm.doc.transaction_date) {
+		frm.fields_dict["schedule_date"].datepicker?.update({
+			minDate: new Date(frm.doc.transaction_date),
+		});
+	}
+}
+>>>>>>> 7f6f39f5e7 (fix: js error if user does not have write permission for date field)
