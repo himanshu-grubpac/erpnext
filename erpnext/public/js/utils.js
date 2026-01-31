@@ -1036,12 +1036,41 @@ erpnext.utils.map_current_doc = function (opts) {
 	}
 };
 
+<<<<<<< HEAD
 frappe.form.link_formatters["Item"] = function (value, doc) {
 	if (doc && value && doc.item_name && doc.item_name !== value && doc.item_code === value) {
 		return value + ": " + doc.item_name;
 	} else if (!value && doc.doctype && doc.item_name) {
 		// format blank value in child table
 		return doc.item_name;
+=======
+frappe.form.link_formatters["Item"] = function (value, doc, df) {
+	return add_link_title(value, doc, df, "item_name");
+};
+
+frappe.form.link_formatters["Employee"] = function (value, doc, df) {
+	return add_link_title(value, doc, df, "employee_name");
+};
+
+frappe.form.link_formatters["Project"] = function (value, doc, df) {
+	return add_link_title(value, doc, df, "project_name");
+};
+
+/**
+ * Add a title to a link value based on the provided document and field information.
+ *
+ * @param {string} value - The value to add a link title to.
+ * @param {Object} doc - The document object.
+ * @param {Object} df - The field object.
+ * @param {string} title_field - The field name for the title.
+ * @returns {string} - The link value with the added title.
+ */
+function add_link_title(value, doc, df, title_field) {
+	if (doc && value && doc[title_field] && doc[title_field] !== value && doc[df.fieldname] === value) {
+		return value + ": " + doc[title_field];
+	} else if (!value && doc.doctype && doc[title_field] && doc.doctype == df.parent) {
+		return doc[title_field];
+>>>>>>> b24ae5e9a2 (fix: better fix for aac39b2671ebe8aed562a9b92ee26876979b0650)
 	} else {
 		// if value is blank in report view or item code and name are the same, return as is
 		return value;
