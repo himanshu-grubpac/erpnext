@@ -32,8 +32,15 @@
   "ignore_pricing_rule",
   "allow_rate_change",
   "allow_discount_change",
+<<<<<<< HEAD
   "set_grand_total_to_default_mop",
   "allow_partial_payment",
+=======
+  "column_break_egpi",
+  "allow_warehouse_change",
+  "section_break_15",
+  "applicable_for_users",
+>>>>>>> 1c5e36017c (feat(pos): allow warehouse change configuration (#52437))
   "section_break_23",
   "item_groups",
   "column_break_25",
@@ -430,6 +437,110 @@
    "fieldname": "allow_partial_payment",
    "fieldtype": "Check",
    "label": "Allow Partial Payment"
+<<<<<<< HEAD
+=======
+  },
+  {
+   "fieldname": "column_break_tvls",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_xygw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "campaign_section_break",
+   "fieldtype": "Section Break",
+   "label": "Campaign"
+  },
+  {
+   "fieldname": "accounting_tab",
+   "fieldtype": "Tab Break",
+   "label": "Accounting"
+  },
+  {
+   "fieldname": "more_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info"
+  },
+  {
+   "fieldname": "pos_configurations_tab",
+   "fieldtype": "Tab Break",
+   "label": "POS Configurations"
+  },
+  {
+   "fieldname": "price_list_and_currency_section",
+   "fieldtype": "Section Break",
+   "label": "Price List & Currency"
+  },
+  {
+   "fieldname": "column_break_bptt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "write_off_section",
+   "fieldtype": "Section Break",
+   "label": "Write Off"
+  },
+  {
+   "fieldname": "column_break_ukpz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pkca",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "income_and_expense_account",
+   "fieldtype": "Section Break",
+   "label": "Income and Expense"
+  },
+  {
+   "fieldname": "column_break_byzk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "taxes_section",
+   "fieldtype": "Section Break",
+   "label": "Taxes"
+  },
+  {
+   "fieldname": "column_break_cjpp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pos_item_selector_section",
+   "fieldtype": "Section Break",
+   "label": "POS Item Selector"
+  },
+  {
+   "fieldname": "column_break_rpny",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_stcl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pos_item_details_section",
+   "fieldtype": "Section Break",
+   "label": "POS Item Details"
+  },
+  {
+   "fieldname": "column_break_hwfg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_egpi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_warehouse_change",
+   "fieldtype": "Check",
+   "label": "Allow User to Edit Warehouse"
+>>>>>>> 1c5e36017c (feat(pos): allow warehouse change configuration (#52437))
   }
  ],
  "grid_page_length": 50,
@@ -458,7 +569,11 @@
    "link_fieldname": "pos_profile"
   }
  ],
+<<<<<<< HEAD
  "modified": "2025-06-24 11:19:19.834905",
+=======
+ "modified": "2026-02-05 04:36:40.757162",
+>>>>>>> 1c5e36017c (feat(pos): allow warehouse change configuration (#52437))
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "POS Profile",
