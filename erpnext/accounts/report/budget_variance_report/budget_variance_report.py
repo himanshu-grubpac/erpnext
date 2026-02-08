@@ -8,12 +8,20 @@ import frappe
 from frappe import _
 from frappe.utils import flt, formatdate
 
+<<<<<<< HEAD
 from erpnext.controllers.trends import get_period_date_ranges, get_period_month_ranges
+=======
+from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import get_dimensions
+from erpnext.accounts.utils import get_fiscal_year
+from erpnext.controllers.trends import get_period_date_ranges
+>>>>>>> 79d0708ea7 (fix(budget-variance-report): validate 'budget_against' filter)
 
 
 def execute(filters=None):
 	if not filters:
 		filters = {}
+
+	validate_filters(filters)
 
 	columns = get_columns(filters)
 	if filters.get("budget_against_filter"):
@@ -24,6 +32,179 @@ def execute(filters=None):
 	period_month_ranges = get_period_month_ranges(filters["period"], filters["from_fiscal_year"])
 	cam_map = get_dimension_account_month_map(filters)
 
+<<<<<<< HEAD
+=======
+	data = build_report_data(budget_map, filters)
+
+	chart_data = build_comparison_chart_data(filters, columns, data)
+
+	return columns, data, None, chart_data
+
+
+def validate_filters(filters):
+	validate_budget_dimensions(filters)
+
+
+def get_budget_records(filters, dimensions):
+	budget_against_field = frappe.scrub(filters["budget_against"])
+
+	return frappe.db.sql(
+		f"""
+		SELECT
+			b.name,
+			b.account,
+			b.{budget_against_field} AS dimension,
+			b.budget_amount,
+			b.from_fiscal_year,
+			b.to_fiscal_year,
+			b.budget_start_date,
+			b.budget_end_date
+		FROM
+			`tabBudget` b
+		WHERE
+			b.company = %s
+			AND b.docstatus = 1
+			AND b.budget_against = %s
+			AND b.{budget_against_field} IN ({", ".join(["%s"] * len(dimensions))})
+			AND (
+				b.from_fiscal_year <= %s
+				AND b.to_fiscal_year >= %s
+			)
+		""",
+		(
+			filters.company,
+			filters.budget_against,
+			*dimensions,
+			filters.to_fiscal_year,
+			filters.from_fiscal_year,
+		),
+		as_dict=True,
+	)
+
+
+def build_budget_map(budget_records, filters):
+	"""
+	Builds a nested dictionary structure aggregating budget and actual amounts.
+
+	Structure: {dimension_name: {account_name: {fiscal_year: {month_name: {"budget": amount, "actual": amount}}}}}
+	"""
+	budget_map = {}
+
+	for budget in budget_records:
+		actual_amt = get_actual_transactions(budget.dimension, filters)
+		budget_map.setdefault(budget.dimension, {})
+		budget_map[budget.dimension].setdefault(budget.account, {})
+
+		budget_distributions = get_budget_distributions(budget)
+
+		for row in budget_distributions:
+			months = get_months_in_range(row.start_date, row.end_date)
+			monthly_budget = flt(row.amount) / len(months)
+
+			for month_date in months:
+				fiscal_year = get_fiscal_year(month_date)[0]
+				month = month_date.strftime("%B")
+
+				budget_map[budget.dimension][budget.account].setdefault(fiscal_year, {})
+				budget_map[budget.dimension][budget.account][fiscal_year].setdefault(
+					month,
+					{
+						"budget": 0,
+						"actual": 0,
+					},
+				)
+
+				budget_map[budget.dimension][budget.account][fiscal_year][month]["budget"] += monthly_budget
+
+				for ad in actual_amt.get(budget.account, []):
+					if ad.month_name == month and ad.fiscal_year == fiscal_year:
+						budget_map[budget.dimension][budget.account][fiscal_year][month]["actual"] += flt(
+							ad.debit
+						) - flt(ad.credit)
+
+	return budget_map
+
+
+def get_actual_transactions(dimension_name, filters):
+	budget_against = frappe.scrub(filters.get("budget_against"))
+	cost_center_filter = ""
+
+	if filters.get("budget_against") == "Cost Center" and dimension_name:
+		cc_lft, cc_rgt = frappe.db.get_value("Cost Center", dimension_name, ["lft", "rgt"])
+		cost_center_filter = f"""
+			and lft >= "{cc_lft}"
+			and rgt <= "{cc_rgt}"
+		"""
+
+	actual_transactions = frappe.db.sql(
+		f"""
+			select
+				gl.account,
+				gl.debit,
+				gl.credit,
+				gl.fiscal_year,
+				MONTHNAME(gl.posting_date) as month_name,
+				b.{budget_against} as budget_against
+			from
+				`tabGL Entry` gl,
+				`tabBudget` b
+			where
+				b.docstatus = 1
+				and b.account=gl.account
+				and b.{budget_against} = gl.{budget_against}
+				and gl.fiscal_year between %s and %s
+				and gl.is_cancelled = 0
+				and b.{budget_against} = %s
+				and exists(
+					select
+						name
+					from
+						`tab{filters.budget_against}`
+					where
+						name = gl.{budget_against}
+						{cost_center_filter}
+				)
+				group by
+					gl.name
+				order by gl.fiscal_year
+		""",
+		(filters.from_fiscal_year, filters.to_fiscal_year, dimension_name),
+		as_dict=1,
+	)
+
+	actual_transactions_map = {}
+	for transaction in actual_transactions:
+		actual_transactions_map.setdefault(transaction.account, []).append(transaction)
+
+	return actual_transactions_map
+
+
+def get_budget_distributions(budget):
+	return frappe.db.sql(
+		"""
+			SELECT start_date, end_date, amount, percent
+			FROM `tabBudget Distribution`
+			WHERE parent = %s
+			ORDER BY start_date ASC
+		  """,
+		(budget.name,),
+		as_dict=True,
+	)
+
+
+def get_months_in_range(start_date, end_date):
+	months = []
+	current = start_date
+
+	while current <= end_date:
+		months.append(current)
+		current = add_months(current, 1)
+
+	return months
+
+
+def build_report_data(budget_map, filters):
+>>>>>>> 79d0708ea7 (fix(budget-variance-report): validate 'budget_against' filter)
 	data = []
 	for dimension in dimensions:
 		dimension_items = cam_map.get(dimension)
@@ -163,6 +344,7 @@ def get_cost_centers(filters):
 		)  # nosec
 
 
+<<<<<<< HEAD
 # Get dimension & target details
 def get_dimension_target_details(filters):
 	budget_against = frappe.scrub(filters.get("budget_against"))
@@ -337,6 +519,20 @@ def get_fiscal_years(filters):
 
 
 def get_chart_data(filters, columns, data):
+=======
+def validate_budget_dimensions(filters):
+	dimensions = [d.get("document_type") for d in get_dimensions(with_cost_center_and_project=True)[0]]
+	if filters.get("budget_against") and filters.get("budget_against") not in dimensions:
+		frappe.throw(
+			title=_("Invalid Accounting Dimension"),
+			msg=_("{0} is not a valid Accounting Dimension.").format(
+				frappe.bold(filters.get("budget_against"))
+			),
+		)
+
+
+def build_comparison_chart_data(filters, columns, data):
+>>>>>>> 79d0708ea7 (fix(budget-variance-report): validate 'budget_against' filter)
 	if not data:
 		return None
 
