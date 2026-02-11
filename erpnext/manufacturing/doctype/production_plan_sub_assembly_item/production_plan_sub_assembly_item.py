@@ -33,6 +33,12 @@ class ProductionPlanSubAssemblyItem(Document):
 		purchase_order: DF.Link | None
 		qty: DF.Float
 		received_qty: DF.Float
+<<<<<<< HEAD
+=======
+		required_qty: DF.Float
+		sales_order: DF.Link | None
+		sales_order_item: DF.Data | None
+>>>>>>> c2282eaf08 (fix(manufacturing): add sales order fields in subassembly child table)
 		schedule_date: DF.Datetime | None
 		stock_uom: DF.Link | None
 		supplier: DF.Link | None
