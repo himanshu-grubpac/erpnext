@@ -974,12 +974,12 @@ erpnext.utils.map_current_doc = function (opts) {
 	}
 
 	if (query_args.filters || query_args.query) {
-		opts.get_query = () => query_args;
+		opts.get_query = () => JSON.parse(JSON.stringify(query_args));
 	}
 
 	if (opts.source_doctype) {
 		let data_fields = [];
-		if (["Purchase Receipt", "Delivery Note"].includes(opts.source_doctype)) {
+		if (["Purchase Receipt", "Delivery Note", "Purchase Invoice"].includes(opts.source_doctype)) {
 			let target_meta = frappe.get_meta(cur_frm.doc.doctype);
 			if (target_meta.fields.find((f) => f.fieldname === "taxes")) {
 				data_fields.push({

@@ -1429,6 +1429,9 @@ class SerialandBatchBundle(Document):
 	def throw_negative_batch(self, batch_no, available_qty, precision):
 		from erpnext.stock.stock_ledger import NegativeStockError
 
+		if frappe.db.get_single_value("Stock Settings", "allow_negative_stock_for_batch"):
+			return
+
 		frappe.throw(
 			_(
 				"""
@@ -2546,7 +2549,10 @@ def get_auto_batch_nos(kwargs):
 	qty = flt(kwargs.qty)
 
 	stock_ledgers_batches = get_stock_ledgers_batches(kwargs)
-	pos_invoice_batches = get_reserved_batches_for_pos(kwargs)
+
+	pos_invoice_batches = frappe._dict()
+	if not kwargs.for_stock_levels:
+		pos_invoice_batches = get_reserved_batches_for_pos(kwargs)
 
 	sre_reserved_batches = frappe._dict()
 	if not kwargs.ignore_reserved_stock:
