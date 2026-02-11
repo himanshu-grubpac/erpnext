@@ -16,6 +16,12 @@ frappe.ui.form.on("Production Plan", {
 			"Work Order": "Work Order / Subcontract PO",
 			"Material Request": "Material Request",
 		};
+<<<<<<< HEAD
+=======
+
+		frm.set_df_property("sub_assembly_items", "cannot_add_rows", true);
+		frm.set_df_property("mr_items", "cannot_add_rows", true);
+>>>>>>> 25f979a825 (fix: prevent rows from being added to sub_assembly_items and mr_items)
 	},
 
 	setup_queries(frm) {
