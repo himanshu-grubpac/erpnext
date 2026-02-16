@@ -565,6 +565,193 @@ class TestProductionPlan(FrappeTestCase):
 		self.assertEqual(po_doc.items[0].fg_item, fg_item)
 		self.assertEqual(po_doc.items[0].item_code, service_item)
 
+<<<<<<< HEAD
+=======
+		po_doc.items[0].qty = 11
+		po_doc.items[0].fg_item_qty = 11
+
+		# Test - 1 : Quantity of item cannot exceed quantity in production plan
+		self.assertRaises(OverAllowanceError, po_doc.submit)
+
+		po_doc.cancel()
+		po_doc = frappe.copy_doc(po_doc)
+		po_doc.items[0].qty = 5
+		po_doc.items[0].fg_item_qty = 5
+		po_doc.submit()
+		make_purchase_receipt_from_po(po_doc)
+
+		plan.reload()
+		plan.make_work_order()
+		po = frappe.db.get_value("Purchase Order Item", {"production_plan": plan.name}, "parent")
+		po_doc = frappe.get_doc("Purchase Order", po)
+
+		# Test - 2 : Quantity of item in new PO should be the available quantity from Production Plan
+		self.assertEqual(po_doc.items[0].qty, 5.0)
+
+		po_doc.submit()
+		plan.make_work_order()
+
+		# Test - 3 : New POs should not be created since the quantity is already fulfilled
+		self.assertEqual(
+			frappe.db.count("Purchase Order Item", {"production_plan": plan.name, "docstatus": 1}), 2
+		)  # 2 since we have already created and submitted 2 POs
+
+	def test_sales_order_references_for_sub_assembly_items(self):
+		"""
+		Test that Sales Order and Sales Order Item references in Work Order and Purchase Order
+		are correctly propagated from the Production Plan.
+		"""
+
+		from erpnext.manufacturing.doctype.bom.test_bom import create_nested_bom
+
+		# Setup Test Items & BOM
+		fg_item = "Test FG Good Item"
+		sub_assembly_item1 = "Test Sub Assembly Item 1"
+		sub_assembly_item2 = "Test Sub Assembly Item 2"
+
+		bom_tree = {
+			fg_item: {
+				sub_assembly_item1: {"Test Raw Material 1": {}},
+				sub_assembly_item2: {"Test Raw Material 2": {}},
+			}
+		}
+
+		create_nested_bom(bom_tree, prefix="")
+
+		# Create Sales Order
+		so = make_sales_order(item_code=fg_item, qty=10)
+		so_item_row = so.items[0].name
+
+		# Create Production Plan from Sales Order
+		production_plan = frappe.new_doc("Production Plan")
+		production_plan.company = so.company
+		production_plan.get_items_from = "Sales Order"
+		production_plan.item_code = fg_item
+
+		production_plan.get_open_sales_orders()
+		self.assertEqual(production_plan.sales_orders[0].sales_order, so.name)
+
+		production_plan.get_so_items()
+
+		production_plan.skip_available_sub_assembly_item = 0
+		production_plan.get_sub_assembly_items()
+
+		self.assertEqual(len(production_plan.sub_assembly_items), 2)
+
+		# Validate Sales Order references in Sub Assembly Items
+		for row in production_plan.sub_assembly_items:
+			if row.production_item == sub_assembly_item1:
+				row.supplier = "_Test Supplier"
+				row.type_of_manufacturing = "Subcontract"
+
+			self.assertEqual(row.sales_order, so.name)
+			self.assertEqual(row.sales_order_item, so_item_row)
+
+		# Submit Production Plan
+		production_plan.save()
+		production_plan.submit()
+		production_plan.make_work_order()
+
+		# Validate Purchase Order (Subcontracted Item)
+		po_items = frappe.get_all(
+			"Purchase Order Item",
+			{
+				"production_plan": production_plan.name,
+				"fg_item": sub_assembly_item1,
+			},
+			["sales_order", "sales_order_item"],
+		)
+
+		self.assertTrue(po_items)
+		self.assertEqual(po_items[0].sales_order, so.name)
+		self.assertEqual(po_items[0].sales_order_item, so_item_row)
+
+		# Validate Work Order (In-house Item)
+		work_orders = frappe.get_all(
+			"Work Order",
+			{
+				"production_plan": production_plan.name,
+				"production_item": sub_assembly_item2,
+			},
+			["sales_order", "sales_order_item"],
+		)
+
+		self.assertTrue(work_orders)
+		self.assertEqual(work_orders[0].sales_order, so.name)
+		self.assertEqual(work_orders[0].sales_order_item, so_item_row)
+
+	def test_production_plan_for_mr_items(self):
+		from erpnext.manufacturing.doctype.bom.test_bom import create_nested_bom
+
+		def setup_item(fg_item):
+			item_doc = frappe.get_doc("Item", fg_item)
+			company = "_Test Company"
+
+			item_doc.is_sub_contracted_item = 1
+			for row in item_doc.item_defaults:
+				if row.company == company and not row.default_supplier:
+					row.default_supplier = "_Test Supplier"
+
+			if not item_doc.item_defaults:
+				item_doc.append("item_defaults", {"company": company, "default_supplier": "_Test Supplier"})
+
+			item_doc.save()
+
+		fg_item = "Test Motherboard 1"
+		fg_item_2 = "Test CPU 1"
+		bom_tree_1 = {
+			"Test Laptop 1": {fg_item: {"Test Motherboard Wires 1": {}}, fg_item_2: {"Test Pins 1": {}}}
+		}
+		create_nested_bom(bom_tree_1, prefix="")
+
+		setup_item(fg_item)
+		setup_item(fg_item_2)
+
+		plan = create_production_plan(
+			item_code="Test Laptop 1", planned_qty=10, use_multi_level_bom=1, do_not_submit=True
+		)
+		plan.get_sub_assembly_items()
+		plan.set_default_supplier_for_subcontracting_order()
+		plan.submit()
+
+		plan.make_material_request()
+		mr_item = frappe.db.get_value("Material Request Item", {"production_plan": plan.name}, "parent")
+		mr_doc = frappe.get_doc("Material Request", mr_item)
+		mr_doc.submit()
+		plan.reload()
+		plan.make_material_request()
+
+		# Test 1 : No more MRs should be created as quantity from Production Plan is fulfilled
+		self.assertEqual(frappe.db.count("Material Request Item", {"production_plan": plan.name}), 2)
+
+		mr_doc.cancel()
+		plan.reload()
+
+		# Test 2 : Requested quantity should be updated in Production Plan on cancellation of MR
+		self.assertEqual(plan.mr_items[0].requested_qty, 0)
+
+		plan.make_material_request()
+		mr_item = frappe.db.get_value("Material Request Item", {"production_plan": plan.name}, "parent")
+		mr_doc = frappe.get_doc("Material Request", mr_item)
+		mr_doc.items[0].qty = 5
+		mr_doc.submit()
+		plan.reload()
+		plan.make_material_request()
+		mr_item = frappe.db.get_value("Material Request Item", {"production_plan": plan.name}, "parent")
+		mr_doc = frappe.get_doc("Material Request", mr_item)
+
+		# Test 3 : Since Item 2 has been fully requested, it should not be included in the new MR by default
+		self.assertEqual(len(mr_doc.items), 1)
+
+		# Test 4 : Quantity in new MR should be the available quantity from Production Plan
+		self.assertEqual(mr_doc.items[0].qty, 5.0)
+
+		mr_doc.items[0].qty = 6
+
+		# Test 5 : Quantity of item cannot exceed available quantity from Production Plan
+		self.assertRaises(frappe.ValidationError, mr_doc.submit)
+
+>>>>>>> 341dc4be7a (test(manufacturing): add test to validate the sales order references for sub assembly items)
 	def test_production_plan_combine_subassembly(self):
 		"""
 		Test combining Sub assembly items belonging to the same BOM in Prod Plan.
