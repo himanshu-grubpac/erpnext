@@ -2580,12 +2580,12 @@ class AccountsController(TransactionBase):
 
 	def get_order_details(self):
 		if self.doctype == "Sales Invoice":
-			po_or_so = self.get("items")[0].get("sales_order")
+			po_or_so = self.get("items") and self.get("items")[0].get("sales_order")
 			po_or_so_doctype = "Sales Order"
 			po_or_so_doctype_name = "sales_order"
 
 		else:
-			po_or_so = self.get("items")[0].get("purchase_order")
+			po_or_so = self.get("items") and self.get("items")[0].get("purchase_order")
 			po_or_so_doctype = "Purchase Order"
 			po_or_so_doctype_name = "purchase_order"
 
@@ -4002,6 +4002,12 @@ def update_child_qty_rate(parent_doctype, trans_items, parent_doctype_name, chil
 				flt(d.get("conversion_factor"), conv_fac_precision) or conversion_factor
 			)
 
+		if child_item.get("total_weight") and child_item.get("weight_per_unit"):
+			child_item.total_weight = flt(
+				child_item.weight_per_unit * child_item.qty * child_item.conversion_factor,
+				child_item.precision("total_weight"),
+			)
+
 		if d.get("delivery_date") and parent_doctype == "Sales Order":
 			child_item.delivery_date = d.get("delivery_date")
 
@@ -4054,6 +4060,7 @@ def update_child_qty_rate(parent_doctype, trans_items, parent_doctype_name, chil
 
 	parent.set_payment_schedule()
 	if parent_doctype == "Purchase Order":
+		parent.set_tax_withholding()
 		parent.validate_minimum_order_qty()
 		parent.validate_budget()
 		if parent.is_against_so():
