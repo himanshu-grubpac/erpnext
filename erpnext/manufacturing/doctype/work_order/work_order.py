@@ -169,6 +169,54 @@ class WorkOrder(Document):
 
 		self.set_required_items(reset_only_qty=len(self.get("required_items")))
 		self.validate_operations_sequence()
+<<<<<<< HEAD
+=======
+		self.validate_subcontracting_inward_order()
+
+	def validate_dates(self):
+		if self.actual_start_date and self.actual_end_date:
+			if self.actual_end_date < self.actual_start_date:
+				frappe.throw(_("Actual End Date cannot be before Actual Start Date"))
+
+	def validate_fg_warehouse_for_reservation(self):
+		if (
+			self.reserve_stock
+			and self.sales_order
+			and not self.subcontracting_inward_order
+			and not self.production_plan_sub_assembly_item
+		):
+			warehouses = frappe.get_all(
+				"Sales Order Item",
+				filters={"parent": self.sales_order, "item_code": self.production_item},
+				pluck="warehouse",
+			)
+
+			if self.fg_warehouse not in warehouses:
+				frappe.throw(
+					_("Warehouse {0} is not allowed for Sales Order {1}, it should be {2}").format(
+						self.fg_warehouse, self.sales_order, warehouses[0]
+					),
+					title=_("Target Warehouse Reservation Error"),
+				)
+
+	def set_reserve_stock(self):
+		for row in self.required_items:
+			row.reserve_stock = self.reserve_stock
+
+	def enable_auto_reserve_stock(self):
+		if self.is_new() and frappe.db.get_single_value("Stock Settings", "auto_reserve_stock"):
+			self.reserve_stock = 1
+
+	def before_save(self):
+		self.set_skip_transfer_for_operations()
+
+	def set_skip_transfer_for_operations(self):
+		if not self.track_semi_finished_goods:
+			return
+
+		for op in self.operations:
+			op.skip_material_transfer = self.skip_transfer
+>>>>>>> 6b1aac4aee (fix(manufacturing): ignore sales order validation for subassembly item)
 
 	def validate_operations_sequence(self):
 		if all([not op.sequence_id for op in self.operations]):
@@ -220,39 +268,52 @@ class WorkOrder(Document):
 				)
 
 	def validate_sales_order(self):
+		if self.production_plan_sub_assembly_item:
+			return
+
 		if self.sales_order:
 			self.check_sales_order_on_hold_or_close()
-			so = frappe.db.sql(
-				"""
-				select so.name, so_item.delivery_date, so.project
-				from `tabSales Order` so
-				inner join `tabSales Order Item` so_item on so_item.parent = so.name
-				left join `tabProduct Bundle Item` pk_item on so_item.item_code = pk_item.parent
-				where so.name=%s and so.docstatus = 1
-					and so.skip_delivery_note  = 0 and (
-					so_item.item_code=%s or
-					pk_item.item_code=%s )
-			""",
-				(self.sales_order, self.production_item, self.production_item),
-				as_dict=1,
+
+			SalesOrder = frappe.qb.DocType("Sales Order")
+			SalesOrderItem = frappe.qb.DocType("Sales Order Item")
+			PackedItem = frappe.qb.DocType("Packed Item")
+			ProductBundleItem = frappe.qb.DocType("Product Bundle Item")
+
+			so = (
+				frappe.qb.from_(SalesOrder)
+				.inner_join(SalesOrderItem)
+				.on(SalesOrderItem.parent == SalesOrder.name)
+				.left_join(ProductBundleItem)
+				.on(ProductBundleItem.parent == SalesOrderItem.item_code)
+				.select(SalesOrder.name, SalesOrder.project, SalesOrderItem.delivery_date)
+				.where(
+					(SalesOrder.skip_delivery_note == 0)
+					& (SalesOrder.docstatus == 1)
+					& (SalesOrder.name == self.sales_order)
+					& (
+						(SalesOrderItem.item_code == self.production_item)
+						| (ProductBundleItem.item_code == self.production_item)
+					)
+				)
+				.run(as_dict=1)
 			)
 
 			if not so:
-				so = frappe.db.sql(
-					"""
-					select
-						so.name, so_item.delivery_date, so.project
-					from
-						`tabSales Order` so, `tabSales Order Item` so_item, `tabPacked Item` packed_item
-					where so.name=%s
-						and so.name=so_item.parent
-						and so.name=packed_item.parent
-						and so.skip_delivery_note = 0
-						and so_item.item_code = packed_item.parent_item
-						and so.docstatus = 1 and packed_item.item_code=%s
-				""",
-					(self.sales_order, self.production_item),
-					as_dict=1,
+				so = (
+					frappe.qb.from_(SalesOrder)
+					.inner_join(SalesOrderItem)
+					.on(SalesOrderItem.parent == SalesOrder.name)
+					.inner_join(PackedItem)
+					.on(PackedItem.parent == SalesOrder.name)
+					.select(SalesOrder.name, SalesOrder.project, SalesOrderItem.delivery_date)
+					.where(
+						(SalesOrder.name == self.sales_order)
+						& (SalesOrder.skip_delivery_note == 0)
+						& (SalesOrderItem.item_code == PackedItem.parent_item)
+						& (SalesOrder.docstatus == 1)
+						& (PackedItem.item_code == self.production_item)
+					)
+					.run(as_dict=1)
 				)
 
 			if len(so):
@@ -426,7 +487,7 @@ class WorkOrder(Document):
 
 			from erpnext.selling.doctype.sales_order.sales_order import update_produced_qty_in_so_item
 
-			if self.sales_order and self.sales_order_item:
+			if self.sales_order and self.sales_order_item and not self.production_plan_sub_assembly_item:
 				update_produced_qty_in_so_item(self.sales_order, self.sales_order_item)
 
 		if self.production_plan:
@@ -818,7 +879,7 @@ class WorkOrder(Document):
 			doc.db_set("status", doc.status)
 
 	def update_work_order_qty_in_so(self):
-		if not self.sales_order and not self.sales_order_item:
+		if (not self.sales_order and not self.sales_order_item) or self.production_plan_sub_assembly_item:
 			return
 
 		total_bundle_qty = 1
