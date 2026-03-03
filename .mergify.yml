@@ -92,3 +92,14 @@ pull_request_rules:
           {{ title }} (#{{ number }})
 
           {{ body }}
+
+- name: Auto-merge eligible backport PRs
+  conditions:
+    - author=mergify[bot]
+    - base~=^version-(15|16)-hotfix$
+    - backport_of.label=automerge-backports
+    - check-success=*
+  actions:
+    merge:
+      method: squash
+      commit_message: title+body
