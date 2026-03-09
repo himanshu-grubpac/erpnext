@@ -490,6 +490,8 @@ def get_repair_cost_for_purchase_invoice(purchase_invoice: str) -> float:
 	if not purchase_invoice:
 		return 0.0
 
+	frappe.has_permission("Purchase Invoice", "read", purchase_invoice, throw=True)
+
 	expense_accounts = _get_expense_accounts_for_purchase_invoice(purchase_invoice)
 
 	if not expense_accounts:
@@ -502,7 +504,7 @@ def _get_expense_accounts_for_purchase_invoice(purchase_invoice: str) -> list[st
 	"""
 	Get expense accounts for non-stock items from the purchase invoice.
 	"""
-	pi_items = frappe.db.get_list(
+	pi_items = frappe.get_all(
 		"Purchase Invoice Item",
 		filters={"parent": purchase_invoice},
 		fields=["item_code", "expense_account", "is_fixed_asset"],

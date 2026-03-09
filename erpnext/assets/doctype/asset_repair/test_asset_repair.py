@@ -343,14 +343,14 @@ class TestAssetRepair(unittest.TestCase):
 			company=company,
 		)
 
-		expense_account = frappe.db.get_value("Company", company, "default_expense_account")
+		service_expense_account = "Miscellaneous Expenses - TCP1"
 		cost_center = frappe.db.get_value("Company", company, "cost_center")
 
 		pi = make_purchase_invoice(
 			item_code=service_item.name,
 			qty=1,
 			rate=500,
-			expense_account=expense_account,
+			expense_account=service_expense_account,
 			cost_center=cost_center,
 			warehouse=warehouse,
 			update_stock=0,
@@ -466,6 +466,7 @@ def create_asset_repair(**args):
 			if asset.calculate_depreciation:
 				asset_repair.increase_in_asset_life = 12
 			pi = make_purchase_invoice(
+				item=args.item or "_Test Non Stock Item",
 				company=asset.company,
 				expense_account=frappe.db.get_value("Company", asset.company, "default_expense_account"),
 				cost_center=asset_repair.cost_center,
