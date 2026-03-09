@@ -327,15 +327,19 @@ class TestAssetRepair(unittest.TestCase):
 		"""Test that repair cost only includes service (non-stock) item amounts from purchase invoice."""
 
 		company = "_Test Company with perpetual inventory"
+		warehouse = "Stores - TCP1"
+
 		service_item = create_item(
 			"_Test Service Item for Repair",
 			is_stock_item=0,
+			warehouse=warehouse,
 			company=company,
 		)
 
 		stock_item = create_item(
 			"_Test Stock Item for Repair",
 			is_stock_item=1,
+			warehouse=warehouse,
 			company=company,
 		)
 
@@ -360,7 +364,7 @@ class TestAssetRepair(unittest.TestCase):
 				"item_code": stock_item.name,
 				"qty": 2,
 				"rate": 300,
-				"warehouse": "Stores - TCP1",
+				"warehouse": warehouse,
 				"cost_center": cost_center,
 			},
 		)
