@@ -352,6 +352,7 @@ class TestAssetRepair(unittest.TestCase):
 			rate=500,
 			expense_account=expense_account,
 			cost_center=cost_center,
+			warehouse=warehouse,
 			update_stock=0,
 			do_not_submit=1,
 			company=company,
