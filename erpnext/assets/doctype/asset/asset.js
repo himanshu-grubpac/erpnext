@@ -36,6 +36,7 @@ frappe.ui.form.on("Asset", {
 	},
 
 	company: function (frm) {
+		frm.trigger("set_dynamic_labels");
 		erpnext.accounts.dimensions.update_dimension(frm, frm.doctype);
 	},
 
@@ -91,7 +92,7 @@ frappe.ui.form.on("Asset", {
 		frappe.ui.form.trigger("Asset", "is_existing_asset");
 =======
 	refresh: async function (frm) {
-		frm.set_currency_labels(["net_purchase_amount"], erpnext.get_currency(frm.doc.company));
+		frm.trigger("set_dynamic_labels");
 
 		frappe.ui.form.trigger("Asset", "asset_type");
 >>>>>>> b4c82c0f1a (refactor: show company currency in purchase amount label)
@@ -228,6 +229,35 @@ frappe.ui.form.on("Asset", {
 		}
 	},
 
+<<<<<<< HEAD
+=======
+	set_dynamic_labels: function (frm) {
+		frm.set_currency_labels(["net_purchase_amount"], erpnext.get_currency(frm.doc.company));
+	},
+
+	should_show_accounting_ledger: async function (frm) {
+		if (["Capitalized"].includes(frm.doc.status)) {
+			return false;
+		}
+
+		if (
+			!frm.doc.purchase_receipt &&
+			!frm.doc.purchase_invoice &&
+			["Existing Asset", "Composite Component"].includes(frm.doc.asset_type)
+		) {
+			return false;
+		}
+
+		const asset_category = await frappe.db.get_value(
+			"Asset Category",
+			frm.doc.asset_category,
+			"enable_cwip_accounting"
+		);
+
+		return !!asset_category.message?.enable_cwip_accounting;
+	},
+
+>>>>>>> 6219a9e6f0 (fix: update label on company change)
 	set_depr_posting_failure_alert: function (frm) {
 		const alert = `
 			<div class="row">
