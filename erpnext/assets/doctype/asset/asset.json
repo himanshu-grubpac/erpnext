@@ -8,6 +8,7 @@
  "document_type": "Document",
  "engine": "InnoDB",
  "field_order": [
+<<<<<<< HEAD
   "company",
   "item_code",
   "item_name",
@@ -17,11 +18,22 @@
   "is_composite_asset",
   "supplier",
   "customer",
+=======
+  "naming_series",
+  "item_code",
+  "item_name",
+  "asset_name",
+  "location",
+>>>>>>> b4c82c0f1a (refactor: show company currency in purchase amount label)
   "image",
   "journal_entry_for_scrap",
   "column_break_3",
+<<<<<<< HEAD
   "naming_series",
   "asset_name",
+=======
+  "company",
+>>>>>>> b4c82c0f1a (refactor: show company currency in purchase amount label)
   "asset_category",
   "location",
   "split_from",
@@ -552,8 +564,95 @@
    "fieldname": "purchase_invoice_item",
    "fieldtype": "Data",
    "hidden": 1,
+<<<<<<< HEAD
    "label": "Purchase Invoice Item",
    "options": "Purchase Invoice Item"
+=======
+   "label": "Purchase Invoice Item"
+  },
+  {
+   "fieldname": "other_info_tab",
+   "fieldtype": "Tab Break",
+   "label": "More Info"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "depends_on": "eval: doc.calculate_depreciation || doc.asset_type == \"Existing Asset\"",
+   "fieldname": "depreciation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Depreciation"
+  },
+  {
+   "fieldname": "accounting_dimensions_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimensions"
+  },
+  {
+   "fieldname": "section_break_jtou",
+   "fieldtype": "Section Break",
+   "label": "Additional Info"
+  },
+  {
+   "fieldname": "net_purchase_amount",
+   "fieldtype": "Currency",
+   "label": "Net Purchase Amount",
+   "mandatory_depends_on": "eval:(doc.asset_type != \"Composite Asset\" || doc.docstatus==1)",
+   "options": "currency",
+   "read_only_depends_on": "eval: doc.asset_type == \"Composite Asset\""
+  },
+  {
+   "fieldname": "asset_type",
+   "fieldtype": "Select",
+   "label": "Asset Type",
+   "options": "\nExisting Asset\nComposite Asset\nComposite Component"
+  },
+  {
+   "fieldname": "column_break_wqzi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_rjyw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_section",
+   "fieldtype": "Section Break",
+   "label": "Insurance"
+  },
+  {
+   "fieldname": "section_break_uiyd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_bbwr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bfkm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fetch_if_empty": 1,
+   "fieldname": "item_name",
+   "fieldtype": "Read Only",
+   "hidden": 1,
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "asset_owner_section",
+   "fieldtype": "Section Break",
+   "label": "Ownership"
+  },
+  {
+   "fieldname": "column_break_yeds",
+   "fieldtype": "Column Break"
+>>>>>>> b4c82c0f1a (refactor: show company currency in purchase amount label)
   }
  ],
  "idx": 72,
@@ -597,7 +696,11 @@
    "link_fieldname": "target_asset"
   }
  ],
+<<<<<<< HEAD
  "modified": "2025-12-23 16:01:10.195932",
+=======
+ "modified": "2026-03-12 16:07:39.543227",
+>>>>>>> b4c82c0f1a (refactor: show company currency in purchase amount label)
  "modified_by": "Administrator",
  "module": "Assets",
  "name": "Asset",
