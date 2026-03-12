@@ -566,17 +566,6 @@ frappe.ui.form.on("Material Request Item", {
 		frm.events.get_item_data(frm, item, true);
 	},
 
-	schedule_date: function (frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		if (row.schedule_date) {
-			if (!frm.doc.schedule_date) {
-				erpnext.utils.copy_value_in_all_rows(frm.doc, cdt, cdn, "items", "schedule_date");
-			} else {
-				set_schedule_date(frm);
-			}
-		}
-	},
-
 	conversion_factor: function (frm, doctype, name) {
 		const item = locals[doctype][name];
 		frm.events.get_item_data(frm, item, false);
@@ -639,10 +628,6 @@ erpnext.buying.MaterialRequestController = class MaterialRequestController exten
 	}
 
 	items_on_form_rendered() {
-		set_schedule_date(this.frm);
-	}
-
-	schedule_date() {
 		set_schedule_date(this.frm);
 	}
 
