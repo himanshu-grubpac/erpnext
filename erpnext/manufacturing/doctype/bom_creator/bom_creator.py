@@ -513,8 +513,20 @@ def delete_node(**kwargs):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def edit_qty(doctype, docname, qty, parent):
 	frappe.db.set_value(doctype, docname, "qty", qty)
+=======
+def edit_bom_creator(doctype: str, docname: str, data: str | dict, parent: str):
+	if not frappe.has_permission(doctype=doctype, ptype="write", parent_doctype="BOM Creator"):
+		frappe.throw(_("You do not have permission to edit this document"), frappe.PermissionError)
+
+	if isinstance(data, str):
+		data = frappe.parse_json(data)
+
+	frappe.db.set_value(doctype, docname, data)
+
+>>>>>>> 9c0c39381f (fix: add validation in bom creator function (#53364))
 	doc = frappe.get_doc("BOM Creator", parent)
 	doc.set_rate_for_items()
 	doc.save()
