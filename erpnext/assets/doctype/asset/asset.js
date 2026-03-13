@@ -224,7 +224,7 @@ frappe.ui.form.on("Asset", {
 	},
 
 	set_dynamic_labels: function (frm) {
-		frm.set_currency_labels(["net_purchase_amount"], erpnext.get_currency(frm.doc.company));
+		frm.set_currency_labels(["gross_purchase_amount"], erpnext.get_currency(frm.doc.company));
 	},
 
 	set_depr_posting_failure_alert: function (frm) {
@@ -315,7 +315,7 @@ frappe.ui.form.on("Asset", {
 			},
 		});
 	},
-	
+
 	render_depreciation_schedule_view: function (frm, asset_depr_schedule_doc) {
 		let wrapper = $(frm.fields_dict["depreciation_schedule_view"].wrapper).empty();
 
@@ -394,7 +394,6 @@ frappe.ui.form.on("Asset", {
 		datatable.style.setStyle(`.dt-cell--col-2`, { "font-weight": 600 });
 		datatable.style.setStyle(`.dt-cell--col-3`, { "font-weight": 600 });
 	},
-
 
 	setup_chart_and_depr_schedule_view: async function (frm) {
 		if (frm.doc.finance_books.length > 1) {
