@@ -36,6 +36,7 @@ frappe.ui.form.on("Asset", {
 	},
 
 	company: function (frm) {
+		frm.trigger("set_dynamic_labels");
 		erpnext.accounts.dimensions.update_dimension(frm, frm.doctype);
 	},
 
@@ -87,6 +88,7 @@ frappe.ui.form.on("Asset", {
 	},
 
 	refresh: function (frm) {
+		frm.trigger("set_dynamic_labels");
 		frappe.ui.form.trigger("Asset", "is_existing_asset");
 		frm.toggle_display("next_depreciation_date", frm.doc.docstatus < 1);
 
@@ -221,6 +223,10 @@ frappe.ui.form.on("Asset", {
 		}
 	},
 
+	set_dynamic_labels: function (frm) {
+		frm.set_currency_labels(["net_purchase_amount"], erpnext.get_currency(frm.doc.company));
+	},
+
 	set_depr_posting_failure_alert: function (frm) {
 		const alert = `
 			<div class="row">
@@ -309,7 +315,7 @@ frappe.ui.form.on("Asset", {
 			},
 		});
 	},
-
+	
 	render_depreciation_schedule_view: function (frm, asset_depr_schedule_doc) {
 		let wrapper = $(frm.fields_dict["depreciation_schedule_view"].wrapper).empty();
 
@@ -388,6 +394,7 @@ frappe.ui.form.on("Asset", {
 		datatable.style.setStyle(`.dt-cell--col-2`, { "font-weight": 600 });
 		datatable.style.setStyle(`.dt-cell--col-3`, { "font-weight": 600 });
 	},
+
 
 	setup_chart_and_depr_schedule_view: async function (frm) {
 		if (frm.doc.finance_books.length > 1) {
