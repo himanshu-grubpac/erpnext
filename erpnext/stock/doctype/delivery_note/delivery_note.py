@@ -1038,6 +1038,7 @@ def make_sales_invoice(source_name, target_doc=None, args=None):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def make_delivery_trip(source_name, target_doc=None, kwargs=None):
 	def update_stop_details(source_doc, target_doc, source_parent):
 		target_doc.customer = source_parent.customer
@@ -1051,6 +1052,17 @@ def make_delivery_trip(source_name, target_doc=None, kwargs=None):
 		delivery_notes.append(target_doc.delivery_note)
 
 	delivery_notes = []
+=======
+def make_delivery_trip(
+	source_name: str, target_doc: str | Document | None = None, kwargs: dict | None = None
+):
+	if not target_doc:
+		target_doc = frappe.new_doc("Delivery Trip")
+
+	def update_address(source_doc, target_doc, source_parent):
+		target_doc.address = source_doc.shipping_address_name or source_doc.customer_address
+		target_doc.customer_address = source_doc.shipping_address or source_doc.address_display
+>>>>>>> b5a21855f6 (feat(stock): implement fallback logic for Delivery Trip address mapping (#53260))
 
 	doclist = get_mapped_doc(
 		"Delivery Note",
@@ -1059,9 +1071,19 @@ def make_delivery_trip(source_name, target_doc=None, kwargs=None):
 			"Delivery Note": {"doctype": "Delivery Trip", "validation": {"docstatus": ["=", 1]}},
 			"Delivery Note Item": {
 				"doctype": "Delivery Stop",
+<<<<<<< HEAD
 				"field_map": {"parent": "delivery_note"},
 				"condition": lambda item: item.parent not in delivery_notes,
 				"postprocess": update_stop_details,
+=======
+				"on_parent": target_doc,
+				"field_map": {
+					"name": "delivery_note",
+					"contact_person": "contact",
+					"contact_display": "customer_contact",
+				},
+				"postprocess": update_address,
+>>>>>>> b5a21855f6 (feat(stock): implement fallback logic for Delivery Trip address mapping (#53260))
 			},
 		},
 		target_doc,
