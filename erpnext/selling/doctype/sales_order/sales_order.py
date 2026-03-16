@@ -838,6 +838,7 @@ def close_or_unclose_sales_orders(names, status):
 
 def get_requested_item_qty(sales_order):
 	result = {}
+<<<<<<< HEAD
 	for d in frappe.db.get_all(
 		"Material Request Item",
 		filters={"docstatus": 1, "sales_order": sales_order},
@@ -845,6 +846,21 @@ def get_requested_item_qty(sales_order):
 		group_by="sales_order_item",
 	):
 		result[d.sales_order_item] = frappe._dict({"qty": d.qty, "received_qty": d.received_qty})
+=======
+
+	so = frappe.get_doc("Sales Order", sales_order)
+
+	for item in so.items:
+		if is_product_bundle(item.item_code):
+			for packed_item in so.get("packed_items"):
+				if (
+					packed_item.parent_item == item.item_code
+					and packed_item.parent_detail_docname == item.name
+				):
+					result[packed_item.name] = frappe._dict({"qty": packed_item.requested_qty})
+		else:
+			result[item.name] = frappe._dict({"qty": item.requested_qty})
+>>>>>>> 953f089c06 (feat: Adding requested qty in packed item (#53486))
 
 	return result
 
@@ -863,12 +879,32 @@ def make_material_request(source_name, target_doc=None):
 			flt(so_item.qty)
 			- flt(requested_item_qty.get(so_item.name, {}).get("qty"))
 			- max(
-				flt(so_item.get("delivered_qty"))
-				- flt(requested_item_qty.get(so_item.name, {}).get("received_qty")),
+				flt(so_item.get("delivered_qty")),
 				0,
 			)
 		)
 
+<<<<<<< HEAD
+=======
+	def get_remaining_packed_item_qty(so_item):
+		delivered_qty = frappe.db.get_value(
+			"Sales Order Item", {"name": so_item.parent_detail_docname}, ["delivered_qty"]
+		)
+
+		bundle_item_qty = frappe.db.get_value(
+			"Product Bundle Item", {"parent": so_item.parent_item, "item_code": so_item.item_code}, ["qty"]
+		)
+
+		return flt(
+			flt(so_item.qty)
+			- flt(requested_item_qty.get(so_item.name, {}).get("qty"))
+			- max(
+				flt(delivered_qty) * flt(bundle_item_qty),
+				0,
+			)
+		)
+
+>>>>>>> 953f089c06 (feat: Adding requested qty in packed item (#53486))
 	def update_item(source, target, source_parent):
 		# qty is for packed items, because packed items don't have stock_qty field
 		target.project = source_parent.project
@@ -923,8 +959,10 @@ def make_material_request(source_name, target_doc=None):
 		target_doc,
 		postprocess,
 	)
-
-	return doc
+	if doc and doc.items:
+		return doc
+	else:
+		frappe.throw(_("Material Request already created for the ordered quantity"))
 
 
 @frappe.whitelist()

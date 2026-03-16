@@ -342,7 +342,14 @@ class StatusUpdater(Document):
 		):
 			return
 
+<<<<<<< HEAD
 		if args["target_dt"] != "Quotation Item":
+=======
+		if args["source_dt"] != "Pick List Item" and args["target_dt"] not in [
+			"Quotation Item",
+			"Packed Item",
+		]:
+>>>>>>> 953f089c06 (feat: Adding requested qty in packed item (#53486))
 			if qty_or_amount == "qty":
 				action_msg = _(
 					'To allow over receipt / delivery, update "Over Receipt/Delivery Allowance" in Stock Settings or the Item.'
