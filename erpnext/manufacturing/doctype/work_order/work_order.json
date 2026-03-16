@@ -603,11 +603,7 @@
  "image_field": "image",
  "is_submittable": 1,
  "links": [],
-<<<<<<< HEAD
- "modified": "2025-06-21 00:55:45.916224",
-=======
  "modified": "2026-03-16 10:15:28.708688",
->>>>>>> ebb4a3d053 (fix: use bom source warehouse in WO created from PP)
  "modified_by": "Administrator",
  "module": "Manufacturing",
  "name": "Work Order",
