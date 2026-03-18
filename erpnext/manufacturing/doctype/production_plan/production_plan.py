@@ -1784,7 +1784,7 @@ def get_item_data(item_code):
 	return {
 		"bom_no": item_details.get("bom_no"),
 		"stock_uom": item_details.get("stock_uom"),
-		# 		"description": item_details.get("description")
+		"description": item_details.get("description"),
 	}
 
 
@@ -1800,6 +1800,7 @@ def get_sub_assembly_items(
 	skip_available_sub_assembly_item=False,
 ):
 	data = get_bom_children(parent=bom_no)
+	precision = frappe.get_precision("Production Plan Sub Assembly Item", "qty")
 	for d in data:
 		if d.expandable:
 			parent_item_code = frappe.get_cached_value("BOM", bom_no, "item")
@@ -1837,7 +1838,7 @@ def get_sub_assembly_items(
 							"is_sub_contracted_item": d.is_sub_contracted_item,
 							"bom_level": indent,
 							"indent": indent,
-							"stock_qty": stock_qty,
+							"stock_qty": flt(stock_qty, precision),
 						}
 					)
 				)
