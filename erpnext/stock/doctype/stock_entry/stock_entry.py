@@ -103,6 +103,7 @@ class StockEntry(StockController):
 		asset_repair: DF.Link | None
 		bom_no: DF.Link | None
 		company: DF.Link
+		cost_center: DF.Link | None
 		credit_note: DF.Link | None
 		delivery_note_no: DF.Link | None
 		fg_completed_qty: DF.Float
@@ -588,9 +589,6 @@ class StockEntry(StockController):
 				item.transfer_qty = flt(
 					flt(item.qty) * flt(item.conversion_factor), self.precision("transfer_qty", item)
 				)
-
-			if self.purpose == "Manufacture":
-				item.set("expense_account", item_details.get("expense_account"))
 
 	def validate_fg_completed_qty(self):
 		item_wise_qty = {}
@@ -2136,7 +2134,7 @@ class StockEntry(StockController):
 							self.to_warehouse if self.purpose == "Send to Subcontractor" else ""
 						)
 
-						if original_item != item.get("item_code"):
+						if isinstance(original_item, str) and original_item != item.get("item_code"):
 							item["original_item"] = original_item
 
 					self.add_to_stock_entry_detail(item_dict)

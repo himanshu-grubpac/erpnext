@@ -185,6 +185,7 @@ class PurchaseReceipt(BuyingController):
 				"target_ref_field": "stock_qty",
 				"source_field": "stock_qty",
 				"percent_join_field": "material_request",
+				"validate_qty": False,
 			},
 			{
 				"source_dt": "Purchase Receipt Item",
@@ -327,7 +328,10 @@ class PurchaseReceipt(BuyingController):
 			)
 
 	def po_required(self):
-		if frappe.db.get_value("Buying Settings", None, "po_required") == "Yes":
+		if (
+			frappe.db.get_single_value("Buying Settings", "po_required") == "Yes"
+			and not self.is_internal_transfer()
+		):
 			for d in self.get("items"):
 				if not d.purchase_order:
 					frappe.throw(_("Purchase Order number required for Item {0}").format(d.item_code))
@@ -1414,6 +1418,8 @@ def make_purchase_return(source_name, target_doc=None):
 
 @frappe.whitelist()
 def update_purchase_receipt_status(docname, status):
+	frappe.has_permission("Purchase Receipt", "submit", docname, throw=True)
+
 	pr = frappe.get_doc("Purchase Receipt", docname)
 	pr.update_status(status)
 
