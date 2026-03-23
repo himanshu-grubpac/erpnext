@@ -4,7 +4,11 @@
 import frappe
 from frappe import _
 from frappe.utils import add_days, flt, get_datetime_str, nowdate
+<<<<<<< HEAD
 from frappe.utils.data import getdate, now_datetime
+=======
+from frappe.utils.data import DateTimeLikeObject
+>>>>>>> 91da450a31 (chore: remove unused imports (#53722))
 from frappe.utils.nestedset import get_root_of
 
 from erpnext import get_default_company
