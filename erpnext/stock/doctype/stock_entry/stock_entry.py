@@ -142,7 +142,12 @@ class StockEntry(StockController):
 		scan_barcode: DF.Data | None
 		select_print_heading: DF.Link | None
 		set_posting_time: DF.Check
+<<<<<<< HEAD
 		source_address_display: DF.SmallText | None
+=======
+		source_address_display: DF.TextEditor | None
+		source_stock_entry: DF.Link | None
+>>>>>>> d4baa9a74a (fix: create source_stock_entry to refer to original manufacturing entry)
 		source_warehouse_address: DF.Link | None
 		stock_entry_type: DF.Link
 		subcontracting_order: DF.Link | None
