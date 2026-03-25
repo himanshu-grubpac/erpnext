@@ -229,6 +229,30 @@ frappe.ui.form.on("Stock Entry", {
 		});
 	},
 
+	source_stock_entry: async function (frm) {
+		if (!frm.doc.source_stock_entry || frm.doc.purpose !== "Disassemble") return;
+
+		if (frm._via_source_stock_entry) {
+			frm.call({
+				doc: frm.doc,
+				method: "get_items",
+				callback: function (r) {
+					if (!r.exc) refresh_field("items");
+				},
+			});
+			frm._via_source_stock_entry = false;
+			return;
+		}
+
+		let available_qty = await frappe.xcall(
+			"erpnext.manufacturing.doctype.work_order.work_order.get_disassembly_available_qty",
+			{ stock_entry_name: frm.doc.source_stock_entry }
+		);
+
+		// triggers get_items() via its onchange
+		await frm.set_value("fg_completed_qty", available_qty);
+	},
+
 	outgoing_stock_entry: function (frm) {
 		frappe.call({
 			doc: frm.doc,
@@ -326,7 +350,7 @@ frappe.ui.form.on("Stock Entry", {
 				);
 			}
 
-			if (frm.doc.purpose === "Manufacture" && frm.doc.work_order) {
+			if (frm.doc.purpose === "Manufacture") {
 				frm.add_custom_button(
 					__("Disassemble"),
 					async function () {
@@ -335,7 +359,6 @@ frappe.ui.form.on("Stock Entry", {
 							{ stock_entry_name: frm.doc.name }
 						);
 						frappe.prompt(
-							// fields
 							{
 								fieldtype: "Float",
 								label: __("Qty to Disassemble"),
@@ -343,28 +366,33 @@ frappe.ui.form.on("Stock Entry", {
 								default: available_qty,
 								description: __("Max: {0}", [available_qty]),
 							},
-							// callback
 							async (data) => {
-								if (data.qty > available_qty) {
-									frappe.throw(
-										__("Cannot disassemble more than available quantity ({0})", [
-											available_qty,
-										])
+								if (frm.doc.work_order) {
+									let stock_entry = await frappe.xcall(
+										"erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry",
+										{
+											work_order_id: frm.doc.work_order,
+											purpose: "Disassemble",
+											qty: data.qty,
+											source_stock_entry: frm.doc.name,
+										}
 									);
-								}
-
-								let stock_entry = await frappe.xcall(
-									"erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry",
-									{
-										work_order_id: frm.doc.work_order,
-										purpose: "Disassemble",
-										qty: data.qty,
-										source_stock_entry: frm.doc.name,
+									if (stock_entry) {
+										frappe.model.sync(stock_entry);
+										frappe.set_route("Form", stock_entry.doctype, stock_entry.name);
 									}
-								);
-								if (stock_entry) {
-									frappe.model.sync(stock_entry);
-									frappe.set_route("Form", stock_entry.doctype, stock_entry.name);
+								} else {
+									let se = frappe.model.get_new_doc("Stock Entry");
+									se.company = frm.doc.company;
+									se.stock_entry_type = "Disassemble";
+									se.purpose = "Disassemble";
+									se.source_stock_entry = frm.doc.name;
+									se.from_bom = frm.doc.from_bom;
+									se.bom_no = frm.doc.bom_no;
+									se.fg_completed_qty = data.qty;
+									frm._via_source_stock_entry = true;
+
+									frappe.set_route("Form", "Stock Entry", se.name);
 								}
 							},
 							__("Disassemble"),
@@ -1338,8 +1366,11 @@ erpnext.stock.StockEntry = class StockEntry extends erpnext.stock.StockControlle
 		if (!this.frm.doc.fg_completed_qty || !this.frm.doc.bom_no)
 			frappe.throw(__("BOM and Manufacturing Quantity are required"));
 
-		if (this.frm.doc.work_order || this.frm.doc.bom_no) {
-			// if work order / bom is mentioned, get items
+		if (
+			this.frm.doc.work_order ||
+			this.frm.doc.bom_no ||
+			(this.frm.doc.purpose === "Disassemble" && this.frm.doc.source_stock_entry)
+		) {
 			return this.frm.call({
 				doc: me.frm.doc,
 				freeze: true,
