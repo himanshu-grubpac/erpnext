@@ -565,12 +565,31 @@ frappe.ui.form.on("Job Card Time Log", {
 	completed_qty: function (frm) {
 		frm.events.set_total_completed_qty(frm);
 	},
+<<<<<<< HEAD
 
 	to_time: function (frm) {
 		frm.set_value("started_time", "");
 	},
+=======
+>>>>>>> afa66e4785 (fix: keep from and to time blank until added explicitly (#53798))
 });
 
 function get_seconds_diff(d1, d2) {
 	return moment(d1).diff(d2, "seconds");
 }
+<<<<<<< HEAD
+=======
+
+function get_last_completed_row(time_logs) {
+	let completed_rows = time_logs.filter((d) => d.to_time);
+
+	if (completed_rows?.length) {
+		let last_completed_row = completed_rows[completed_rows.length - 1];
+		return last_completed_row;
+	}
+}
+
+function get_last_row(time_logs) {
+	return time_logs[time_logs.length - 1] || {};
+}
+>>>>>>> afa66e4785 (fix: keep from and to time blank until added explicitly (#53798))
