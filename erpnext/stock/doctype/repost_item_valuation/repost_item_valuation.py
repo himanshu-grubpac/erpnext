@@ -261,6 +261,11 @@ class RepostItemValuation(Document):
 		self.items_to_be_repost = None
 		self.gl_reposting_index = 0
 		self.total_reposting_count = 0
+<<<<<<< HEAD
+=======
+		self.total_vouchers = 0
+		self.vouchers_posted = 0
+>>>>>>> 8fbb86d53e (fix: corrected logic to retry reposting if timeout occurs after dependent SLE processing)
 		self.clear_attachment()
 		self.db_update()
 

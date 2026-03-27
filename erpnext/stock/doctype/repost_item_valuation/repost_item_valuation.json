@@ -34,7 +34,15 @@
   "total_reposting_count",
   "current_index",
   "gl_reposting_index",
+<<<<<<< HEAD
   "affected_transactions"
+=======
+  "reposting_data_file",
+  "vouchers_based_on_item_and_warehouse_section",
+  "total_vouchers",
+  "column_break_yqwo",
+  "vouchers_posted"
+>>>>>>> 8fbb86d53e (fix: corrected logic to retry reposting if timeout occurs after dependent SLE processing)
  ],
  "fields": [
   {
@@ -247,13 +255,51 @@
    "fieldname": "repost_only_accounting_ledgers",
    "fieldtype": "Check",
    "label": "Repost Only Accounting Ledgers"
+<<<<<<< HEAD
+=======
+  },
+  {
+   "fieldname": "vouchers_based_on_item_and_warehouse_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Reposting Vouchers"
+  },
+  {
+   "fieldname": "total_vouchers",
+   "fieldtype": "Int",
+   "label": "Total Ledgers",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_yqwo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vouchers_posted",
+   "fieldtype": "Int",
+   "label": "Ledgers Posted",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "reposting_data_file",
+   "fieldtype": "Attach",
+   "label": "Reposting Data File",
+   "no_copy": 1,
+   "read_only": 1
+>>>>>>> 8fbb86d53e (fix: corrected logic to retry reposting if timeout occurs after dependent SLE processing)
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2026-02-25 14:22:21.681549",
+=======
+ "modified": "2026-03-27 18:59:58.637964",
+>>>>>>> 8fbb86d53e (fix: corrected logic to retry reposting if timeout occurs after dependent SLE processing)
  "modified_by": "Administrator",
  "module": "Stock",
  "name": "Repost Item Valuation",
