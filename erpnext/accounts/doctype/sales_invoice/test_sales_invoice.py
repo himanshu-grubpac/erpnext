@@ -3230,7 +3230,7 @@ class TestSalesInvoice(FrappeTestCase):
 			calculate_depreciation=1,
 			submit=1,
 		)
-		post_depreciation_entries()
+		post_depreciation_entries(date="2025-04-01")
 
 		si = create_sales_invoice(
 			item_code="Macbook Pro", asset=asset.name, qty=1, rate=10000, posting_date=getdate("2025-05-01")
