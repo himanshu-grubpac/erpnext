@@ -1138,12 +1138,8 @@ def update_billing_percentage(pr_doc, update_modified=True, adjust_incoming_rate
 	billed_qty_amt = frappe._dict()
 
 	if adjust_incoming_rate:
-<<<<<<< HEAD
-		item_wise_billed_qty = get_billed_qty_against_purchase_receipt(pr_doc)
-=======
 		billed_qty_amt = get_billed_qty_amount_against_purchase_receipt(pr_doc)
 		billed_qty_amt_based_on_po = get_billed_qty_amount_against_purchase_order(pr_doc)
->>>>>>> a953709640 (fix: GL entries for different exchange rate in the purchase invoice)
 
 	for item in pr_doc.items:
 		returned_qty = flt(item_wise_returned_qty.get(item.name))
@@ -1172,13 +1168,6 @@ def update_billing_percentage(pr_doc, update_modified=True, adjust_incoming_rate
 			if (
 				item.billed_amt is not None
 				and item.amount is not None
-<<<<<<< HEAD
-				and item_wise_billed_qty.get(item.name)
-			):
-				adjusted_amt = (
-					flt(item.billed_amt / item_wise_billed_qty.get(item.name)) - flt(item.rate)
-				) * item.qty
-=======
 				and (
 					billed_qty_amt.get(item.name) or billed_qty_amt_based_on_po.get(item.purchase_order_item)
 				)
@@ -1202,7 +1191,6 @@ def update_billing_percentage(pr_doc, update_modified=True, adjust_incoming_rate
 					total_billed_qty = (
 						billed_qty_amt_based_on_po.get(item.purchase_order_item).get("qty") + qty
 					)
->>>>>>> a953709640 (fix: GL entries for different exchange rate in the purchase invoice)
 
 					if total_billed_qty:
 						billed_amt = flt(
@@ -1282,8 +1270,6 @@ def get_billed_qty_amount_against_purchase_receipt(pr_doc):
 	return billed_qty_amt
 
 
-<<<<<<< HEAD
-=======
 def get_billed_qty_amount_against_purchase_order(pr_doc):
 	po_names = list(
 		set(
@@ -1327,7 +1313,6 @@ def get_billed_qty_amount_against_purchase_order(pr_doc):
 	return invoice_data_po_based
 
 
->>>>>>> a953709640 (fix: GL entries for different exchange rate in the purchase invoice)
 def adjust_incoming_rate_for_pr(doc):
 	doc.update_valuation_rate(reset_outgoing_rate=False)
 
