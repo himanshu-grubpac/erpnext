@@ -2043,6 +2043,7 @@ def create_customer(name="_Test Customer 2 USD", currency="USD"):
 		customer.customer_name = name
 		customer.default_currency = currency
 		customer.type = "Individual"
+		customer.customer_group = "Individual"
 		customer.save()
 		customer = customer.name
 	return customer
