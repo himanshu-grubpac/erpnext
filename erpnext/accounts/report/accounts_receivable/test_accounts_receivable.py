@@ -779,6 +779,7 @@ class TestAccountsReceivable(AccountsTestMixin, FrappeTestCase):
 					"customer_name": "Jane Doe",
 					"type": "Individual",
 					"default_currency": "USD",
+					"customer_group": "Individual",
 				}
 			)
 			.insert()
@@ -1002,6 +1003,7 @@ class TestAccountsReceivable(AccountsTestMixin, FrappeTestCase):
 					"customer_name": "Jane Doe",
 					"type": "Individual",
 					"default_currency": "USD",
+					"customer_group": "Individual",
 				}
 			)
 			.insert()
