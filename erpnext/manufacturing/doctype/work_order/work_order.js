@@ -868,10 +868,6 @@ erpnext.work_order = {
 		return flt(max, precision("qty"));
 	},
 
-<<<<<<< HEAD
-	show_prompt_for_qty_input: function (frm, purpose) {
-		let max = this.get_max_transferable_qty(frm, purpose);
-=======
 	show_disassembly_prompt: function (frm) {
 		let max_qty = flt(frm.doc.produced_qty - frm.doc.disassembled_qty);
 
@@ -926,9 +922,8 @@ erpnext.work_order = {
 		});
 	},
 
-	show_prompt_for_qty_input: function (frm, purpose, qty, additional_transfer_entry) {
-		let max = !additional_transfer_entry ? this.get_max_transferable_qty(frm, purpose) : qty;
->>>>>>> 68e97808c5 (fix: disassembly prompt with source stock entry field)
+	show_prompt_for_qty_input: function (frm, purpose) {
+		let max = this.get_max_transferable_qty(frm, purpose);
 
 		let fields = [
 			{

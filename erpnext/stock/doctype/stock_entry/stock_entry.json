@@ -11,6 +11,7 @@
   "naming_series",
   "stock_entry_type",
   "outgoing_stock_entry",
+  "source_stock_entry",
   "purpose",
   "add_to_transit",
   "work_order",
@@ -28,15 +29,7 @@
   "column_break_eaoa",
   "set_posting_time",
   "inspection_required",
-<<<<<<< HEAD
   "apply_putaway_rule",
-=======
-  "column_break_jabv",
-  "work_order",
-  "subcontracting_order",
-  "outgoing_stock_entry",
-  "source_stock_entry",
->>>>>>> d4baa9a74a (fix: create source_stock_entry to refer to original manufacturing entry)
   "bom_info_section",
   "from_bom",
   "use_multi_level_bom",
