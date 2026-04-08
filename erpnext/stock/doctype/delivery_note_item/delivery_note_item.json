@@ -951,11 +951,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
-<<<<<<< HEAD
- "modified": "2025-05-31 18:51:32.651562",
-=======
- "modified": "2026-04-07 15:43:20.892151",
->>>>>>> 90fd6f2e40 (fix: hardcoded precision causing decimal issues)
+ "modified": "2026-04-07 15:44:20.892151",
  "modified_by": "Administrator",
  "module": "Stock",
  "name": "Delivery Note Item",
