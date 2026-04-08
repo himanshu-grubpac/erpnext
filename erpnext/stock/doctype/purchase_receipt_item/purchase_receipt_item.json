@@ -1148,11 +1148,7 @@
  "idx": 1,
  "istable": 1,
  "links": [],
-<<<<<<< HEAD
- "modified": "2025-10-14 12:59:20.384056",
-=======
- "modified": "2026-04-07 15:40:47.032889",
->>>>>>> 90fd6f2e40 (fix: hardcoded precision causing decimal issues)
+ "modified": "2026-04-07 15:41:47.032889",
  "modified_by": "Administrator",
  "module": "Stock",
  "name": "Purchase Receipt Item",
