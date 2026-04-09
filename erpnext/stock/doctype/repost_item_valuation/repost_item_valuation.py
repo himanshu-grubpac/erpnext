@@ -74,6 +74,7 @@ class RepostItemValuation(Document):
 		repost(self)
 
 	def validate(self):
+		self.set_default_posting_time()
 		self.set_company()
 		self.validate_update_stock()
 		self.validate_period_closing_voucher()
@@ -82,6 +83,13 @@ class RepostItemValuation(Document):
 		self.validate_accounts_freeze()
 		self.reset_recreate_stock_ledgers()
 		self.validate_recreate_stock_ledgers()
+
+	def set_default_posting_time(self):
+		if not self.posting_time:
+			self.posting_time = nowtime()
+
+		if not self.posting_date:
+			frappe.throw(_("Posting date is required"))
 
 	def validate_update_stock(self):
 		if self.voucher_type in ["Sales Invoice", "Purchase Invoice"]:
