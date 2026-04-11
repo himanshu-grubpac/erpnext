@@ -74,6 +74,15 @@ class SellingSettings(Document):
 
 		self.validate_fallback_to_default_price_list()
 
+<<<<<<< HEAD
+=======
+		if old_doc and old_doc.enable_tracking_sales_commissions != self.enable_tracking_sales_commissions:
+			toggle_tracking_sales_commissions_section(not self.enable_tracking_sales_commissions)
+
+		if old_doc and old_doc.enable_utm != self.enable_utm:
+			toggle_utm_analytics_section(not self.enable_utm)
+
+>>>>>>> 3e5d18c5c4 (Fix(selling): enable selling_settings creation through fixtures (#54177))
 	def validate_fallback_to_default_price_list(self):
 		if (
 			self.fallback_to_default_price_list
