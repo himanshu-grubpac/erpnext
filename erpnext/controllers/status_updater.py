@@ -270,6 +270,52 @@ class StatusUpdater(Document):
 						args["name"],
 						as_dict=1,
 					)
+<<<<<<< HEAD
+=======
+
+			if items_to_validate:
+				pp_sub_assembly_items = [
+					item.production_plan_sub_assembly_item
+					for item in items_to_validate
+					if item.production_plan_sub_assembly_item
+				]
+
+				pp_subcontract_items = []
+				if pp_sub_assembly_items:
+					pp_subcontract_items = frappe.db.get_all(
+						"Production Plan Sub Assembly Item",
+						filters={
+							"name": ("in", pp_sub_assembly_items),
+							"type_of_manufacturing": "Subcontract",
+						},
+						pluck="name",
+					)
+
+				regular_items = []
+				pp_items = []
+
+				for item in items_to_validate:
+					if item.production_plan_sub_assembly_item in pp_subcontract_items:
+						pp_items.append(item.name)
+					else:
+						regular_items.append(item.name)
+
+				item_details = []
+
+				# Query regular items with item_code field
+				if regular_items:
+					item_details.extend(self.fetch_items_with_pending_qty(args, "item_code", regular_items))
+
+				# Query production plan items with production_item field
+				if pp_items and args.get("target_dt") in ["Production Plan Sub Assembly Item"]:
+					item_details.extend(self.fetch_items_with_pending_qty(args, "production_item", pp_items))
+
+				item_lookup = {item.name: item for item in item_details}
+
+				for child_item in items_to_validate:
+					item = item_lookup.get(child_item.name)
+
+>>>>>>> 1e43c37452 (fix: not able to submit the PO)
 					if item:
 						item = item[0]
 						item["idx"] = d.idx
