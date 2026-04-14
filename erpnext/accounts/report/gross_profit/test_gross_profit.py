@@ -736,7 +736,7 @@ class TestGrossProfit(FrappeTestCase):
 		item = make_item("_Test Drop Ship Item", properties={"is_stock_item": 1, "delivered_by_supplier": 1})
 
 		so = make_sales_order(item=item.name, qty=10, rate=100)
-		po = make_purchase_order(so.name, selected_items=[so.items[0]])[0]
+		po = make_purchase_order(so.name, selected_items=[so.items[0]])
 		po.items[0].rate = 80
 		po.supplier = "_Test Supplier"
 		po.submit()
