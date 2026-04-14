@@ -392,7 +392,13 @@ frappe.ui.form.on("Work Order", {
 						qty: pending_qty,
 						pending_qty: pending_qty,
 						sequence_id: data.sequence_id,
+<<<<<<< HEAD
 						bom: data.bom,
+=======
+						skip_material_transfer: data.skip_material_transfer,
+						backflush_from_wip_warehouse: data.backflush_from_wip_warehouse,
+						time_in_mins: data.time_in_mins,
+>>>>>>> f37bf62824 (fix: wrong operation time calculation (#53796))
 					});
 				}
 			}

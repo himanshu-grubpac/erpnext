@@ -699,10 +699,14 @@ class TestWorkOrder(FrappeTestCase):
 		if not bom_name:
 			bom = make_bom(item=fg_item, rate=1000, raw_materials=[rm1], do_not_save=True)
 			bom.with_operations = 1
+			operation = make_operation(operation="Batch Size Operation")
+			operation.create_job_card_based_on_batch_size = 1
+			operation.save()
+
 			bom.append(
 				"operations",
 				{
-					"operation": "_Test Operation 1",
+					"operation": "Batch Size Operation",
 					"workstation": "_Test Workstation 1",
 					"description": "Test Data",
 					"operating_cost": 100,
@@ -3630,6 +3634,64 @@ class TestWorkOrder(FrappeTestCase):
 		bin1_at_completion = get_bin(rm_item_code, "_Test Warehouse - _TC")
 
 		self.assertEqual(bin1_at_completion.reserved_qty_for_production, 0)
+
+	def test_operating_time(self):
+		workstation = make_workstation(workstation="Test Workstation for Operating Time")
+		raw_material = make_item(item_code="Raw Material 1", properties={"is_stock_item": 1})
+		subassembly_item = make_item(item_code="Subassembly Item", properties={"is_stock_item": 1})
+		subassembly_bom = make_bom(
+			item=subassembly_item.name,
+			quantity=5,
+			raw_materials=[raw_material.name],
+			rm_qty=25,
+			with_operations=1,
+			do_not_submit=True,
+		)
+		subassembly_operation = make_operation(operation="Subassembly Operation")
+		subassembly_bom.append(
+			"operations",
+			{
+				"operation": subassembly_operation.name,
+				"time_in_mins": 60,
+				"workstation": workstation.name,
+			},
+		)
+		subassembly_bom.save()
+		subassembly_bom.submit()
+
+		fg_item = make_item(item_code="FG Item", properties={"is_stock_item": 1})
+		fg_bom = make_bom(
+			item=fg_item.name,
+			quantity=50,
+			raw_materials=[subassembly_item.name],
+			rm_qty=3,
+			with_operations=1,
+			do_not_submit=True,
+		)
+		fg_operation = make_operation(operation="FG Operation")
+		fg_operation.create_job_card_based_on_batch_size = 1
+		fg_operation.batch_size = 25
+		fg_operation.save()
+		fg_bom.append(
+			"operations",
+			{
+				"operation": fg_operation.name,
+				"time_in_mins": 60,
+				"workstation": workstation.name,
+			},
+		)
+		fg_bom.items[0].do_not_explode = 0
+		fg_bom.items[0].bom_no = subassembly_bom.name
+		fg_bom.save()
+		fg_bom.submit()
+
+		wo_order = make_wo_order_test_record(
+			item=fg_item.name,
+			qty=100,
+			use_multi_level_bom=1,
+		)
+		self.assertEqual(wo_order.operations[0].time_in_mins, 72)
+		self.assertEqual(wo_order.operations[1].time_in_mins, 240)
 
 
 def make_stock_in_entries_and_get_batches(rm_item, source_warehouse, wip_warehouse):
