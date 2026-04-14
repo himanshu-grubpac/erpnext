@@ -556,6 +556,16 @@ class update_entries_after:
 		previous_sle = get_previous_sle_of_current_voucher(args)
 		if previous_sle:
 			self.prev_sle_dict[(args.get("item_code"), args.get("warehouse"))] = previous_sle
+		else:
+			self.prev_sle_dict[(args.get("item_code"), args.get("warehouse"))] = frappe._dict(
+				{
+					"qty_after_transaction": 0.0,
+					"valuation_rate": 0.0,
+					"stock_value": 0.0,
+					"prev_stock_value": 0.0,
+					"stock_queue": [],
+				}
+			)
 
 		warehouse_dict.previous_sle = previous_sle
 
@@ -1070,34 +1080,6 @@ class update_entries_after:
 					sabb_doc.voucher_detail_no = None
 					sabb_doc.voucher_no = None
 					sabb_doc.cancel()
-
-		if sle.serial_and_batch_bundle and frappe.get_cached_value("Item", sle.item_code, "has_serial_no"):
-			self.update_serial_no_status(sle)
-
-	def update_serial_no_status(self, sle):
-		from erpnext.stock.serial_batch_bundle import get_serial_nos
-
-		serial_nos = get_serial_nos(sle.serial_and_batch_bundle)
-		if not serial_nos:
-			return
-
-		warehouse = None
-		status = "Inactive"
-
-		if sle.actual_qty > 0:
-			warehouse = sle.warehouse
-			status = "Active"
-
-		sn_table = frappe.qb.DocType("Serial No")
-
-		query = (
-			frappe.qb.update(sn_table)
-			.set(sn_table.warehouse, warehouse)
-			.set(sn_table.status, status)
-			.where(sn_table.name.isin(serial_nos))
-		)
-
-		query.run()
 
 	def calculate_valuation_for_serial_batch_bundle(self, sle):
 		if not frappe.db.exists("Serial and Batch Bundle", sle.serial_and_batch_bundle):
