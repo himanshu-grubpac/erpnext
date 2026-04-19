@@ -65,7 +65,9 @@ class Workstation(Document):
 	# end: auto-generated types
 
 	def before_save(self):
-		self.set_data_based_on_workstation_type()
+		if self.has_value_changed("workstation_type"):
+			self.set_data_based_on_workstation_type()
+
 		self.set_hour_rate()
 		self.set_total_working_hours()
 
@@ -102,6 +104,7 @@ class Workstation(Document):
 				"description",
 			]
 
+<<<<<<< HEAD
 			data = frappe.get_cached_value("Workstation Type", self.workstation_type, fields, as_dict=True)
 
 			if not data:
@@ -113,6 +116,20 @@ class Workstation(Document):
 
 				if value := data.get(field):
 					self.set(field, value)
+=======
+			if data:
+				self.workstation_costs = []
+
+			for row in data:
+				self.append(
+					"workstation_costs",
+					{
+						"operating_component": row.operating_component,
+						"operating_cost": row.operating_cost,
+						"idx": row.idx,
+					},
+				)
+>>>>>>> 28f3429a54 (fix: recalculate operating costs if workstation type is changed (#54390))
 
 	def on_update(self):
 		self.validate_overlap_for_operation_timings()
