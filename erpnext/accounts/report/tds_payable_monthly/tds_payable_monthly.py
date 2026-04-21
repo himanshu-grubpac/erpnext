@@ -8,6 +8,10 @@ from frappe.utils import getdate
 
 
 def execute(filters=None):
+	return _execute(filters)
+
+
+def _execute(filters=None, additional_table_columns=None):
 	if filters.get("party_type") == "Customer":
 		party_naming_by = frappe.db.get_single_value("Selling Settings", "cust_master_name")
 	else:
@@ -24,11 +28,15 @@ def execute(filters=None):
 		net_total_map,
 	) = get_tds_docs(filters)
 
-	columns = get_columns(filters)
+	columns = get_columns(filters, additional_table_columns)
 
+<<<<<<< HEAD:erpnext/accounts/report/tds_payable_monthly/tds_payable_monthly.py
 	res = get_result(
 		filters, tds_docs, tds_accounts, tax_category_map, journal_entry_party_map, net_total_map
 	)
+=======
+	res = get_result(filters, tds_accounts, tax_category_map, net_total_map, additional_table_columns)
+>>>>>>> e22326065d (feat: enhance tax withholding details report with additional columns support (backport #54409) (#54432)):erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py
 	return columns, res
 
 
@@ -39,10 +47,21 @@ def validate_filters(filters):
 		frappe.throw(_("From Date must be before To Date"))
 
 
+<<<<<<< HEAD:erpnext/accounts/report/tds_payable_monthly/tds_payable_monthly.py
 def get_result(filters, tds_docs, tds_accounts, tax_category_map, journal_entry_party_map, net_total_map):
 	party_map = get_party_pan_map(filters.get("party_type"))
 	tax_rate_map = get_tax_rate_map(filters)
 	gle_map = get_gle_map(tds_docs)
+=======
+def get_result(filters, tds_accounts, tax_category_map, net_total_map, additional_table_columns=None):
+	party_names = {v.party for v in net_total_map.values() if v.party}
+	party_map = get_party_pan_map(filters.get("party_type"), party_names)
+	tax_rate_map = get_tax_rate_map(filters)
+	gle_map = get_gle_map(net_total_map)
+	precision = get_currency_precision()
+	twc = get_tax_withholding_category_details(additional_table_columns)
+	twc_additional_columns = _get_twc_additional_columns(additional_table_columns)
+>>>>>>> e22326065d (feat: enhance tax withholding details report with additional columns support (backport #54409) (#54432)):erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py
 
 	out = []
 	entries = {}
@@ -106,8 +125,8 @@ def get_result(filters, tds_docs, tds_accounts, tax_category_map, journal_entry_
 
 				row.update(
 					{
-						"section_code": tax_withholding_category or "",
-						"entity_type": party_map.get(party, {}).get(party_type),
+						"tax_withholding_category": tax_withholding_category or "",
+						"party_entity_type": party_map.get(party, {}).get(party_type),
 						"rate": rate,
 						"total_amount": total_amount,
 						"grand_total": grand_total,
@@ -121,18 +140,56 @@ def get_result(filters, tds_docs, tds_accounts, tax_category_map, journal_entry_
 					}
 				)
 
+				if tax_withholding_category:
+					if twc_details := twc.get(tax_withholding_category, {}):
+						for col in twc_additional_columns or []:
+							row[col] = twc_details.get(col)
+
 				key = entry.voucher_no
 				if key in entries:
 					entries[key]["tax_amount"] += tax_amount
 				else:
 					entries[key] = row
 	out = list(entries.values())
+<<<<<<< HEAD:erpnext/accounts/report/tds_payable_monthly/tds_payable_monthly.py
 	out.sort(key=lambda x: (x["section_code"], x["transaction_date"]))
+=======
+	out.sort(key=lambda x: (x["tax_withholding_category"], x["transaction_date"], x["ref_no"]))
+>>>>>>> e22326065d (feat: enhance tax withholding details report with additional columns support (backport #54409) (#54432)):erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py
 
 	return out
 
 
+<<<<<<< HEAD:erpnext/accounts/report/tds_payable_monthly/tds_payable_monthly.py
 def get_party_pan_map(party_type):
+=======
+def get_tax_withholding_category_details(additional_table_columns=None):
+	if not additional_table_columns:
+		return {}
+
+	category_fields = _get_twc_additional_columns(additional_table_columns)
+
+	if not category_fields:
+		return {}
+
+	rows = frappe.get_all("Tax Withholding Category", fields=["name", *category_fields])
+
+	return {row["name"]: row for row in rows}
+
+
+def _get_twc_additional_columns(additional_table_columns):
+	if not additional_table_columns:
+		return []
+
+	return [
+		col.get("fieldname")
+		for col in additional_table_columns
+		if col.get("_doctype") == "Tax Withholding Category" and col.get("fieldname")
+	]
+
+
+def get_party_pan_map(party_type, party_names):
+>>>>>>> e22326065d (feat: enhance tax withholding details report with additional columns support (backport #54409) (#54432)):erpnext/accounts/report/tax_withholding_details/tax_withholding_details.py
 	party_map = frappe._dict()
 
 	fields = ["name", "tax_withholding_category"]
@@ -173,18 +230,21 @@ def get_gle_map(documents):
 	return gle_map
 
 
-def get_columns(filters):
+def get_columns(filters, additional_table_columns=None):
 	pan = "pan" if frappe.db.has_column(filters.party_type, "pan") else "tax_id"
 	columns = [
 		{
-			"label": _("Section Code"),
+			"label": _("Tax Withholding Category"),
 			"options": "Tax Withholding Category",
-			"fieldname": "section_code",
+			"fieldname": "tax_withholding_category",
 			"fieldtype": "Link",
-			"width": 90,
+			"width": 180,
 		},
 		{"label": _(frappe.unscrub(pan)), "fieldname": pan, "fieldtype": "Data", "width": 60},
 	]
+
+	if additional_table_columns:
+		columns.extend(additional_table_columns)
 
 	if filters.naming_series == "Naming Series":
 		columns.append(
@@ -208,7 +268,12 @@ def get_columns(filters):
 
 	columns.extend(
 		[
-			{"label": _("Entity Type"), "fieldname": "entity_type", "fieldtype": "Data", "width": 100},
+			{
+				"label": _(f"{filters.get('party_type', 'Party')} Type"),
+				"fieldname": "party_entity_type",
+				"fieldtype": "Data",
+				"width": 100,
+			},
 		]
 	)
 	if filters.party_type == "Supplier":
