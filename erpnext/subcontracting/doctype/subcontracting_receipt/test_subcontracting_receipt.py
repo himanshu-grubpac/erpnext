@@ -2008,7 +2008,8 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		This test ensures that the inventory dimensions are retained on each save.
 		"""
 		from erpnext.stock.doctype.inventory_dimension.test_inventory_dimension import (
-			create_inventory_dimension, prepare_test_data
+			create_inventory_dimension,
+			prepare_test_data,
 		)
 
 		prepare_test_data()
