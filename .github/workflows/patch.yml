@@ -1,13 +1,13 @@
 name: Patch
 
 on:
-  pull_request:
-    paths-ignore:
-      - '**.js'
-      - '**.css'
-      - '**.md'
-      - '**.html'
-      - '**.csv'
+  # pull_request:
+  #   paths-ignore:
+  #     - '**.js'
+  #     - '**.css'
+  #     - '**.md'
+  #     - '**.html'
+  #     - '**.csv'
   workflow_dispatch:
 
 concurrency:

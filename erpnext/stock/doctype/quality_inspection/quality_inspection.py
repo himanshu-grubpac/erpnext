@@ -392,13 +392,15 @@ def item_query(doctype, txt, searchfield, start, page_len, filters):
 
 		return frappe.db.sql(
 			f"""
-				SELECT distinct item_code, item_name
-				FROM `tab{from_doctype}`
-				WHERE parent=%(parent)s and docstatus < 2 and item_code like %(txt)s
+			SELECT DISTINCT pri.item_code, pri.item_name
+			FROM `tab{from_doctype}` pri
+			JOIN `tab{parent_doctype}` pr ON pr.name = pri.parent
+			WHERE pri.item_code LIKE %(txt)s
 				{qi_condition} {cond} {mcond}
-				ORDER BY item_code limit {cint(page_len)} offset {cint(start)}
+			ORDER BY pri.item_code
+			LIMIT {cint(page_len)} OFFSET {cint(start)}
 			""",
-			{"parent": filters.get("parent"), "txt": "%%%s%%" % txt},
+			{"parent": filters.get("parent"), "txt": f"%{txt}%"},
 		)
 
 	elif filters.get("reference_name"):
