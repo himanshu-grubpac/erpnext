@@ -25,6 +25,10 @@ from erpnext.controllers.tests.test_subcontracting_controller import (
 	set_backflush_based_on,
 )
 from erpnext.manufacturing.doctype.production_plan.test_production_plan import make_bom
+from erpnext.stock.doctype.inventory_dimension.test_inventory_dimension import (
+	create_inventory_dimension,
+	prepare_test_data,
+)
 from erpnext.stock.doctype.item.test_item import make_item
 from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import get_gl_entries
 from erpnext.stock.doctype.serial_and_batch_bundle.test_serial_and_batch_bundle import (
@@ -44,6 +48,17 @@ from erpnext.subcontracting.doctype.subcontracting_receipt.subcontracting_receip
 
 
 class TestSubcontractingReceipt(FrappeTestCase):
+	@classmethod
+	def setUpClass(cls):
+		prepare_test_data()
+		create_inventory_dimension(
+			apply_to_all_doctypes=1,
+			dimension_name="Inv Site",
+			reference_document="Inv Site",
+			document_type="Inv Site",
+		)
+		return super().setUpClass()
+
 	def setUp(self):
 		make_subcontracted_items()
 		make_raw_materials()
@@ -2007,22 +2022,6 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		The subcontracting controller resets the supplied items table on each save causing the inventory dimensions to be lost.
 		This test ensures that the inventory dimensions are retained on each save.
 		"""
-		from erpnext.stock.doctype.inventory_dimension.test_inventory_dimension import (
-			create_inventory_dimension,
-			prepare_test_data,
-		)
-
-		prepare_test_data()
-		inventory_dimension = create_inventory_dimension(
-			apply_to_all_doctypes=1,
-			dimension_name="Inv Site",
-			reference_document="Inv Site",
-			document_type="Inv Site",
-		)
-
-		inventory_dimension.reqd = 1
-		inventory_dimension.save()
-
 		set_backflush_based_on("BOM")
 
 		sco = get_subcontracting_order()
@@ -2041,9 +2040,6 @@ class TestSubcontractingReceipt(FrappeTestCase):
 		scr.save()
 
 		self.assertEqual(scr.supplied_items[0].inv_site, "Site 1")
-
-		inventory_dimension.reqd = 0
-		inventory_dimension.save()
 
 
 def make_return_subcontracting_receipt(**args):
