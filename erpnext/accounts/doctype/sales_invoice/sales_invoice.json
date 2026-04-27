@@ -2322,10 +2322,7 @@
    "collapsible": 1,
    "fieldname": "utm_analytics_section",
    "fieldtype": "Section Break",
-<<<<<<< HEAD
    "label": "UTM Analytics"
-=======
-   "label": "Automation"
   },
   {
    "fieldname": "section_break_sgnf",
@@ -2338,7 +2335,6 @@
    "label": "Title",
    "no_copy": 1,
    "print_hide": 1
->>>>>>> bd9427623f (refactor: bring back titles on sales transactions and make them optional and visible on purchase transactions (#52633))
   }
  ],
  "grid_page_length": 50,

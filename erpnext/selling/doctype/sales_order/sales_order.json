@@ -1744,20 +1744,6 @@
    "hidden": 1,
    "label": "Ignore Default Payment Terms Template",
    "read_only": 1
-<<<<<<< HEAD
-=======
-  },
-  {
-   "allow_on_submit": 1,
-   "collapsible": 1,
-   "fieldname": "auto_repeat_section",
-   "fieldtype": "Section Break",
-   "hide_days": 1,
-   "hide_seconds": 1,
-   "label": "Auto Repeat",
-   "no_copy": 1,
-   "print_hide": 1,
-   "read_only": 1
   },
   {
    "fieldname": "section_break_umok",
@@ -1770,7 +1756,6 @@
    "label": "Title",
    "no_copy": 1,
    "print_hide": 1
->>>>>>> bd9427623f (refactor: bring back titles on sales transactions and make them optional and visible on purchase transactions (#52633))
   }
  ],
  "grid_page_length": 50,

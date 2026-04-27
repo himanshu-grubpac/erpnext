@@ -1124,13 +1124,6 @@
    "fieldname": "utm_analytics_section",
    "fieldtype": "Section Break",
    "label": "UTM Analytics"
-<<<<<<< HEAD
-=======
-  },
-  {
-   "fieldname": "auto_repeat_section",
-   "fieldtype": "Section Break",
-   "label": "Auto Repeat"
   },
   {
    "fieldname": "section_break_cojf",
@@ -1143,7 +1136,6 @@
    "label": "Title",
    "no_copy": 1,
    "print_hide": 1
->>>>>>> bd9427623f (refactor: bring back titles on sales transactions and make them optional and visible on purchase transactions (#52633))
   }
  ],
  "icon": "fa fa-shopping-cart",
