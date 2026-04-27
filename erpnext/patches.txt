@@ -433,3 +433,11 @@ erpnext.patches.v15_0.replace_http_with_https_in_sales_partner
 erpnext.patches.v16_0.add_portal_redirects
 erpnext.patches.v16_0.update_order_qty_and_requested_qty_based_on_mr_and_po
 erpnext.patches.v16_0.depends_on_inv_dimensions
+<<<<<<< HEAD
+=======
+erpnext.patches.v16_0.uom_category
+erpnext.patches.v16_0.merge_repost_settings_to_accounts_settings
+erpnext.patches.v16_0.set_root_type_in_account_categories
+erpnext.patches.v16_0.scr_inv_dimension
+erpnext.patches.v16_0.packed_item_inv_dimen
+>>>>>>> 0aadd1e3a5 (fix: make inv dimen reqd only in delivery note (#54546))
