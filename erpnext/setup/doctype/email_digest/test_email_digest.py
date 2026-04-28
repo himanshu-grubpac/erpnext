@@ -1,23 +1,14 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # See license.txt
 
-<<<<<<< HEAD
-import unittest
-
-# test_records = frappe.get_test_records('Email Digest')
-
-
-class TestEmailDigest(unittest.TestCase):
-	pass
-=======
 import frappe
+from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_days, today
 
 from erpnext.buying.doctype.purchase_order.test_purchase_order import create_purchase_order
-from erpnext.tests.utils import ERPNextTestSuite
 
 
-class TestEmailDigest(ERPNextTestSuite):
+class TestEmailDigest(FrappeTestCase):
 	def test_purchase_orders_items_overdue_list_is_filtered_by_company(self):
 		digest = create_email_digest(
 			company="_Test Company",
