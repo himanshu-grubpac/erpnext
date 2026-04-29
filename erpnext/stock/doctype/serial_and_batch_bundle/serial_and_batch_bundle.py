@@ -7,10 +7,18 @@ import json
 from collections import Counter, defaultdict
 
 import frappe
+<<<<<<< HEAD
 from frappe import _, _dict, bold
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
 from frappe.query_builder.functions import CombineDatetime, Sum
+=======
+import frappe.query_builder
+from frappe import _, _dict, bold
+from frappe.model.document import Document
+from frappe.model.naming import make_autoname
+from frappe.query_builder.functions import Concat_ws, Sum
+>>>>>>> 503b5bf140 (perf: max recursion depth error in serial no (#54629))
 from frappe.utils import (
 	cint,
 	cstr,
@@ -3129,6 +3137,29 @@ def get_stock_ledgers_for_serial_nos(kwargs):
 		else:
 			query = query.where(stock_ledger_entry[field] == kwargs.get(field))
 
+<<<<<<< HEAD
+=======
+	serial_nos = kwargs.get("serial_nos") or kwargs.get("serial_no")
+	if serial_nos and not isinstance(serial_nos, list):
+		serial_nos = [serial_nos]
+
+	if serial_nos:
+		import re
+
+		escaped_serial_nos = [re.escape(sn) for sn in serial_nos if sn]
+		regex_pattern = r"\n(" + "|".join(escaped_serial_nos) + r")\n"
+
+		query = (
+			query.left_join(serial_batch_entry)
+			.on(stock_ledger_entry.serial_and_batch_bundle == serial_batch_entry.parent)
+			.where(
+				serial_batch_entry.serial_no.isin(serial_nos)
+				| Concat_ws("", "\n", stock_ledger_entry.serial_no, "\n").regexp(regex_pattern)
+			)
+			.distinct()
+		)
+
+>>>>>>> 503b5bf140 (perf: max recursion depth error in serial no (#54629))
 	if kwargs.ignore_voucher_detail_no:
 		query = query.where(stock_ledger_entry.voucher_detail_no != kwargs.ignore_voucher_detail_no)
 
