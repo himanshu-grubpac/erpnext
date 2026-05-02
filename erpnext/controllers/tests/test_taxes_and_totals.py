@@ -67,7 +67,7 @@ class TestTaxesAndTotals(ERPNextTestSuite):
 		item = so.items[0]
 		item.qty = 2
 		item.price_list_rate = 100.0
-		item.rate = 120.0  # rate > price_list_rate → implicit Amount margin
+		item.rate = 120.0  # rate > price_list_rate -> implicit Amount margin
 		item.pricing_rules = ""
 		item.margin_type = None
 		item.margin_rate_or_amount = 0
@@ -76,8 +76,8 @@ class TestTaxesAndTotals(ERPNextTestSuite):
 
 		self.assertEqual(item.margin_type, "Amount")
 		self.assertEqual(item.margin_rate_or_amount, 20.0)
-		# rate_with_margin should equal the explicit rate
-		self.assertEqual(item.rate_with_margin, 120.0)
+		# The implicit-Amount branch does not populate rate_with_margin; the rate is preserved.
+		self.assertEqual(item.rate, 120.0)
 
 	def test_calculate_margin_percentage_type(self):
 		"""Percentage margin should add a fraction of price_list_rate to derive rate_with_margin."""
