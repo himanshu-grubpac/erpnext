@@ -1,6 +1,7 @@
 import frappe
 
 from erpnext.tests.utils import ERPNextTestSuite
+from erpnext.utilities.transaction_base import validate_uom_is_integer
 
 
 class TestUtils(ERPNextTestSuite):
@@ -92,3 +93,73 @@ class TestUtils(ERPNextTestSuite):
 		doc.reset_default_field_value("to_warehouse", "items", "t_warehouse")
 		self.assertEqual(doc.from_warehouse, None)
 		self.assertEqual(doc.to_warehouse, "Warehouse 2")
+
+	def test_validate_posting_time_invalid(self):
+		"""An invalid posting_time string must raise a ValidationError."""
+		doc = frappe.get_doc({"doctype": "Stock Entry"})
+		doc.set_posting_time = 1
+		doc.posting_time = "not-a-time"
+
+		self.assertRaises(frappe.ValidationError, doc.validate_posting_time)
+
+	def test_validate_posting_time_auto_set(self):
+		"""When set_posting_time is falsy, posting_date and posting_time are replaced with now."""
+		from frappe.utils import getdate, nowdate
+
+		doc = frappe.get_doc({"doctype": "Stock Entry"})
+		doc.set_posting_time = 0
+		doc.posting_date = "2000-01-01"
+		doc.posting_time = "00:00:00"
+
+		doc.validate_posting_time()
+
+		# Both fields must have been refreshed to the current date/time
+		self.assertEqual(doc.posting_date, nowdate())
+		# posting_time should look like HH:MM:SS (not the old midnight value)
+		self.assertNotEqual(doc.posting_time, "00:00:00")
+
+	def test_validate_uom_is_integer_raises_for_fraction(self):
+		"""Fractional qty in a whole-number UOM must raise UOMMustBeIntegerError."""
+		from erpnext.utilities.transaction_base import UOMMustBeIntegerError
+
+		# Nos is seeded as a whole-number UOM in test fixtures
+		se = frappe.get_doc(
+			{
+				"doctype": "Stock Entry",
+				"purpose": "Material Receipt",
+				"company": "_Test Company",
+				"items": [
+					{
+						"item_code": "_Test Item",
+						"uom": "Nos",
+						"qty": 1.5,
+						"t_warehouse": "_Test Warehouse - _TC",
+						"basic_rate": 100,
+					}
+				],
+			}
+		)
+
+		self.assertRaises(UOMMustBeIntegerError, validate_uom_is_integer, se, "uom", "qty")
+
+	def test_validate_uom_is_integer_passes_for_whole_number(self):
+		"""Integer qty in a whole-number UOM must NOT raise any error."""
+		se = frappe.get_doc(
+			{
+				"doctype": "Stock Entry",
+				"purpose": "Material Receipt",
+				"company": "_Test Company",
+				"items": [
+					{
+						"item_code": "_Test Item",
+						"uom": "Nos",
+						"qty": 3,
+						"t_warehouse": "_Test Warehouse - _TC",
+						"basic_rate": 100,
+					}
+				],
+			}
+		)
+
+		# Should complete without raising
+		validate_uom_is_integer(se, "uom", "qty")
