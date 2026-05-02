@@ -113,7 +113,7 @@ class TestTaxesAndTotals(ERPNextTestSuite):
 
 		calculate_taxes_and_totals(qo)
 
-		# Only the first (non-alternative) item should contribute: 5 × 100 = 500
+		# Only the first (non-alternative) item should contribute: 5 x 100 = 500
 		self.assertEqual(qo.net_total, 500.0)
 		self.assertEqual(qo.grand_total, 500.0)
 
