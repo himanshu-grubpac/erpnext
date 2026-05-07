@@ -67,21 +67,12 @@ from erpnext.setup.utils import get_exchange_rate
 from erpnext.stock.doctype.item.item import get_uom_conv_factor
 from erpnext.stock.doctype.packed_item.packed_item import make_packing_list
 from erpnext.stock.get_item_details import (
-<<<<<<< HEAD
-	_get_item_tax_template,
-	get_conversion_factor,
-	get_item_details,
-	get_item_tax_map,
-	get_item_warehouse,
-=======
-	ItemDetailsCtx,
 	_get_item_tax_template,
 	_get_item_tax_template_from_item_group,
 	get_conversion_factor,
 	get_item_details,
 	get_item_tax_map,
-	get_item_warehouse_,
->>>>>>> 03c9d16ca6 (fix: fetch get_item_tax_template while update items)
+	get_item_warehouse,
 )
 from erpnext.utilities.regional import temporary_flag
 from erpnext.utilities.transaction_base import TransactionBase
@@ -3656,29 +3647,15 @@ def set_child_tax_template_and_map(item, child_item, parent_doc):
 		"base_net_rate": item.get("base_net_rate"),
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	child_item.item_tax_template = _get_item_tax_template(args, item.taxes)
+
+	if not child_item.get("item_tax_template"):
+		child_item.item_tax_template = _get_item_tax_template_from_item_group(args, item.item_group)
+
 	if child_item.get("item_tax_template"):
 		child_item.item_tax_rate = get_item_tax_map(
 			parent_doc.get("company"), child_item.item_tax_template, as_json=True
 		)
-=======
-	child_item.item_tax_template = get_item_tax_template(ctx, item.taxes)
-=======
-	item_tax_template = _get_item_tax_template(ctx, item.taxes)
-
-	if not item_tax_template:
-		item_tax_template = _get_item_tax_template_from_item_group(ctx, item.item_group)
-
-	child_item.item_tax_template = item_tax_template
->>>>>>> 97e7916b66 (fix: resolve item tax template from item group in update items)
-	child_item.item_tax_rate = get_item_tax_map(
-		doc=parent_doc,
-		tax_template=child_item.item_tax_template,
-		as_json=True,
-	)
->>>>>>> 03c9d16ca6 (fix: fetch get_item_tax_template while update items)
 
 
 def add_taxes_from_tax_template(child_item, parent_doc, db_insert=True):

@@ -7,6 +7,7 @@ import json
 import frappe
 from frappe import _, throw
 from frappe.model import child_table_fields, default_fields
+from frappe.model.document import Document
 from frappe.model.meta import get_field_precision
 from frappe.model.utils import get_fetch_values
 from frappe.query_builder.functions import IfNull, Sum
@@ -672,7 +673,9 @@ def get_item_tax_info(company, tax_category, item_codes, item_rates=None, item_t
 
 
 @frappe.whitelist()
-def get_item_tax_template(args, item=None, out=None):
+def get_item_tax_template(
+	args: str | dict, item: Document | None = None, out: dict | None = None
+) -> str | None:
 	if isinstance(args, str):
 		args = json.loads(args)
 
@@ -687,15 +690,7 @@ def get_item_tax_template(args, item=None, out=None):
 		item_tax_template = _get_item_tax_template(args, item.taxes, out)
 
 	if not item_tax_template:
-<<<<<<< HEAD
-		item_group = item.item_group
-		while item_group and not item_tax_template:
-			item_group_doc = frappe.get_cached_doc("Item Group", item_group)
-			item_tax_template = _get_item_tax_template(args, item_group_doc.taxes, out)
-			item_group = item_group_doc.parent_item_group
-=======
-		item_tax_template = _get_item_tax_template_from_item_group(ctx, item.item_group, out)
->>>>>>> ad22256b2d (fix: resolve item tax template from item group in update items)
+		item_tax_template = _get_item_tax_template_from_item_group(args, item.item_group, out)
 
 	if out and args.get("child_doctype") and item_tax_template:
 		out.update(get_fetch_values(args.get("child_doctype"), "item_tax_template", item_tax_template))
@@ -703,40 +698,26 @@ def get_item_tax_template(args, item=None, out=None):
 	return item_tax_template
 
 
-<<<<<<< HEAD
-def _get_item_tax_template(args, taxes, out=None, for_validate=False):
-=======
-def _get_item_tax_template_from_item_group(ctx, item_group, out=None):
+def _get_item_tax_template_from_item_group(
+	args: dict, item_group: str, out: dict | None = None
+) -> str | None:
 	from frappe.utils.nestedset import get_ancestors_of
 
 	ancestors = get_ancestors_of("Item Group", item_group)
 	for group in [item_group, *ancestors]:
 		group_doc = frappe.get_cached_doc("Item Group", group)
-		item_tax_template = _get_item_tax_template(ctx, group_doc.taxes, out)
+		item_tax_template = _get_item_tax_template(args, group_doc.taxes, out)
 		if item_tax_template:
 			return item_tax_template
 	return None
 
 
-@erpnext.normalize_ctx_input(ItemDetailsCtx)
 def _get_item_tax_template(
-	ctx: ItemDetailsCtx, taxes, out: ItemDetails | None = None, for_validate=False
-) -> None | str | list[str]:
-	"""
-	Accesses:
-	        ctx = {
-	                "company": str
-	                "bill_date": str
-	                "transaction_date": str
-	        "tax_category": None
-	        "item_tax_template": None
-	        }
-	Passes:
-	        ctx = {
-	        "base_net_rate": float
-	        }
-	"""
->>>>>>> ad22256b2d (fix: resolve item tax template from item group in update items)
+	args: dict,
+	taxes,
+	out: dict | None = None,
+	for_validate: bool = False,
+) -> str | list[str] | None:
 	if out is None:
 		out = {}
 	taxes_with_validity = []
