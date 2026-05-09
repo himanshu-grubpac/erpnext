@@ -218,7 +218,6 @@ class PurchaseOrder(BuyingController):
 			self.create_raw_materials_supplied()
 
 		self.validate_fg_item_for_subcontracting()
-		self.set_received_qty_for_drop_ship_items()
 
 		if not self.advance_payment_status:
 			self.advance_payment_status = "Not Initiated"
@@ -493,6 +492,8 @@ class PurchaseOrder(BuyingController):
 
 		if self.has_drop_ship_item():
 			self.update_delivered_qty_in_sales_order()
+			self.set_received_qty_to_zero_for_drop_ship_items()
+			self.update_receiving_percentage()
 
 		self.update_reserved_qty_for_subcontract()
 		self.check_on_hold_or_closed_status()
@@ -566,6 +567,11 @@ class PurchaseOrder(BuyingController):
 			so.set_status(update=True)
 			so.notify_update()
 
+	def set_received_qty_to_zero_for_drop_ship_items(self):
+		for item in self.items:
+			if item.delivered_by_supplier:
+				item.db_set("received_qty", 0)
+
 	def has_drop_ship_item(self):
 		return any(d.delivered_by_supplier for d in self.items)
 
@@ -575,11 +581,6 @@ class PurchaseOrder(BuyingController):
 	def is_against_pp(self):
 		return any(d.production_plan for d in self.items if d.production_plan)
 
-	def set_received_qty_for_drop_ship_items(self):
-		for item in self.items:
-			if item.delivered_by_supplier == 1:
-				item.received_qty = item.qty
-
 	def update_reserved_qty_for_subcontract(self):
 		if self.is_old_subcontracting_flow:
 			for d in self.supplied_items:
@@ -587,12 +588,13 @@ class PurchaseOrder(BuyingController):
 					stock_bin = get_bin(d.rm_item_code, d.reserve_warehouse)
 					stock_bin.update_reserved_qty_for_sub_contracting(subcontract_doctype="Purchase Order")
 
+	@frappe.whitelist()
 	def update_receiving_percentage(self):
 		total_qty, received_qty = 0.0, 0.0
 		for item in self.items:
 			received_qty += min(item.received_qty, item.qty)
 			total_qty += item.qty
-		if total_qty:
+		if total_qty and received_qty:
 			self.db_set("per_received", flt(received_qty / total_qty) * 100, update_modified=False)
 		else:
 			self.db_set("per_received", 0, update_modified=False)
