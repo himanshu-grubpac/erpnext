@@ -575,6 +575,51 @@ class PurchaseOrder(BuyingController):
 	def has_drop_ship_item(self):
 		return any(d.delivered_by_supplier for d in self.items)
 
+	@frappe.whitelist()
+	def update_dropship_received_qty(self, data: list[dict]):
+		if not data:
+			frappe.throw(_("Please select at least one item to update delivered quantity."))
+
+		for d in data:
+			item = next((item for item in self.items if item.name == d.get("name")), None)
+
+			if not item:
+				frappe.throw(
+					_("Item with name {0} not found in the Purchase Order").format(frappe.bold(d.get("name")))
+				)
+
+			if not item.has_permlevel_access_to("received_qty", permission_type="write"):
+				frappe.throw(
+					_("You don't have permission to update Received Qty DocField for item {0}").format(
+						frappe.bold(item.item_code)
+					)
+				)
+
+			if not d.get("qty_change"):
+				frappe.throw(
+					_(
+						"Item {0} has no changes in delivered quantity. Please unselect the row if you do not wish to update its quantity."
+					).format(frappe.bold(item.item_code))
+				)
+
+			if d.get("qty_change") < 0 and abs(d.get("qty_change")) > item.received_qty:
+				frappe.throw(
+					_("Delivered Qty cannot be reduced by more than {0} for item {1}").format(
+						item.received_qty, frappe.bold(item.item_code)
+					)
+				)
+
+			if d.get("qty_change") > 0 and item.received_qty + d.get("qty_change") > item.qty:
+				frappe.throw(
+					_("Delivered Qty cannot be increased by more than {0} for item {1}").format(
+						item.qty - item.received_qty, frappe.bold(item.item_code)
+					)
+				)
+
+			item.received_qty += d.get("qty_change")
+		self.update_receiving_percentage()
+		self.save()
+
 	def is_against_so(self):
 		return any(d.sales_order for d in self.items if d.sales_order)
 
@@ -588,7 +633,6 @@ class PurchaseOrder(BuyingController):
 					stock_bin = get_bin(d.rm_item_code, d.reserve_warehouse)
 					stock_bin.update_reserved_qty_for_sub_contracting(subcontract_doctype="Purchase Order")
 
-	@frappe.whitelist()
 	def update_receiving_percentage(self):
 		total_qty, received_qty = 0.0, 0.0
 		for item in self.items:
