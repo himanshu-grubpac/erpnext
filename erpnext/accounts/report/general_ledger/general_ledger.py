@@ -398,6 +398,7 @@ def get_data_with_opening_closing(filters, account_details, accounting_dimension
 	# Opening for filtered account
 	data.append(totals.opening)
 
+<<<<<<< HEAD
 	if filters.get("categorize_by") != "Categorize by Voucher (Consolidated)":
 		for _acc, acc_dict in gle_map.items():
 			# acc
@@ -408,6 +409,19 @@ def get_data_with_opening_closing(filters, account_details, accounting_dimension
 					filters.get("categorize_by") and filters.get("categorize_by") != "Categorize by Voucher"
 				):
 					data.append(acc_dict.totals.opening)
+=======
+	if not filters.get("categorize_by"):
+		all_entries = []
+		for acc_dict in gle_map.values():
+			all_entries.extend(acc_dict.entries)
+		data += all_entries
+
+	elif filters.get("categorize_by") != "Categorize by Voucher (Consolidated)":
+		set_opening_closing = (not filters.get("categorize_by") and not filters.get("voucher_no")) or (
+			filters.get("categorize_by") and filters.get("categorize_by") != "Categorize by Voucher"
+		)
+		set_total = filters.get("categorize_by") or not filters.voucher_no
+>>>>>>> dfbe847307 (fix(general-ledger): show raw GL entries when categorize_by is empty (#54816))
 
 				data += acc_dict.entries
 
@@ -467,7 +481,16 @@ def initialize_gle_map(gl_entries, filters, totals_dict):
 	group_by = group_by_field(filters.get("categorize_by"))
 
 	for gle in gl_entries:
+<<<<<<< HEAD
 		gle_map.setdefault(gle.get(group_by), _dict(totals=copy.deepcopy(totals_dict), entries=[]))
+=======
+		group_by_value = gle.get(group_by)
+		if group_by_value not in gle_map:
+			gle_map[group_by_value] = _dict(
+				totals=get_totals_dict(),
+				entries=[],
+			)
+>>>>>>> dfbe847307 (fix(general-ledger): show raw GL entries when categorize_by is empty (#54816))
 	return gle_map
 
 
