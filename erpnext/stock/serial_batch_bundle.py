@@ -1082,7 +1082,11 @@ class SerialBatchCreation:
 =======
 =======
 		from erpnext.stock.utils import get_combine_datetime
+<<<<<<< HEAD
 >>>>>>> c740f77a6f (chore: fixed test case)
+=======
+
+>>>>>>> 3c993377aa (chore: fix linter issue)
 		if not self.get("posting_datetime"):
 			if self.get("posting_date") and self.get("posting_time"):
 				self.posting_datetime = get_combine_datetime(self.posting_date, self.posting_time)
