@@ -561,7 +561,15 @@ class SellingController(StockController):
 				if (
 					not d.incoming_rate
 					or self.is_internal_transfer()
+<<<<<<< HEAD
 					or (get_valuation_method(d.item_code) == "Moving Average" and self.get("is_return"))
+=======
+					or (
+						get_valuation_method(d.item_code, self.company) == "Moving Average"
+						and self.get("is_return")
+						and not is_standalone
+					)
+>>>>>>> 00057b1798 (fix: valuation rate missing for standalone credit notes for moving av… (#55102))
 				):
 					d.incoming_rate = get_incoming_rate(
 						{
