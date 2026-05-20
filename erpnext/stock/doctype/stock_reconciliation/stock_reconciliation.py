@@ -1035,6 +1035,7 @@ class StockReconciliation(StockController):
 		else:
 			self._cancel()
 
+<<<<<<< HEAD
 	def recalculate_current_qty(self, voucher_detail_no, sle_creation, add_new_sle=False):
 		from erpnext.stock.stock_ledger import get_valuation_rate
 
@@ -1115,6 +1116,8 @@ class StockReconciliation(StockController):
 
 				self.add_missing_stock_ledger_entry(row, voucher_detail_no, sle_creation)
 
+=======
+>>>>>>> b9e08f3ce4 (fix(stock): remove recalculate current qty function (#54774))
 	def add_missing_stock_ledger_entry(self, row, voucher_detail_no, sle_creation):
 		if row.current_qty == 0:
 			return
