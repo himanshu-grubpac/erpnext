@@ -1044,7 +1044,7 @@ def insert_item_price(args):
 			)
 			item_price.insert()
 			frappe.msgprint(
-				_("Item Price Added for {0} in Price List {1}").format(
+				_("Item Price added for {0} in Price List - {1}").format(
 					get_link_to_form("Item", args.item_code), args.price_list
 				),
 				alert=True,
@@ -1070,7 +1070,9 @@ def insert_item_price(args):
 		)
 		item_price.insert()
 		frappe.msgprint(
-			_("Item Price added for {0} in Price List {1}").format(args.item_code, args.price_list),
+			_("Item Price added for {0} in Price List - {1}").format(
+				get_link_to_form("Item", args.item_code), args.price_list
+			),
 			alert=True,
 		)
 
