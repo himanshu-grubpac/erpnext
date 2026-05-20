@@ -136,6 +136,7 @@ class TestItem(FrappeTestCase):
 		currency = frappe.get_cached_value("Company", company, "default_currency")
 
 		details = get_item_details(
+<<<<<<< HEAD
 			{
 				"item_code": "_Test Item",
 				"company": company,
@@ -151,6 +152,26 @@ class TestItem(FrappeTestCase):
 				"price_list_uom_dependant": 1,
 				"ignore_pricing_rule": 1,
 			}
+=======
+			ItemDetailsCtx(
+				{
+					"item_code": "_Test Item",
+					"company": company,
+					"price_list": "_Test Price List",
+					"currency": currency,
+					"doctype": "Sales Order",
+					"conversion_rate": 1,
+					"price_list_currency": currency,
+					"plc_conversion_rate": 1,
+					"order_type": "Sales",
+					"customer": "_Test Customer",
+					"conversion_factor": 1,
+					"price_list_uom_dependant": 1,
+					"ignore_pricing_rule": 1,
+					"qty": 1,
+				}
+			)
+>>>>>>> 3084e3654c (fix: item price with party condition (#55100))
 		)
 
 		for key, value in to_check.items():
