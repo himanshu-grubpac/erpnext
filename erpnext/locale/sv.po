@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2026-05-17 10:04+0000\n"
-"PO-Revision-Date: 2026-05-18 20:21\n"
+"PO-Revision-Date: 2026-05-20 21:03\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Swedish\n"
 "MIME-Version: 1.0\n"
@@ -1799,7 +1799,7 @@ msgstr "Bokföring Dimension"
 #: erpnext/accounts/doctype/gl_entry/gl_entry.py:213
 #: erpnext/accounts/doctype/payment_ledger_entry/payment_ledger_entry.py:150
 msgid "Accounting Dimension <b>{0}</b> is required for 'Balance Sheet' account {1}."
-msgstr "Bokföring Dimension <b>{0}</b> erfordras för 'Saldo Rapport' konto {1}."
+msgstr "Bokföring Dimension <b>{0}</b> erfordras för 'Balans Rapport' konto {1}."
 
 #: erpnext/accounts/doctype/gl_entry/gl_entry.py:200
 #: erpnext/accounts/doctype/payment_ledger_entry/payment_ledger_entry.py:138
@@ -7265,7 +7265,7 @@ msgstr "Balans Rapport"
 #. Closing Voucher'
 #: erpnext/accounts/doctype/process_period_closing_voucher/process_period_closing_voucher.json
 msgid "Balance Sheet Closing Balance"
-msgstr "Balansräkning Stängning Saldo"
+msgstr "Balans Rapport Stängning Saldo"
 
 #. Label of the balance_sheet_summary (Heading) field in DocType 'Bisect
 #. Accounting Statements'
@@ -36352,7 +36352,7 @@ msgstr "Betalningar uppdaterade."
 #. Account'
 #: erpnext/accounts/doctype/journal_entry_account/journal_entry_account.json
 msgid "Payroll Entry"
-msgstr "Lön Post"
+msgstr "Löneregistrering"
 
 #: erpnext/accounts/doctype/account/chart_of_accounts/verified/standard_chart_of_accounts.py:156
 #: erpnext/accounts/doctype/account/chart_of_accounts/verified/standard_chart_of_accounts_with_account_number.py:262
@@ -59194,7 +59194,7 @@ msgstr "Visa Stycklista Uppdatering Logg"
 #: erpnext/accounts/onboarding_step/view_balance_sheet/view_balance_sheet.json
 #: erpnext/assets/onboarding_step/view_balance_sheet/view_balance_sheet.json
 msgid "View Balance Sheet"
-msgstr "Visa Balans Räkning"
+msgstr "Visa Balans Rapport"
 
 #: erpnext/public/js/setup_wizard.js:47
 msgid "View Chart of Accounts"
