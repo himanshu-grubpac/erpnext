@@ -3728,7 +3728,7 @@ def set_order_defaults(parent_doctype, parent_doctype_name, child_doctype, child
 	child_item = frappe.new_doc(child_doctype, parent_doc=p_doc, parentfield=child_docname)
 	item = frappe.get_doc("Item", trans_item.get("item_code"))
 
-	for field in ("item_code", "item_name", "description", "item_group"):
+	for field in ("item_code", "item_name", "description", "item_group", "weight_per_unit", "weight_uom"):
 		child_item.update({field: item.get(field)})
 
 	date_fieldname = "delivery_date" if child_doctype == "Sales Order Item" else "schedule_date"
@@ -3847,6 +3847,140 @@ def validate_and_delete_children(parent, data, ordered_item=None) -> bool:
 	return bool(deleted_children)
 
 
+<<<<<<< HEAD
+=======
+def get_allow_zero_qty(parent_doctype: str) -> bool:
+	if parent_doctype == "Sales Order":
+		return frappe.db.get_single_value("Selling Settings", "allow_zero_qty_in_sales_order") or False
+	if parent_doctype == "Purchase Order":
+		return frappe.db.get_single_value("Buying Settings", "allow_zero_qty_in_purchase_order") or False
+	return False
+
+
+def get_child_item_change_state(parent_doctype: str, child_item, new_data) -> frappe._dict:
+	prev_rate, new_rate = flt(child_item.get("rate")), flt(new_data.get("rate"))
+	prev_qty, new_qty = flt(child_item.get("qty")), flt(new_data.get("qty"))
+	prev_fg_qty, new_fg_qty = flt(child_item.get("fg_item_qty")), flt(new_data.get("fg_item_qty"))
+	prev_con_fac, new_con_fac = (
+		flt(child_item.get("conversion_factor")),
+		flt(new_data.get("conversion_factor")),
+	)
+
+	if parent_doctype == "Sales Order":
+		prev_date, new_date = child_item.get("delivery_date"), new_data.get("delivery_date")
+	elif parent_doctype == "Purchase Order":
+		prev_date, new_date = child_item.get("schedule_date"), new_data.get("schedule_date")
+	else:
+		prev_date, new_date = None, None
+
+	if parent_doctype in ["Quotation", "Supplier Quotation"]:
+		date_unchanged = False
+	else:
+		prev_date = getdate(prev_date) if prev_date else None
+		new_date = getdate(new_date) if new_date else None
+		date_unchanged = prev_date == new_date
+
+	return frappe._dict(
+		rate_unchanged=prev_rate == new_rate,
+		qty_unchanged=prev_qty == new_qty,
+		fg_qty_unchanged=prev_fg_qty == new_fg_qty,
+		uom_unchanged=child_item.get("uom") == new_data.get("uom"),
+		conversion_factor_unchanged=prev_con_fac == new_con_fac,
+		date_unchanged=date_unchanged,
+		description_unchanged=child_item.get("description") == new_data.get("description"),
+	)
+
+
+def is_child_item_unchanged(change_state: frappe._dict) -> bool:
+	return (
+		change_state.rate_unchanged
+		and change_state.qty_unchanged
+		and change_state.fg_qty_unchanged
+		and change_state.conversion_factor_unchanged
+		and change_state.uom_unchanged
+		and change_state.date_unchanged
+		and change_state.description_unchanged
+	)
+
+
+def update_child_item_rate_and_discount(
+	parent_doctype: str, child_item, new_data, allow_zero_qty: bool, rate_unchanged: bool | None = None
+) -> None:
+	rate_precision = child_item.precision("rate") or 2
+	qty_precision = child_item.precision("qty") or 2
+
+	if rate_unchanged is None:
+		prev_rate, new_rate = flt(child_item.get("rate")), flt(new_data.get("rate"))
+		rate_unchanged = prev_rate == new_rate
+
+	if not rate_unchanged and not child_item.get("qty") and allow_zero_qty:
+		frappe.throw(_("Rate of '{}' items cannot be changed").format(frappe.bold(_("Unit Price"))))
+
+	# Amount cannot be lesser than billed amount, except for negative amounts
+	row_rate = flt(new_data.get("rate"), rate_precision)
+
+	if parent_doctype in ["Purchase Order", "Sales Order"]:
+		amount_below_billed_amt = flt(child_item.billed_amt, rate_precision) > flt(
+			row_rate * flt(new_data.get("qty"), qty_precision), rate_precision
+		)
+		if amount_below_billed_amt and row_rate > 0.0:
+			frappe.throw(
+				_(
+					"Row #{0}: Cannot set Rate if the billed amount is greater than the amount for Item {1}."
+				).format(child_item.idx, child_item.item_code)
+			)
+
+	child_item.rate = row_rate
+
+	if parent_doctype not in ["Sales Order", "Purchase Order"] or not flt(child_item.price_list_rate):
+		return
+
+	if flt(child_item.rate) > flt(child_item.price_list_rate):
+		# if rate is greater than price_list_rate, set margin or set discount
+		child_item.discount_percentage = 0
+		child_item.margin_type = "Amount"
+		child_item.margin_rate_or_amount = flt(
+			child_item.rate - child_item.price_list_rate,
+			child_item.precision("margin_rate_or_amount"),
+		)
+		child_item.rate_with_margin = child_item.rate
+	else:
+		child_item.discount_percentage = flt(
+			(1 - flt(child_item.rate) / flt(child_item.price_list_rate)) * 100.0,
+			child_item.precision("discount_percentage"),
+		)
+		child_item.discount_amount = flt(child_item.price_list_rate) - flt(child_item.rate)
+		child_item.margin_type = ""
+		child_item.margin_rate_or_amount = 0
+		child_item.rate_with_margin = 0
+
+
+def update_child_item_uom_and_weight(child_item, new_data) -> None:
+	conv_fac_precision = child_item.precision("conversion_factor") or 2
+
+	if new_data.get("conversion_factor"):
+		if child_item.stock_uom == child_item.uom:
+			child_item.conversion_factor = 1
+		else:
+			child_item.conversion_factor = flt(new_data.get("conversion_factor"), conv_fac_precision)
+
+	if new_data.get("uom"):
+		child_item.uom = new_data.get("uom")
+		conversion_factor = flt(
+			get_conversion_factor(child_item.item_code, child_item.uom).get("conversion_factor")
+		)
+		child_item.conversion_factor = (
+			flt(new_data.get("conversion_factor"), conv_fac_precision) or conversion_factor
+		)
+
+	if child_item.get("weight_per_unit"):
+		child_item.total_weight = flt(
+			child_item.weight_per_unit * child_item.qty * child_item.conversion_factor,
+			child_item.precision("total_weight"),
+		)
+
+
+>>>>>>> 33dc1f5f09 (fix: set weight in update items (#55089))
 @frappe.whitelist()
 def update_child_qty_rate(parent_doctype, trans_items, parent_doctype_name, child_docname="items"):
 	from erpnext.buying.doctype.supplier_quotation.supplier_quotation import get_purchased_items
@@ -3945,24 +4079,6 @@ def update_child_qty_rate(parent_doctype, trans_items, parent_doctype_name, chil
 
 				if flt(new_data.get("qty")) < qty_to_check:
 					frappe.throw(_("Cannot reduce quantity than ordered or purchased quantity"))
-
-	def should_update_supplied_items(doc) -> bool:
-		"""Subcontracted PO can allow following changes *after submit*:
-
-		1. Change rate of subcontracting - regardless of other changes.
-		2. Change qty and/or add new items and/or remove items
-		        Exception: Transfer/Consumption is already made, qty change not allowed.
-		"""
-
-		supplied_items_processed = any(
-			item.supplied_qty or item.consumed_qty or item.returned_qty for item in doc.supplied_items
-		)
-
-		update_supplied_items = any_qty_changed or items_added_or_removed or any_conversion_factor_changed
-		if update_supplied_items and supplied_items_processed:
-			frappe.throw(_("Item qty can not be updated as raw materials are already processed."))
-
-		return update_supplied_items
 
 	def validate_fg_item_for_subcontracting(new_data, is_new):
 		if is_new:
