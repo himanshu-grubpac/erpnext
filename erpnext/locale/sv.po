@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: hello@frappe.io\n"
 "POT-Creation-Date: 2026-05-17 10:04+0000\n"
-"PO-Revision-Date: 2026-05-20 21:03\n"
+"PO-Revision-Date: 2026-05-21 21:16\n"
 "Last-Translator: hello@frappe.io\n"
 "Language-Team: Swedish\n"
 "MIME-Version: 1.0\n"
@@ -20423,7 +20423,7 @@ msgstr "Finansiella Tjänster"
 #: erpnext/accounts/workspace/financial_reports/financial_reports.json
 #: erpnext/public/js/financial_statements.js:312
 msgid "Financial Statements"
-msgstr "Finans Rapporter"
+msgstr "Bokslut"
 
 #: erpnext/public/js/setup_wizard.js:48
 msgid "Financial Year Begins On"
