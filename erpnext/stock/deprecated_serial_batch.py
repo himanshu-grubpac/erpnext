@@ -32,18 +32,6 @@ class DeprecatedSerialNoValuation:
 
 		# get rate from serial nos within same company
 		incoming_values = 0.0
-<<<<<<< HEAD
-=======
-		posting_datetime = self.sle.posting_datetime
-
-		if not posting_datetime and self.sle.posting_date:
-			posting_datetime = get_combine_datetime(self.sle.posting_date, self.sle.posting_time)
-
-		do_not_fetch_rate = frappe.db.get_single_value(
-			"Stock Reposting Settings", "do_not_fetch_incoming_rate_from_serial_no"
-		)
-
->>>>>>> 2773b7c002 (fix: incoming rate for legacy serial no)
 		for serial_no in serial_nos:
 			sn_details = frappe.db.get_value("Serial No", serial_no, ["purchase_rate", "company"], as_dict=1)
 			if (
