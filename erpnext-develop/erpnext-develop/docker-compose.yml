@@ -1,0 +1,167 @@
+x-common-env: &common-env
+  DB_HOST: db
+  DB_PORT: "3306"
+  REDIS_CACHE: redis-cache:6379
+  REDIS_QUEUE: redis-queue:6379
+  REDIS_SOCKETIO: redis-socketio:6379
+  SOCKETIO_PORT: "9000"
+
+services:
+  backend:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    environment:
+      <<: *common-env
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      db:
+        condition: service_healthy
+      redis-cache:
+        condition: service_started
+      redis-queue:
+        condition: service_started
+      redis-socketio:
+        condition: service_started
+    networks:
+      - erpnext-network
+
+  frontend:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    command: ["nginx-entrypoint.sh"]
+    environment:
+      BACKEND: backend:8000
+      FRAPPE_SITE_NAME_HEADER: erp.localhost
+      SOCKETIO: websocket:9000
+      UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
+      PROXY_READ_TIMEOUT: "120"
+      CLIENT_MAX_BODY_SIZE: "50m"
+    ports:
+      - "80:8080"
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+      - websocket
+    networks:
+      - erpnext-network
+
+  websocket:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    command: ["node", "/home/frappe/frappe-bench/apps/frappe/socketio.js"]
+    environment:
+      <<: *common-env
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+    networks:
+      - erpnext-network
+
+  queue-default:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    command: ["bench", "worker", "--queue", "default"]
+    environment:
+      <<: *common-env
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      - backend
+    networks:
+      - erpnext-network
+
+  queue-short:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    command: ["bench", "worker", "--queue", "short"]
+    environment:
+      <<: *common-env
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      - backend
+    networks:
+      - erpnext-network
+
+  queue-long:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    command: ["bench", "worker", "--queue", "long"]
+    environment:
+      <<: *common-env
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      - backend
+    networks:
+      - erpnext-network
+
+  scheduler:
+    image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+    restart: unless-stopped
+    command: ["bench", "schedule"]
+    environment:
+      <<: *common-env
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    depends_on:
+      - backend
+    networks:
+      - erpnext-network
+
+  db:
+    image: mariadb:10.6
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --skip-innodb-read-only-compressed
+      - --innodb-buffer-pool-size=2G
+      - --innodb-log-file-size=256M
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-admin}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--password=admin"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      - erpnext-network
+
+  redis-cache:
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - erpnext-network
+
+  redis-queue:
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - erpnext-network
+
+  redis-socketio:
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - erpnext-network
+
+volumes:
+  sites:
+  logs:
+  db-data:
+
+networks:
+  erpnext-network:
+    driver: bridge
