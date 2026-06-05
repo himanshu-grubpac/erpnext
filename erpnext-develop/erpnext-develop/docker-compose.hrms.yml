@@ -9,6 +9,12 @@ x-frappe-image: &frappe_image
 services:
   backend:
     <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench serve --port 8000",
+      ]
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
