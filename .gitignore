@@ -1,0 +1,4 @@
+.env
+apps/hrms/
+*.log
+.DS_Store

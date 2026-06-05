@@ -1,0 +1,79 @@
+# HRMS persistence overlay — use with:
+#   docker compose -f docker-compose.yml -f docker-compose.hrms.yml up -d
+#
+# Requires ./apps/hrms (version-16 clone) on the host before first up.
+
+x-frappe-image: &frappe_image
+  image: ${ERPNEXT_IMAGE:-frappe/erpnext:v16.18.2}
+
+services:
+  backend:
+    <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench serve --port 8000",
+      ]
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+      - ./apps/hrms:/home/frappe/frappe-bench/apps/hrms
+
+  frontend:
+    <<: *frappe_image
+
+  websocket:
+    <<: *frappe_image
+
+  queue-default:
+    <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench worker --queue default",
+      ]
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+      - ./apps/hrms:/home/frappe/frappe-bench/apps/hrms
+
+  queue-short:
+    <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench worker --queue short",
+      ]
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+      - ./apps/hrms:/home/frappe/frappe-bench/apps/hrms
+
+  queue-long:
+    <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench worker --queue long",
+      ]
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+      - ./apps/hrms:/home/frappe/frappe-bench/apps/hrms
+
+  scheduler:
+    <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench schedule",
+      ]
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+      - ./apps/hrms:/home/frappe/frappe-bench/apps/hrms
