@@ -22,6 +22,12 @@ services:
 
   queue-default:
     <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench worker --queue default",
+      ]
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
@@ -29,6 +35,12 @@ services:
 
   queue-short:
     <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench worker --queue short",
+      ]
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
@@ -36,6 +48,12 @@ services:
 
   queue-long:
     <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench worker --queue long",
+      ]
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
@@ -43,6 +61,12 @@ services:
 
   scheduler:
     <<: *frappe_image
+    command:
+      [
+        "bash",
+        "-c",
+        "cd /home/frappe/frappe-bench && ./env/bin/pip install -q -e apps/hrms && exec bench schedule",
+      ]
     volumes:
       - sites:/home/frappe/frappe-bench/sites
       - logs:/home/frappe/frappe-bench/logs
